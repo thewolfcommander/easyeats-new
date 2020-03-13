@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}All delicious dishes available through Easyeats{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <h1 class="hero-title">Enjoy the <br> best food near you</h1>
+            <div class="d-sm-flex flex-wrap">
+                <a class="button button-hero button-shadow m-2" href="#">Search your favourite</a>
+                <a class="button button-hero button-shadow m-2" href="#">Download App</a>
+            </div>
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="/static/img/banner/fas-service-icon.png" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="/static/img/banner/fresh-food-icon.png" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right">
+            <div class="owl-carousel owl-theme hero-carousel">
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+<!--================Featured Section Start =================-->
+<section class="section-margin mb-lg-100">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Featured Items</h4>
+            <h2>Fresh taste at great price</h2>
+        </div>
+
+        {% if featured_foods %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            {% for item in featured_foods %}
+            <div class="featured-item">
+                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <div class="item-body">
+                    <a href="{% url 'products:food_detail' item.id %}">
+                        <h3 style="color: var(--main);">{{ item.name }}</h3>
+                    </a>
+                    <p>{{ item.summary }}</p>
+                    <div class="d-flex justify-content-between">
+                        <ul class="rating-star">
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                        </ul>
+                        <h3 class="price-tag"><strike
+                                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">No food items found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Featured Section End =================-->
+
+
+
+<!--================Food menu section start =================-->
+<section class="section-margin">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Food Menu</h4>
+            <h2>Delicious food</h2>
+        </div>
+        {% if foods %}
+        <div class="row">
+                {% for food in foods %}
+                <div class="col-md-4 col-sm-12">
+                    <div class="card w-100 my-3" style="height: 500px!important;">
+                        <img class="card-img-top" src="{{ food.foodimage_set.first.image.url }}" alt="Card image cap" height="250px">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'products:food_detail' food.id %}" style="color: var(--main);">{{ food.name }}</a></h5>
+                            <p class="card-text">{{ food.summary }}</p>
+                            <p class="card-text"><small class="text-muted"></small></p>
+                        </div>
+                        <div class="card-footer">
+                            <h3 class="price-tag"><strike
+                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
+                            </h3>
+                            {% include 'products/snippets/update-cart.html' with cart=cart food=food %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+        <hr>
+
+        {% if foods.has_other_pages %}
+        <ul class="pagination justify-content-center mt-5">
+            {% if foods.has_previous %}
+            <li class="page-item"><a href="?page={{ foods.previous_page_number }}" class="page-link">&laquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in foods.paginator.page_range %}
+            {% if foods.number == i %}
+            <li class="btn"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if foods.has_next %}
+            <li class="page-item"><a href="?page={{ foods.next_page_number }}" class="page-link">&raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+
+
+        {% else %}
+        <p class="lead">No Products found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Food menu section end =================-->
+
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

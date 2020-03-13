@@ -1,0 +1,8 @@
+<form action="{% url 'orders:create' %}" class="form-product-ajax" method="post" data-endpoint="{% url 'orders:create' %}" class="form" {% if request.user.is_authenticated %}data-user='abc'{% endif %}>
+    {% csrf_token %}
+    <input type="hidden" name="cart_id" value='{{ cart.id }}'>
+    <input type="hidden" name="address_id" value='{{ address.id }}'>
+        <span class="submit-span">
+            <button class="button" type="submit">Create Order</button>
+        </span>
+</form>

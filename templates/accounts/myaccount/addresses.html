@@ -1,0 +1,38 @@
+{% extends 'accounts/myaccount/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block myacc_title %}Manage Addresses{% endblock myacc_title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+
+{% block main %}
+
+<div class="container">
+    <h4 class="display-4">Manage Addresses</h4>
+    <a href="{% url 'addresses:add' %}" class="button">Add new</a>
+    <div class="row mt-3">
+        {% if addresses %}
+        {% for address in addresses %}
+        <div class="col-md-6 col-sm-12">
+            <div class="card w-100 shadow-lg m-3"  style="border-radius: 6px!important;">
+                <div class="card-body text-center" style="background: var(--main);">
+                    <h5 class="card-title"><a href="{% url 'accounts:address_detail' address.id %}" style="color: #fff;">{{ address.name }}</a>
+                    </h5>
+                </div>
+                <div class="card-footer">
+                    <p class="text-muted">Updated {{ address.updated }} </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock main %}

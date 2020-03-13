@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Select a address to complete the order{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+
+            <h3 class="display-3">Select a new Address</h3>
+            <br>
+            <a href="{% url 'addresses:add' %}" class="button">Add New Address</a>
+            {% if addresses %}
+
+
+            {% for address in addresses %}
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="cart shadow-lg m-3">
+                        <div class="card-body">
+                            <div class="row justify-content-center">
+                            <a href="{% url 'cart:checkout' address.id %}" class="button">Continue with
+                                {{ address.name }}</a>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p class="lead"><strong>Address:</strong></p>
+                            {{ address.address1 }},<br>
+                            {{ address.address2 }}, <br>
+                            {{ address.city }}, {{address.state|title}} <br>
+                            {{ address.country|title }} - {{ address.pincode }}
+
+                            <br>
+                            <p class="lead"><strong>Contact Details:</strong></p>
+                            <a href="tel:+91-{{address.mobile_number}}"
+                                style="color: var(--main);">+91-{{ address.mobile_number }}</a><br>
+                            <a href="mailto:{{ address.email}}" style="color: var(--main);">{{ address.email }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

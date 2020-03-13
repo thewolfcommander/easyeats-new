@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Enjoy {% if food %}{{ food.name }}{% else %}Easyeats{% endif %}{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <h1 class="hero-title">{{ restaurant.name }}</h1>
+            <div class="d-sm-flex flex-wrap">
+                <a class="button button-hero button-shadow m-2" href="#">Search your favourite</a>
+                <a class="button button-hero button-shadow m-2" href="#">Download App</a>
+            </div>
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="/static/img/banner/fas-service-icon.png" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="/static/img/banner/fresh-food-icon.png" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right">
+            <div class="owl-carousel owl-theme hero-carousel">
+                {% for image in restaurant.restaurantimage_set.all %}
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="{{ image.image.url }}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+
+{% if restaurant %}
+<!--================Detail Area =================-->
+<section class="blog_area single-post-area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 posts-list">
+                <div class="single-post">
+                    <div class="owl-carousel owl-theme hero-carousel w-100">
+                        {% for item in restaurant.restaurantimage_set.all %}
+                        <div class="hero-carousel-item">
+                            <img class="img-fluid" src="{{ item.image.url }}" alt="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="blog_details">
+                        <h2>{{ restaurant.name|upper }}</h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li>Added {{ restaurant.added|timesince }} ago</li>
+                            <li>By {{ restaurant.vendor.user.full_name }}</li>
+                        </ul>
+
+                        <div class="quote-wrapper">
+                            <p class="lead"><strong>Address:</strong></p>
+                            {{ restaurant.address1 }},<br>
+                            {{ restaurant.address2 }}, <br>
+                            {{ restaurant.city }}, {{restaurant.state|title}} <br>
+                            {{ restaurant.country|title }} - {{ restaurant.pincode }}
+
+                            <br>
+                            <p class="lead"><strong>Contact Details:</strong></p>
+                            <a href="tel:+91-{{restaurant.mobile_number}}"
+                                style="color: var(--main);">+91-{{ restaurant.mobile_number }}</a><br>
+                            <a href="mailto:{{ restaurant.email}}"
+                                style="color: var(--main);">{{ restaurant.email }}</a>
+                        </div>
+                        <div class="container">
+                            <p class="lead">Top Dishes</p>
+                            <div class="row">
+                                {% for food in foods %}
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="card w-100 my-3" style="height: 350px!important;">
+                                        <img class="card-img-top" src="{{ food.foodimage_set.first.image.url }}"
+                                            alt="Card image cap" height="170px">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="{% url 'products:food_detail' food.id %}"
+                                                    style="color: var(--main);">{{ food.name }}</a></h5>
+
+                                            <h3 class="price-tag"><strike
+                                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
+                                            </h3>
+                                        </div>
+                                        <div class="card-footer">
+                                            {% include 'products/snippets/update-cart.html' with cart=cart food=food %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info"><span class="align-middle"><i class="ti-heart"></i></span> 4
+                            people love this</p>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            <p class="comment-count"><span class="align-middle"><i class="ti-comment"></i></span> 06
+                                Comments</p>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-dribbble"></i></a></li>
+                            <li><a href="#"><i class="ti-wordpress"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="comments-area">
+                        {% if reviews %}
+                        <h4>{{ reviews.count }} Reviews</h4>
+                        <div class="comment-list">
+                            {% for review in reviews %}
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb py-2">
+                                        <img src="{% if review.user.profile_photo %}{{ review.user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}"
+                                            alt="{{ review.user.user_id }}">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            {{ review.comment }}
+                                        </p>
+
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#">{{ review.user.full_name }}</a>
+                                                </h5>
+                                                <p class="date">{{ review.added }} </p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No reviews found for this restaurants</p>
+                        {% endif %}
+                    </div>
+                    <div class="comment-form">
+                        <h4>Leave a Review about {{ restaurant.name }} below</h4>
+                        {% if request.user.is_authenticated %}
+                        <form class="form-contact comment_form" action="#" id="commentForm" method="POST">
+                            {% csrf_token %}
+                            {% include 'includes/form.html' %}
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm">Submit Review</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}">Login</a> here to review the dish
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Detail Area =================-->
+{% else %}
+<div class="row justify-content-center">
+    <p class="lead">No food found. Maybe you are facing some issue. Kindly <a href="{% url 'core:report' %}"
+            class="button"> Report the issue</a> in order to get the proper assistance.</p>
+</div>
+{% endif %}
+
+
+<!--================Featured Section Start =================-->
+<section class="section-margin mb-lg-100">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Featured Items</h4>
+            <h2>Fresh taste at great price</h2>
+        </div>
+
+        {% if featured_foods %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            {% for item in featured_foods %}
+            <div class="featured-item">
+                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <div class="item-body">
+                    <a href="#">
+                        <h3 style="color: var(--main);">{{ item.name }}</h3>
+                    </a>
+                    <p>{{ item.summary }}</p>
+                    <div class="d-flex justify-content-between">
+                        <ul class="rating-star">
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                        </ul>
+                        <h3 class="price-tag"><strike
+                                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">No food items found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Featured Section End =================-->
+
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

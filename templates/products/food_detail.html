@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Enjoy {% if food %}{{ food.name }}{% else %}Easyeats{% endif %}{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <h1 class="hero-title">{{ food.name }}</h1>
+            <div class="d-sm-flex flex-wrap">
+                <a class="button button-hero button-shadow m-2" href="#">Search your favourite</a>
+                <a class="button button-hero button-shadow m-2" href="#">Download App</a>
+            </div>
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="/static/img/banner/fas-service-icon.png" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="/static/img/banner/fresh-food-icon.png" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right">
+            <div class="owl-carousel owl-theme hero-carousel">
+                {% for image in food.foodimage_set.all %}
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="{{ image.image.url }}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+
+{% if food %}
+<!--================Detail Area =================-->
+<section class="blog_area single-post-area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="owl-carousel owl-theme hero-carousel w-75">
+                        {% for item in food.foodimage_set.all %}
+                        <div class="hero-carousel-item">
+                            <img class="img-fluid" src="{{ item.image.url }}" alt="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="blog_details">
+                        <h2>{{ food.name|upper }}</h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#">Added {{ food.added|timesince }} ago</a></li>
+                        </ul>
+
+                        {% if cart %}
+                        <div class="quotes-wrapper my-3">
+                            {% include 'products/snippets/update-cart.html' with food=food cart=cart %}
+                        </div>
+                        {% endif %}
+                        <div class="quote-wrapper">
+                                {{ food.summary }}
+                        </div>
+                        <p class="excert">
+
+                            {{ food.description }}
+
+                        </p>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info"><span class="align-middle"><i class="ti-heart"></i></span> 4
+                            people love this</p>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            <p class="comment-count"><span class="align-middle"><i class="ti-comment"></i></span> 06
+                                Comments</p>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-dribbble"></i></a></li>
+                            <li><a href="#"><i class="ti-wordpress"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="comments-area">
+                        {% if reviews %}
+                        <h4>{{ reviews.count }} Reviews</h4>
+                        <div class="comment-list">
+                            {% for review in reviews %}
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb py-2">
+                                        <img src="{% if review.user.profile_photo %}{{ review.user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}" alt="{{ review.user.user_id }}">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            {{ review.comment }}
+                                        </p>
+
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#">{{ review.user.full_name }}</a>
+                                                </h5>
+                                                <p class="date">{{ review.added }} </p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No reviews found for this food</p>
+                        {% endif %}
+                    </div>
+                    <div class="comment-form">
+                        <h4>Leave a Review about {{ food.name }} below</h4>
+                        {% if request.user.is_authenticated %}
+                        <form class="form-contact comment_form" action="#" id="commentForm" method="POST">
+                            {% csrf_token %}
+                            {% include 'includes/form.html' %}
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm">Submit Review</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}">Login</a> here to review the dish
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title"><a href="{% url 'products:categories' %}">Category</a></h4>
+                        {% if categories %}
+                        <ul class="list cat-list">
+                            {% for category in categories %}
+                            <li>
+                                <a href="{% url 'products:categories_detail' category.id %}" class="d-flex">
+                                    <p>{{ category.name }}</p>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </aside>
+
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title"><a href="{% url 'products:restaurants' %}">Restaurant</a></h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="{% url 'products:restaurant_detail' food.restaurant.id %}" class="d-flex">
+                                    <p class="lead">{{ food.restaurant.name }}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Recommended Dishes</h3>
+                        {% if recommendations %}
+                        {% for item in recommendations %}
+                        <div class="media post_item">
+                            <img src="{{ item.foodimage_set.first.image.url }}" alt="post" width="70px">
+                            <div class="media-body">
+                                <a href="{% url 'products:food_detail' item.id %}">
+                                    <h3>{{ item.name }}</h3>
+                                </a>
+                                <p>{{ item.summary }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Clouds</h4>
+                        {% if tags %}
+                        <ul class="list">
+                            {% for tag in tags %}
+                            <li>
+                                <a href="{% url 'core:search' %}?search={{ tag.name }}">{{ tag.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Detail Area =================-->
+{% else %}
+<div class="row justify-content-center">
+    <p class="lead">No food found. Maybe you are facing some issue. Kindly <a href="{% url 'core:report' %}"
+            class="button"> Report the issue</a> in order to get the proper assistance.</p>
+</div>
+{% endif %}
+
+
+<!--================Featured Section Start =================-->
+<section class="section-margin mb-lg-100">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Featured Items</h4>
+            <h2>Fresh taste at great price</h2>
+        </div>
+
+        {% if featured_foods %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            {% for item in featured_foods %}
+            <div class="featured-item">
+                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <div class="item-body">
+                    <a href="#">
+                        <h3 style="color: var(--main);">{{ item.name }}</h3>
+                    </a>
+                    <p>{{ item.summary }}</p>
+                    <div class="d-flex justify-content-between">
+                        <ul class="rating-star">
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                        </ul>
+                        <h3 class="price-tag"><strike
+                                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">No food items found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Featured Section End =================-->
+
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

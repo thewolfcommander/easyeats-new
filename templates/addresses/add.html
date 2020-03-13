@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Add a new address to complete the order
+{% endblock title %}
+
+{% block styles_custom %}
+
+<style>
+	
+</style>
+
+{% endblock styles_custom %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="">
+	<div class="row justify-content-center">
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card shadow mb-3">
+				<div class="card-body">
+					<h3 class="card-title">Add a new address</h3>
+					<form method="post">
+						{% csrf_token %}
+						{% include 'includes/form.html' %}
+						<center><button type="submit" class="button button-hero button-shadow">Add</button></center>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

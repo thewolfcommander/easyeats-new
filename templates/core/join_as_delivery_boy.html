@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Register as Delivery Boy now to earn the most
+{% endblock title %}
+
+{% block styles_custom %}
+
+<style>
+
+</style>
+
+{% endblock styles_custom %}
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+	<div class="hero-wrapper">
+		<div class="hero-left">
+
+			<h1 class="hero-title">Register as Delivery Boy</h1>
+			<p>Many of the working guys or students earning a lot by joining our delivery boy program <br class="d-none d-xl-block"> Come forward and make a step towards your new earning stream.</p>
+			<ul class="hero-info d-none d-lg-block">
+				<li>
+					<img src="/static/img/banner/fas-service-icon.png" alt="">
+					<h4>Fast Service</h4>
+				</li>
+				<li>
+					<img src="/static/img/banner/fresh-food-icon.png" alt="">
+					<h4>Fresh Food</h4>
+				</li>
+				<li>
+					<img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+						width="35px">
+					<h4>No Minimum order</h4>
+				</li>
+			</ul>
+		</div>
+		<div class="hero-right">
+			<div class="owl-carousel owl-theme hero-carousel">
+				<div class="hero-carousel-item">
+					<img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+				</div>
+				<div class="hero-carousel-item">
+					<img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+				</div>
+				<div class="hero-carousel-item">
+					<img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+				</div>
+				<div class="hero-carousel-item">
+					<img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+
+<!-- ================ Delivery Boy section start ================= -->
+<section class="section-margin">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="contact-title">Register as Delivery Boy</h2>
+			</div>
+			<div class="col-lg-8">
+				{% if delivery_boy %}
+                    {% if not delivery_boy.active %}
+                    <h3 class="display-4 text-success">You have already registered as delivery boy, but not verified by our team. Kindly wait for some time and check back again later.</h3>
+                    {% elif delivery_boy.active %}
+                    <h3 class="display-4 text-success">You have already registered as delivery boy, and successfully verified by our team. Click the link below to go to your dashboard</h3>
+                    <br>
+                    <center><a href="#" class="button">Explore as Delivery Boy</a></center>
+                    {% endif %}
+                {% else %}
+				<form method="post">
+					{% csrf_token %}
+					{% include 'includes/form.html' %}
+					<center><button type="submit" class="button button-contactForm">Send Request</button></center>
+                </form>
+                {% endif %}
+
+
+			</div>
+
+			<div class="col-lg-4">
+                <h4 class="display-4">Contact here</h4>
+				<div class="media contact-info">
+					<span class="contact-info__icon"><i class="ti-home"></i></span>
+					<div class="media-body">
+						<h3>Srinagar Garhwal, Uttarakhand</h3>
+						<p>India - 246174</p>
+					</div>
+				</div>
+				<div class="media contact-info">
+					<span class="contact-info__icon"><i class="ti-tablet"></i></span>
+					<div class="media-body">
+						<h3><a href="tel:+91-7253919169">+91-7253919169</a></h3>
+						<p>Mon to Fri 9am to 6pm</p>
+					</div>
+				</div>
+				<div class="media contact-info">
+					<span class="contact-info__icon"><i class="ti-email"></i></span>
+					<div class="media-body">
+						<h3><a href="mailto:manoj@rightbros.co">manoj@rightbros.co</a></h3>
+						<p>Send us your query anytime!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- ================ Delivery Boy section end ================= -->
+{% endblock content %}

@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}All Restaurants available on EasyEats{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+  <div class="hero-wrapper">
+    <div class="hero-left">
+      <h1 class="hero-title">Restaurants<br> near you</h1>
+      <div class="d-sm-flex flex-wrap">
+        <a class="button button-hero button-shadow m-2" href="#">Search your favourite</a>
+        <a class="button button-hero button-shadow m-2" href="#">Download App</a>
+      </div>
+      <ul class="hero-info d-none d-lg-block">
+        <li>
+          <img src="/static/img/banner/fas-service-icon.png" alt="">
+          <h4>Fast Service</h4>
+        </li>
+        <li>
+          <img src="/static/img/banner/fresh-food-icon.png" alt="">
+          <h4>Fresh Food</h4>
+        </li>
+        <li>
+          <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt="" width="35px">
+          <h4>No Minimum order</h4>
+        </li>
+      </ul>
+    </div>
+    <div class="hero-right">
+      <div class="owl-carousel owl-theme hero-carousel">
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+<!--================Restaurant Area =================-->
+<section class="blog_area section-margin">
+  <div class="container">
+    <div class="row">
+      {% if restaurants %}
+      {% for restaurant in restaurants %}
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-5 mb-lg-0">
+        <article class="blog_item">
+          <div class="blog_item_img">
+            <img class="card-img rounded-0" src="{{ restaurant.restaurantimage_set.first.image.url }}" alt="">
+            <a href="{% url 'products:menu' %}" class="blog_item_date">
+              <h3>{{ restaurant.food_set.all.count }}</h3>
+              <p>Dishes</p>
+            </a>
+          </div>
+
+          <div class="blog_details">
+            <a class="d-inline-block" href="{% url 'products:restaurant_detail' restaurant.id %}">
+              <h2>{{ restaurant.name }}</h2>
+            </a>
+            <ul class="blog-info-link">
+              <li><a href="{% url 'core:search' %}?search={{ restaurant.city }}">{{ restaurant.city }},
+                  {{ restaurant.state }}</a></li>
+              <li>{{ restaurant.added }}</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+      <div class="col-md-12 mt-3">
+        {% if restaurants.has_other_pages %}
+        <ul class="pagination justify-content-center mt-5">
+            {% if restaurants.has_previous %}
+            <li class="page-item"><a href="?page={{ restaurants.previous_page_number }}" class="page-link">&laquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in restaurants.paginator.page_range %}
+            {% if restaurants.number == i %}
+            <li class="btn"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if restaurants.has_next %}
+            <li class="page-item"><a href="?page={{ restaurants.next_page_number }}" class="page-link">&raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+        {% else %}
+        No restaurants found
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Restaurant Area =================-->
+
+
+<!--================Featured Section Start =================-->
+<section class="section-margin mb-lg-100">
+  <div class="container">
+    <div class="section-intro mb-75px">
+      <h4 class="intro-title">Featured Items</h4>
+      <h2>Fresh taste at great price</h2>
+    </div>
+
+    {% if featured_foods %}
+    <div class="owl-carousel owl-theme featured-carousel">
+      {% for item in featured_foods %}
+      <div class="featured-item">
+        <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+        <div class="item-body">
+          <a href="{% url 'products:food_detail' item.id %}">
+            <h3 style="color: var(--main);">{{ item.name }}</h3>
+          </a>
+          <p>{{ item.summary }}</p>
+          <div class="d-flex justify-content-between">
+            <ul class="rating-star">
+              <li><i class="ti-star"></i></li>
+              <li><i class="ti-star"></i></li>
+              <li><i class="ti-star"></i></li>
+              <li><i class="ti-star"></i></li>
+              <li><i class="ti-star"></i></li>
+            </ul>
+            <h3 class="price-tag"><strike
+                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead">No food items found</p>
+    {% endif %}
+  </div>
+</section>
+<!--================Featured Section End =================-->
+
+
+
+
+{% endblock content %}

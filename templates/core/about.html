@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}About Us{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block about %}active{% endblock about %}
+
+{% block content %}
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+
+            <h1 class="hero-title">About Us</h1>
+            <p>The way we provide food to you is no one in the town can do. You will get the same taste of restaurant
+                mixed with the happiness of home at anywhere you want, anytime you want</p>
+
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="/static/img/banner/fas-service-icon.png" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="/static/img/banner/fresh-food-icon.png" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right">
+            <div class="owl-carousel owl-theme hero-carousel">
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner1.png" alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="/static/img/banner/hero-banner2.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+<!--================About Section start =================-->
+<section class="about section-margin pb-xl-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xl-6 mb-5 mb-md-0 pb-5 pb-md-0">
+                <div class="img-styleBox">
+                    <div class="styleBox-border">
+                        <img class="styleBox-img1 img-fluid" src="/static/img/home/about-img1.png" alt="">
+                    </div>
+                    <img class="styleBox-img2 img-fluid" src="/static/img/home/about-img2.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-6 pl-md-5 pl-xl-0 offset-xl-1 col-xl-5">
+                <div class="section-intro mb-lg-4">
+                    <h4 class="intro-title">About Us</h4>
+                    <h2>We speak the good food language</h2>
+                </div>
+                <p>Living first us creepeth she'd earth second be sixth hath likeness greater image said sixth was
+                    without male
+                    place fowl evening an grass form living fish and rule lesser for blessed can't saw third one signs
+                    moving
+                    stars light divided was two you him appear midst cattle for they are gathering.</p>
+                <a class="button button-shadow mt-2 mt-lg-4" href="#">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================About Section End =================-->
+
+
+
+<!--================Featured Section Start =================-->
+<section class="section-margin mb-lg-100">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Featured Items</h4>
+            <h2>Fresh taste at great price</h2>
+        </div>
+
+        {% if featured_foods %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            {% for item in featured_foods %}
+            <div class="featured-item">
+                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <div class="item-body">
+                    <a href="{% url 'products:food_detail' item.id %}">
+                        <h3 style="color: var(--main);">{{ item.name }}</h3>
+                    </a>
+                    <p>{{ item.summary }}</p>
+                    <div class="d-flex justify-content-between">
+                        <ul class="rating-star">
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                            <li><i class="ti-star"></i></li>
+                        </ul>
+                        <h3 class="price-tag"><strike
+                                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">No food items found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Featured Section End =================-->
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

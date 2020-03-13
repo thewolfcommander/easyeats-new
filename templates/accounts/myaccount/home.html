@@ -1,0 +1,106 @@
+{% extends 'accounts/myaccount/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block myacc_title %}{% endblock myacc_title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+
+{% block main %}
+
+<div class="container">
+    <h4 class="display-4">Account Details</h4>
+    <div class="col-md-12 col-sm-12">
+        <div class="card w-100 shadow-lg m-3" style="border-radius: 6px!important;">
+            <div class="card-body text-center" style="background: var(--main);">
+                <h5 class="card-title" style="color: #fff;">Your Profile
+                </h5>
+                <div class="row justify-content-center">
+                    <img src="{% if user.profile_photo %}{{ user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}" width="100px" style="border: 2px solid var(--main);" alt="">
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="table-responsive-md">
+                    <table class="table">
+                        <thead class="" style="background: var(--main)!important; color: #fff;">
+                            <tr>
+                                <th scope="col" class="col-md-2" style="min-width: 120px!important;"></th>
+                                <th scope="col" class="col-md-1">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>User ID</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ user.user_id }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Full Name</strong></p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ user.full_name }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Email</strong></p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ user.email }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Mobile
+                                            Number</strong></p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ user.mobile_number }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Gender</strong></p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ user.gender|title }}</p>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="display-4 mt-4">Edit your details</h4>
+    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ field|as_crispy_field }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="window.history.back();">Cancel</button>
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock main %}

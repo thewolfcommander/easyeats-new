@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Checkout Home{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}
+<style>
+
+</style>
+{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <center><h2 class="display-2" style="color: var(--main);">CHECKOUT</h2></center>
+        <div class="col-md-12 mt-4 pt-4">
+            <h4 class="display-4" style="color: var(--main);">Customer Details</h4>
+            {% if request.user.is_authenticated %}
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead class="" style="background: var(--main)!important; color: #fff;">
+                        <tr>
+                            <th scope="col" class="col-md-2" style="min-width: 120px!important;"></th>
+                            <th scope="col" class="col-md-1">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Customer User ID</strong></p></th>
+                            <th><p class="lead">{{ user.user_id }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Customer Name</strong></p></th>
+                            <th><p class="lead">{{ user.full_name }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Customer Email</strong></p></th>
+                            <th><p class="lead">{{ user.email }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Customer Mobile Number</strong></p></th>
+                            <th><p class="lead">{{ user.mobile_number }}</p></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            <h4 class="display-4" style="color: var(--main);">Selected address</h4>
+            {% if request.user.is_authenticated %}
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead class="" style="background: var(--main)!important; color: #fff;">
+                        <tr>
+                            <th scope="col" class="col-md-2" style="min-width: 120px!important;"></th>
+                            <th scope="col" class="col-md-1">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Address Name</strong></p></th>
+                            <th><p class="lead">{{ address.name }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Address Line 1</strong></p></th>
+                            <th><p class="lead">{{ address.address1 }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Address Line 2</strong></p></th>
+                            <th><p class="lead">{{ address.address2 }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>City</strong></p></th>
+                            <th><p class="lead">{{ address.city }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>State</strong></p></th>
+                            <th><p class="lead">{{ address.state }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Country</strong></p></th>
+                            <th><p class="lead">{{ address.country }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Primary Mobile Number</strong></p></th>
+                            <th><p class="lead">{{ address.mobile_number }}</p></th>
+                        </tr>
+                        <tr>
+                            <th><p class="lead" style="color: var(--main);"><strong>Alternate Mobile Number</strong></p></th>
+                            <th><p class="lead">{{ address.alt_mobile }}</p></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            <h4 class="display-4" style="color: var(--main);">Customer Details</h4>
+            {% if cart %}
+            <div class="table-responsive-md">
+                <table class="table">
+                    <thead class="" style="background: var(--main)!important; color: #fff;">
+                        <tr>
+                            <th scope="col" class="col-md-2" style="min-width: 120px!important;">Item Thumbnail</th>
+                            <th scope="col" class="col-md-1">Quantity</th>
+                            <th scope="col" class="col-md-7" style="min-width: 450px!important;">Item Name</th>
+                            <th scope="col" class="col-md-2 col-sm-12" >Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.foods.all %}
+                        <tr>
+                            <th scope="row"><img src="{{ item.foodimage_set.first.image.url }}" alt="{{ item.name }}"
+                                    width="90px"></th>
+                            <th>1</th>
+                            <td><a href="{% url 'products:food_detail' item.id %}">
+                                    <p class="lead"><strong>{{ item.name }}</strong></p>
+                                </a>
+                                <small>{{ item.summary }}</small><br>
+                            </td>
+                            <td>Rs. {{ item.discount_price }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Sub Total</th>
+                            <th>{{ cart.sub_total }}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Discount (If Any)</th>
+                            <th>0.00</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Shipping Charges</th>
+                            <th>{{ cart.shipping }}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th>{{ cart.total }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="" style="float: right!important;">
+                    {% include 'orders/create-order.html' with cart=cart address=address %}
+                </div>
+            </div>
+            {% else %}
+            <p class="lead">Ohhhh It seams your cart is feeling hungry !!!</p>
+            <a href="{% url 'core:home' %}" class="button">Feed it now</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

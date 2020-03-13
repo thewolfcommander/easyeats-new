@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Join this beautiful community now.
+{% endblock title %}
+
+{% block styles_custom %}
+
+<style>
+	
+</style>
+
+{% endblock styles_custom %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="">
+	<div class="row justify-content-center">
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card shadow mb-3">
+				<div class="card-body">
+					<h3 class="card-title">Sign up</h3>
+					<form method="post">
+						{% csrf_token %}
+						{% include 'includes/form.html' %}
+						<center><button type="submit" class="button button-hero button-shadow">Create an Account</button></center>
+						<center><a href="{% url 'social:begin' 'facebook' %}" class="btn btn-info btn-lg shadow mt-5">Login with Facebook</a></center>
+					</form>
+				</div>
+				<div class="card-footer text-muted text-center c-shadow-small-s">
+					Already have an account? <a href="{% url 'accounts:login' %}" class="c-text-inverted" style="text-decoration: none;">Log in</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

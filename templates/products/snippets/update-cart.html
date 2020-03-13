@@ -1,0 +1,12 @@
+<form action="{% url 'cart:update' %}" class="form-product-ajax" method="post" data-endpoint="{% url 'cart:update' %}" class="form" {% if request.user.is_authenticated %}data-user='abc'{% endif %}>
+    {% csrf_token %}
+    <input type="hidden" name="food_id" value='{{ food.id }}'>
+        <span class="submit-span">
+            {% if food in cart.foods.all %}
+            <div class="btn-group"><button type="submit" class="button">Remove from cart</button></div>
+            {% else %}
+            <!-- <input type="number" name="quantity" value="1" class="my-2"> -->
+            <button class="button" type="submit">Add to Cart</button>
+            {% endif %}
+        </span>
+</form>

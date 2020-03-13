@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Sign In to your beautiful account.
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="">
+	<div class="row justify-content-center">
+		<div class="col-lg-4 col-md-6 col-sm-8">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title">Log in</h3>
+					<form method="post">
+						{% csrf_token %}
+  						<input type="hidden" name="next" value="{{ next }}">
+						{% include 'includes/form.html' %}
+						<center><button type="submit" class="button button-hero button-shadow">Log In to your account</button></center>
+						<center><a href="{% url 'social:begin' 'facebook' %}" class="btn btn-info btn-lg shadow mt-5">Login with Facebook</a></center>
+					</form>
+				</div>
+				<div class="card-footer text-muted text-center">
+					New to Platform? <a href="{% url 'accounts:signup' %}" class="c-text-inverted" style="text-decoration: none;">Sign up</a>
+				</div>
+			</div>
+			<div class="text-center py-2">
+				<small>
+					<a href="#" class="text-muted" style="text-decoration: none;">Forgot your password?</a>
+				</small>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

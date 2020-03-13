@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Order successfully placed at EasyEats{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12">
+
+        <h4 class="display-4 text-success text-center">Hello <strong>{{ request.user.full_name }}</strong>, your order has been successfully placed at EasyEats</h4>
+        <br>
+        <center><a href="{% url 'accounts:orders' %}" class="button">Track your orders</a></center>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
