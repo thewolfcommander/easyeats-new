@@ -24,16 +24,16 @@
 	<meta name="twitter:card" content="" />
 
 
-	<link rel="icon" href="/static/img/Fevicon.png" type="image/png">
+	<link rel="icon" href="{% static 'img/Fevicon.png' %}" type="image/png">
 
-	<link rel="stylesheet" href="/static/vendors/bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="/static/vendors/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="/static/vendors/owl-carousel/owl.theme.default.min.css">
-	<link rel="stylesheet" href="/static/vendors/owl-carousel/owl.carousel.min.css">
-	<link rel="stylesheet" href="/static/vendors/Magnific-Popup/magnific-popup.css">
+	<link rel="stylesheet" href="{% static 'vendors/bootstrap/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/themify-icons/themify-icons.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.theme.default.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendors/Magnific-Popup/magnific-popup.css' %}">
 
-	<link rel="stylesheet" href="/static/css/style.css">
-	<link rel="stylesheet" href="/static/css/main.css">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 
 	{% block styles %}
@@ -56,14 +56,14 @@
 	<!-- Footer -->
 	{% include 'includes/footer.html' %}
 
-	<script src="/static/vendors/jquery/jquery-3.2.1.min.js"></script>
-	<script src="/static/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-	<script src="/static/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script src="/static/vendors/nice-select/jquery.nice-select.min.js"></script>
-	<script src="/static/vendors/Magnific-Popup/jquery.magnific-popup.min.js"></script>
-	<script src="/static/js/jquery.ajaxchimp.min.js"></script>
-	<script src="/static/js/mail-script.js"></script>
-	<script src="/static/js/main.js"></script>
+	<script src="{% static 'vendors/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'vendors/bootstrap/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'vendors/nice-select/jquery.nice-select.min.js' %}"></script>
+	<script src="{% static 'vendors/Magnific-Popup/jquery.magnific-popup.min.js' %}"></script>
+	<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+	<script src="{% static 'js/mail-script.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
 	{% block scripts %}
 	{% endblock scripts %}
 
