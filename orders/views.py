@@ -17,6 +17,7 @@ def create_order(request):
     order = Order.objects.create(user=user, cart=cart, address=address)
     order.update_total()
     order.user.order_count += 1
+    order.user.save()
     print("Session ID before: {}".format(request.session["cart_id"]))
     del request.session["cart_id"]
     return redirect("orders:success")
