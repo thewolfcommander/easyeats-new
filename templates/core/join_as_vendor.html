@@ -22,7 +22,23 @@ Register as Vendor and add unlimited restaurants
 		<div class="hero-left">
 
 			<h1 class="hero-title">Register as Vendor</h1>
-			<p>Many of the businesses expanding enormously by joining our platform <br class="d-none d-xl-block"> Come forward and make a step and join as a vendor on our platform and add unlimited restaurants.</p>
+			<p>Many of the businesses expanding enormously by joining our platform <br class="d-none d-xl-block"> Come
+				forward and make a step and join as a vendor on our platform and add unlimited restaurants.</p>
+			<div class="d-sm-flex flex-wrap">
+				<form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
+					<div class="input-group mb-3 shadow-lg" style="height: 50px;">
+						<input type="text" class="form-control w-75" placeholder="Search something awesome..."
+							aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;"
+							name="search">
+						<div class="input-group-append w-25">
+							<button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+								style="background-color: var(--main); color: #fff;">
+								<center>Search</center>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
 			<ul class="hero-info d-none d-lg-block">
 				<li>
 					<img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
@@ -69,27 +85,29 @@ Register as Vendor and add unlimited restaurants
 				<h2 class="contact-title">Register as Vendor</h2>
 			</div>
 			<div class="col-lg-8">
-                {% if vendor %}
-                    {% if not vendor.active %}
-                    <h3 class="display-4 text-success">You have already registered as vendor, but not verified by our team. Kindly wait for some time and check back again later.</h3>
-                    {% elif vendor.active %}
-                    <h3 class="display-4 text-success">You have already registered as vendor, and successfully verified by our team. click the link below to go to your dashboard</h3>
-                    <br>
-                    <center><a href="#" class="button">Explore as Vendor</a></center>
-                    {% endif %}
-                {% else %}
+				{% if vendor %}
+				{% if not vendor.active %}
+				<h3 class="display-4 text-success">You have already registered as vendor, but not verified by our team.
+					Kindly wait for some time and check back again later.</h3>
+				{% elif vendor.active %}
+				<h3 class="display-4 text-success">You have already registered as vendor, and successfully verified by
+					our team. click the link below to go to your dashboard</h3>
+				<br>
+				<center><a href="#" class="button">Explore as Vendor</a></center>
+				{% endif %}
+				{% else %}
 				<form method="post">
 					{% csrf_token %}
 					{% include 'includes/form.html' %}
 					<center><button type="submit" class="button button-contactForm">Send Request</button></center>
-                </form>
-                {% endif %}
+				</form>
+				{% endif %}
 
 
 			</div>
 
 			<div class="col-lg-4">
-                <h4 class="display-4">Contact here</h4>
+				<h4 class="display-4">Contact here</h4>
 				<div class="media contact-info">
 					<span class="contact-info__icon"><i class="ti-home"></i></span>
 					<div class="media-body">
