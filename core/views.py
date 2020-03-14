@@ -51,7 +51,7 @@ def home(request):
     foods = Food.objects.filter(active=True).order_by('-updated')[:16]
     collections = Collection.objects.filter(active=True).order_by('-updated')[:10]
     if request.method == 'POST':
-        form = HotelReservationForm(request.POST or None):
+        form = HotelReservationForm(request.POST or None)
         if form.is_valid():
             reserve = form.save()
             return redirect(request.path_info)
