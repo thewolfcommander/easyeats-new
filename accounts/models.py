@@ -68,6 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     profile_photo = models.ImageField(max_length=255, blank=True, null=True, upload_to=UPLOAD_DIRECTORY_PROFILEPHOTO, help_text="User's Profile photo")
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    order_count = models.IntegerField(default=0)
 
     is_admin = models.BooleanField(default=False)
     is_client = models.BooleanField(default=False)
