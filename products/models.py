@@ -17,16 +17,16 @@ class Restaurant(models.Model):
     ]
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    address1 = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True)
+    address1 = models.CharField(max_length=255, null=True)
     address2 = models.CharField(max_length=255, null=True, blank=True)
-    city = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True)
     landmark = models.CharField(max_length=255, null=True, blank=True)
-    state = models.CharField(max_length=255, null=True, blank=True, choices=STATE_CHOICES, default='uttarakhand')
-    country = models.CharField(max_length=255, null=True, blank=True, choices=COUNTRY_CHOICES, default='india')
-    pincode = models.CharField(max_length=6, null=True, blank=True)
-    mobile_number = models.CharField(max_length=20, null=True, blank=True)
-    email = models.CharField(max_length=255, null=True, blank=True)
+    state = models.CharField(max_length=255, null=True, choices=STATE_CHOICES, default='uttarakhand')
+    country = models.CharField(max_length=255, null=True, choices=COUNTRY_CHOICES, default='india')
+    pincode = models.CharField(max_length=6, null=True)
+    mobile_number = models.CharField(max_length=20, null=True)
+    email = models.CharField(max_length=255, null=True)
     active = models.BooleanField(default=True)
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
 
@@ -55,10 +55,10 @@ class Category(models.Model):
     """
     This model gonna hold the available categories for a particular restaurant
     """
-    image = models.ImageField(upload_to='category_feature_image', null=True, blank=True)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    summary = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='category_feature_image', null=True)
+    name = models.CharField(max_length=255, null=True)
+    summary = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -77,16 +77,16 @@ class Food(models.Model):
     This model gonna hold the available food items for a particular category and a particular restaurant
     """
     category = models.ManyToManyField(Category)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    summary = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    name = models.CharField(max_length=255, null=True)
+    summary = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    gross_price = models.CharField(max_length=255, null=True, blank=True)
-    discount_price = models.CharField(max_length=255, null=True, blank=True)
-    tax = models.CharField(max_length=255, null=True, blank=True)
-    preparation_time = models.CharField(max_length=5, null=True, blank=True, help_text="In minutes")
+    gross_price = models.CharField(max_length=255, null=True)
+    discount_price = models.CharField(max_length=255, null=True)
+    tax = models.CharField(max_length=255, null=True)
+    preparation_time = models.CharField(max_length=5, null=True, help_text="In minutes")
     added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     featured = models.BooleanField(default=False)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, default=1)
@@ -119,10 +119,10 @@ class Collection(models.Model):
     """
     This model gonna hold the featured collections on the platform
     """
-    image = models.ImageField(upload_to='collection_feature_image', null=True, blank=True)
-    name = models.CharField(max_length=255, null=True, blank=True)
-    summary = models.CharField(max_length=255, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='collection_feature_image', null=True)
+    name = models.CharField(max_length=255, null=True)
+    summary = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -153,7 +153,7 @@ class Review(models.Model):
     This model is for the reviews for the particular products
     """
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255, null=True, blank=True)
+    comment = models.CharField(max_length=255, null=True)
     rating_1 = models.BooleanField(default=False)
     rating_2 = models.BooleanField(default=False)
     rating_3 = models.BooleanField(default=False)
@@ -173,7 +173,7 @@ class RestaurantReview(models.Model):
     This model is for the reviews for the particular products
     """
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=255, null=True, blank=True)
+    comment = models.CharField(max_length=255, null=True)
     rating_1 = models.BooleanField(default=False)
     rating_2 = models.BooleanField(default=False)
     rating_3 = models.BooleanField(default=False)
