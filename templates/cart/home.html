@@ -70,7 +70,15 @@
                         </tr>
                     </tbody>
                 </table>
+                {% if cart.foods.count != 0 %}
+                {% if request.user.is_authenticated %}
                 <a href="{% url 'addresses:select' %}" class="button m-4" style="float: right!important;">Continue</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}?next={{ request.get_full_path|urlencode }}" class="button m-4" style="float: right!important;">Login to Continue</a>
+                <p class="lead" style="float: right!important;">Not registered yet?</p>
+                <a href="{% url 'accounts:signup' %}?next={{ request.get_full_path|urlencode }}" class="button m-4" style="float: right!important;">Register to Continue</a>
+                {% endif %}
+                {% endif %}
             </div>
             {% else %}
             <p class="lead">Ohhhh It seams your cart is feeling hungry !!!</p>

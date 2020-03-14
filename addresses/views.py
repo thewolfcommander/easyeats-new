@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from addresses.forms import AddressForm
 from addresses.models import Address
 # Create your views here.
 
+@login_required
 def add_address(request):
     if request.method == 'POST':
         form = AddressForm(request.POST or None)
@@ -19,7 +21,7 @@ def add_address(request):
     }
     return render(request, 'addresses/add.html', context)
 
-
+@login_required
 def select_address(request):
     addresses = Address.objects.filter(user=request.user)
     context = {

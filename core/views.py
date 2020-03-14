@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from accounts.forms import VendorForm, DeliveryBoyForm
 from accounts.models import Vendor, DeliveryBoy
@@ -114,7 +115,7 @@ def partner_relations(request):
 def terms_of_service(request):
     return render(request, 'core/terms_of_service.html')
 
-
+@login_required
 def join_as_vendor(request):
     vendor = Vendor.objects.filter(user=request.user).first()
     if request.method == 'POST':
@@ -134,6 +135,7 @@ def join_as_vendor(request):
     return render(request, 'core/join_as_vendor.html', context)
 
 
+@login_required
 def join_as_delivery_boy(request):
     delivery_boy = DeliveryBoy.objects.filter(user=request.user).first()
     if request.method == 'POST':
