@@ -1,7 +1,9 @@
+import datetime
 from django.db import models
 
 from accounts.models import User
 from products.models import Restaurant
+
 
 class Contact(models.Model):
     """
@@ -85,7 +87,7 @@ class HotelReservation(models.Model):
     full_name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
     mobile_number = models.CharField(max_length=20, null=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default="")
     people = models.CharField(max_length=10, null=True, choices=PEOPLE_CHOICES, default='1')
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
