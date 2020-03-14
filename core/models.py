@@ -91,7 +91,6 @@ class HotelReservation(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ('-updated',)
         verbose_name = 'Restaurant Reservation'
         verbose_name_plural = 'Restaurant Reservations'
 

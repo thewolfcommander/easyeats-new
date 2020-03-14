@@ -24,4 +24,3 @@ class ReportIssueAdmin(admin.ModelAdmin):
 @admin.register(HotelReservation)
 class HotelReservationAdmin(admin.ModelAdmin):
     list_display = ['full_name', 'email', 'timestamp', 'restaurant']
-    list_filter = ['-updated']

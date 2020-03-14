@@ -3,7 +3,8 @@ from django import forms
 from core.models import (
     Contact, 
     ReportIssue,
-    Newsletter
+    Newsletter,
+    HotelReservation
 )
 
 class ContactForm(forms.ModelForm):
@@ -28,3 +29,9 @@ class NewsletterForm(forms.ModelForm):
     class Meta:
         model = Newsletter
         fields = ['email']
+
+    
+class HotelReservationForm(forms.ModelForm):
+    class Meta:
+        model = HotelReservation
+        fields = ['full_name', 'restaurant', 'email', 'mobile_number', 'date', 'people']
