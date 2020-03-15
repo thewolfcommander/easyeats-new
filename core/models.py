@@ -66,34 +66,3 @@ class Newsletter(models.Model):
     def __str__(self):
         return self.user.user_id
 
-
-class HotelReservation(models.Model):
-    """
-    This model is for hotel reservation
-    """
-    PEOPLE_CHOICES = [
-        ('1', 'One'),
-        ('2', 'Two'),
-        ('3', 'Three'),
-        ('4', 'Four'),
-        ('5', 'Five'),
-        ('6', 'Six'),
-        ('7', 'Seven'),
-        ('8', 'Eight'),
-        ('9', 'Nine'),
-        ('10', 'Ten'),
-    ]
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.DO_NOTHING, default=1)
-    full_name = models.CharField(max_length=255, null=True)
-    email = models.CharField(max_length=255, null=True)
-    mobile_number = models.CharField(max_length=20, null=True)
-    people = models.CharField(max_length=10, null=True, choices=PEOPLE_CHOICES, default='1')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Restaurant Reservation'
-        verbose_name_plural = 'Restaurant Reservations'
-
-    def __str__(self):
-        return self.full_name

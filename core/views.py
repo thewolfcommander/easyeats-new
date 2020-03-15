@@ -8,7 +8,6 @@ from core.forms import (
     ContactForm,
     ReportIssueForm,
     NewsletterForm,
-    HotelReservationForm
 )
 from easyeats import utils
 from products.models import (
@@ -50,20 +49,12 @@ def home(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     foods = Food.objects.filter(active=True).order_by('-updated')[:16]
     collections = Collection.objects.filter(active=True).order_by('-updated')[:10]
-    if request.method == 'POST':
-        form = HotelReservationForm(request.POST or None)
-        if form.is_valid():
-            reserve = form.save()
-            return redirect(request.path_info)
-    else:
-        form = HotelReservationForm()
     context = {
         'restaurants': restaurants,
         'categories': categories,
         'featured_foods': featured_foods,
         'foods': foods,
         'collections': collections,
-        'form': form,
     }
     return render(request, 'core/home.html', context)
 
