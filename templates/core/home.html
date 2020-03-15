@@ -189,21 +189,20 @@
     <div class="owl-carousel owl-theme featured-carousel">
       {% for category in categories %}
       <div class="featured-item">
-        <a href="{% url 'products:category_detail' category.id %}">
+        <a href="{% url 'products:categories_detail' category.id %}">
           <img class="card-img rounded-0"
             src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
             alt="">
         </a>
         <div class="item-body">
-          <a href="{% url 'products:category_detail' category.id %}">
+          <a href="{% url 'products:categories_detail' category.id %}">
             <h3 style="color: var(--main);">{{ category.name }}</h3>
           </a>
-          <p>{{ categoru.summary }}</p>
           <div class="d-flex justify-content-left">
-            <p><small>More than {{ category.food_set.all.count }} food items</small></p>
+            <p><small>{{ category.summary }}</small></p>
           </div>
           <div class="d-flex justify-content-left">
-            <p><small style="color: orange;">By {{ category.restaurant.name }}</small></p>
+            <p><small style="color: orange;">More than {{ category.food_set.all.count }} food items</small></p>
           </div>
         </div>
       </div>
@@ -230,18 +229,22 @@
     {% if restaurants %}
     <div class="row">
       {% for restaurant in restaurants|slice:":4" %}
-      <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+      <div class="col-sm-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card-blog">
+          <a href="{% url 'products:restaurant_detail' restaurant.id %}">
           <img class="card-img rounded-0"
             src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-            alt="">
+            alt=""></a>
           <div class="blog-body">
-            <ul class="blog-info">
-              <li><a href="#">{{ restaurant.city }}, {{ restaurant.state|title }}</a></li>
-            </ul>
-            <a href="#">
+            <a href="{% url 'products:restaurant_detail' restaurant.id %}">
               <h3>{{ restaurant.name }}</h3>
             </a>
+            <ul class="blog-info">
+              <li><a href="{% url 'core:search' %}?search={{restaurant.city}}">{{ restaurant.city }}, {{ restaurant.state|title }}</a></li>
+              <li>
+                <p class="mono text-primary">{{ restaurant.food_set.all.count }} Dishes</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -323,11 +326,12 @@
       {% for collection in collections %}
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
         <div class="chef-card">
+          <a href="{% url 'products:collection_detail' collection.id %}">
           <img class="card-img rounded-0"
             src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-            alt="">
+            alt=""></a>
           <div class="chef-footer">
-            <h4>{{ collection.name }}</h4>
+            <a href="{% url 'products:collection_detail' collection.id %}"><h4>{{ collection.name }}</h4></a>
             <p>{{ collection.summary }}</p>
           </div>
 

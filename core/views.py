@@ -52,6 +52,7 @@ def search(request):
             'restaurants': restaurants,
             'featured_foods': featured_foods,
             'foods': foods,
+            'count': int(foods_list.count) + int(restaurants.count), 
             'cart': cart_obj,
         }
     return render(request, 'core/search.html', context)

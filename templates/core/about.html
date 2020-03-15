@@ -118,22 +118,24 @@
         <div class="owl-carousel owl-theme featured-carousel">
             {% for item in featured_foods %}
             <div class="featured-item">
-                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+                <a href="{% url 'products:food_detail' item.id %}">
+                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt=""></a>
                 <div class="item-body">
                     <a href="{% url 'products:food_detail' item.id %}">
                         <h3 style="color: var(--main);">{{ item.name }}</h3>
                     </a>
                     <p>{{ item.summary }}</p>
                     <div class="d-flex justify-content-between">
-                        <ul class="rating-star">
+                        <!-- <ul class="rating-star">
                             <li><i class="ti-star"></i></li>
                             <li><i class="ti-star"></i></li>
                             <li><i class="ti-star"></i></li>
                             <li><i class="ti-star"></i></li>
                             <li><i class="ti-star"></i></li>
-                        </ul>
+                        </ul> -->
+                        <p class="lead" style="color: orangered">20% off</p>
                         <h3 class="price-tag"><strike
-                                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                style="font-size: 14px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
                         </h3>
                     </div>
                 </div>
