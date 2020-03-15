@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'storages',
     'crispy_forms',
     'widget_tweaks',
+    'import_export',
 
     'accounts',
     'addresses',
@@ -51,6 +52,8 @@ INSTALLED_APPS = [
     'orders',
     'products',
 ]
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 AUTH_USER_MODEL = 'accounts.User'
 

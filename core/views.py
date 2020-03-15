@@ -162,3 +162,6 @@ def join_as_delivery_boy(request):
     }
     return render(request, 'core/join_as_delivery_boy.html', context)
 
+
+def best_offer(request):
+    return render(request, 'core/best_offer.html')

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from products.models import *
 
@@ -22,26 +23,26 @@ class ReviewInline(admin.TabularInline):
 
 
 @admin.register(Restaurant)
-class RestaurantAdmin(admin.ModelAdmin):
+class RestaurantAdmin(ImportExportModelAdmin):
     list_display = ['name', 'mobile_number', 'email', 'vendor', 'added', 'active']
     list_filter = ['added', 'updated', 'pincode']
     inlines = [RestaurantImageInline]
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ImportExportModelAdmin):
     list_display = ['name', 'active', 'added']
     list_filter = ['active', 'added', 'updated']
 
 
 @admin.register(Food)
-class FoodAdmin(admin.ModelAdmin):
+class FoodAdmin(ImportExportModelAdmin):
     list_display = ['name', 'active', 'added', 'gross_price', 'discount_price', 'added_by']
     list_filter = ['active', 'added', 'updated']
     inlines = [FoodImageInline, FoodTagInline, ReviewInline]
 
 
 @admin.register(Collection)
-class CollectionAdmin(admin.ModelAdmin):
+class CollectionAdmin(ImportExportModelAdmin):
     list_display = ['name', 'active', 'added']
     list_filter = ['active', 'added', 'updated']

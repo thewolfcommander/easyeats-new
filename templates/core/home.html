@@ -156,8 +156,9 @@
       <div class="col-sm">
         <div class="offer-card offer-card-position">
           <h3>Never Before Offer</h3>
-          <h2>50% OFF</h2>
-          <a class="button" href="#">Read More</a>
+          <p class="lead">Get Free Delivery on first order</p>
+          <br>
+          <a class="button" href="{% url 'core:best_offer' %}">Read More</a>
         </div>
       </div>
     </div>
@@ -195,7 +196,7 @@
       {% endfor %}
     </div>
 
-    <center><a class="button" href="#">All Categories</a></center>
+    <center><a class="button" href="{% url 'products:categories' %}">All Categories</a></center>
     {% else %}
     <p class="lead">Sorry, no categories found</p>
     {% endif %}
@@ -231,7 +232,7 @@
       {% endfor %}
     </div>
 
-    <center><a class="button mt-5" href="#">All Restaurants</a></center>
+    <center><a class="button mt-5" href="{% url 'products:restaurants' %}">All Restaurants</a></center>
     {% else %}
     <p class="lead">Sorry, no restaurants found</p>
     {% endif %}
@@ -245,7 +246,7 @@
   <div class="container">
     <p>Be first in your area to expand tremendously</p>
     <h2>Register now as a vendor and add unlimited restaurants</h2>
-    <a class="button" href="#">Know more</a>
+    <a class="button" href="{% url 'core:join_as_vendor' %}">Know more</a>
   </div>
 </section>
 <!--================CTA section end =================-->
@@ -311,7 +312,7 @@
       </div>
       {% endfor %}
     </div>
-    <center><a class="button mt-5" href="#">All collections</a></center>
+    <center><a class="button mt-5" href="{% url 'products:collections' %}">All collections</a></center>
     {% else %}
     <p class="lead">No collections found</p>
     {% endif %}
@@ -341,7 +342,7 @@
         <p>Living first us creepeth she'd earth second be sixth hath likeness greater image said sixth was without male
           place fowl evening an grass form living fish and rule lesser for blessed can't saw third one signs moving
           stars light divided was two you him appear midst cattle for they are gathering.</p>
-        <a class="button button-shadow mt-2 mt-lg-4" href="#">Learn More</a>
+        <a class="button button-shadow mt-2 mt-lg-4" href="{% url 'core:about' %}">Learn More</a>
       </div>
     </div>
   </div>
