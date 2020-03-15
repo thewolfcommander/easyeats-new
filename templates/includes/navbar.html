@@ -17,7 +17,7 @@
                   <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                       <ul class="nav navbar-nav menu_nav justify-content-end">
 
-                          <li class="nav-item mt-3">
+                          <li class="nav-item ">
                               <form action="{% url 'core:search' %}?search={{ query}}" class="mt-4">
                                   <div class="form-group py-2">
                                       <div class="input-group">
@@ -32,15 +32,15 @@
                                   </div>
                               </form>
                           </li>
-                          <li class="nav-item mt-0"><a class="nav-link" href="{% url 'core:home' %}"><img
+                          <li class="nav-item mt-0"><a class="nav-link" href="{% url 'core:home' %}"><!-- <img
                                       src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/home-icon.png"
-                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;"></a></li>
+                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;"> --> <i class="ti-home"></i> Home</a></li>
                           {% if request.user.is_authenticated %}
                           <li class="nav-item submenu dropdown mt-0">
                               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                  aria-haspopup="true" aria-expanded="false"><img
+                                  aria-haspopup="true" aria-expanded="false"><!-- <img
                                       src="https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png"
-                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;"></a>
+                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;">--> <i class="ti-user"></i> IAM</a>
                               <ul class="dropdown-menu">
                                   <li class="nav-item"><a href="#" class="nav-link">Hello
                                           {{ request.user.user_id|upper }}</a></li>
@@ -74,9 +74,9 @@
                           {% endif %}
                           <li class="nav-item submenu dropdown mt-0">
                               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                  aria-haspopup="true" aria-expanded="false"><img
+                                  aria-haspopup="true" aria-expanded="false"><!-- <img
                                       src="https://img.icons8.com/bubbles/2x/product.png" alt="Avatar" width="45px"
-                                      style="margin-bottom: 0px!important;"></a>
+                                      style="margin-bottom: 0px!important;">--> <i class="ti-crown"></i> Explore</a>
                               <ul class="dropdown-menu">
                                   <li class="nav-item"><a class="nav-link" href="{% url 'products:menu' %}">Menu</a>
                                   <li class="nav-item "><a class="nav-link"
@@ -87,9 +87,9 @@
                                           href="{% url 'products:collections' %}">Collections</a>
                               </ul>
                           </li>
-                          <li class="nav-item mt-0"><a class="nav-link" href="{% url 'cart:home' %}"><img
+                          <li class="nav-item mt-0"><a class="nav-link" href="{% url 'cart:home' %}"><!-- <img
                                       src="https://icons.iconarchive.com/icons/graphicloads/100-flat/256/cart-remove-icon.png"
-                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;"></a></li>
+                                      alt="Avatar" width="45px" style="margin-bottom: 0px!important;">--> <i class="ti-shopping-cart"></i> Cart</a></li>
 
                       </ul>
                   </div>
