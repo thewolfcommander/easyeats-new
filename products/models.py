@@ -85,6 +85,7 @@ class Food(models.Model):
     updated = models.DateTimeField(auto_now=True)
     gross_price = models.CharField(max_length=255, null=True)
     discount_price = models.CharField(max_length=255, null=True)
+    original_price = models.CharField(max_length=255, null=True)
     tax = models.CharField(max_length=255, null=True)
     preparation_time = models.CharField(max_length=5, null=True, help_text="In minutes")
     added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
