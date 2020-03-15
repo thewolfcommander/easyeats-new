@@ -47,12 +47,14 @@ def search(request):
             foods = paginator.page(1)
         except EmptyPage:
             foods = paginator.page(paginator.num_pages)
+        f_count =foods_list.count()
+        r_count = restaurants.count()
         context = {
             'query': query,
             'restaurants': restaurants,
             'featured_foods': featured_foods,
             'foods': foods,
-            'count': int(foods_list.count) + int(restaurants.count), 
+            'count': int(f_count) + int(r_count), 
             'cart': cart_obj,
         }
     return render(request, 'core/search.html', context)

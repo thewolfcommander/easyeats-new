@@ -27,8 +27,11 @@
                         <button class="button rounded-2 primary-bg text-white w-25" type="submit">Search</button>
                     </center>
                 </form>
-                <center><p class="lead mt-5">Showing {{ count }} results for <a href="{% url 'core:search' %}?search={{ query}}"
-                    style="color: var(--main);">{{ query }}</a></p></center>
+                <center>
+                    <p class="lead mt-5">Showing {{ count }} results for <a
+                            href="{% url 'core:search' %}?search={{ query}}" style="color: var(--main);">{{ query }}</a>
+                    </p>
+                </center>
             </div>
         </div>
     </div>
@@ -48,9 +51,10 @@
             {% for item in foods %}
             <div class="col-md-3 col-sm-12">
                 <div class="card w-100 my-3">
-                    <img class="card-img-top"
-                        src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                        alt="Card image cap">
+                    <a href="{% url 'products:food_detail' item.id %}">
+                        <img class="card-img-top"
+                            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                            alt="Card image cap"></a>
                     <div class="card-body">
                         <h5 class="card-title text-center"><a href="{% url 'products:food_detail' item.id %}"
                                 style="color: var(--main);">{{ item.name }}</a></h5>
@@ -59,7 +63,10 @@
 
                         <center>
                             <h3 class="price-tag"><strike
-                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}<small class="text-muted" style="font-size: 10px;"><center>20% off</center></small>
+                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}<small
+                                    class="text-muted" style="font-size: 10px;">
+                                    <center>20% off</center>
+                                </small>
                             </h3>
                         </center>
                         <center>{% include 'products/snippets/update-cart.html' with cart=cart food=item %}</center>
@@ -112,20 +119,26 @@
         </div>
         {% if restaurants %}
         <div class="row">
-            {% for item in restaurants %}
-            <div class="col-md-3 col-sm-12">
-                <div class="card w-100 mt-3 p-4">
-                    <img class="card-img-top"
-                        src="{% if item.restaurantimage_set.first.image %}{{ item.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'products:restaurant_detail' item.id %}"
-                                style="color: var(--main);">{{ item.name }}</a></h5>
-                        <p class="card-text">{{ item.food_set.all.count }} Dishes</p>
-                        <p class="card-text"><small class="text-muted"></small></p>
-                    </div>
+            {% for restaurant in restaurants %}
+            <div class="col-sm-12 col-lg-4 mb-4 mb-lg-0">
+                <div class="card-blog">
+                  <a href="{% url 'products:restaurant_detail' restaurant.id %}">
+                  <img class="card-img rounded-0"
+                    src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                    alt=""></a>
+                  <div class="blog-body">
+                    <a href="{% url 'products:restaurant_detail' restaurant.id %}">
+                      <h3>{{ restaurant.name }}</h3>
+                    </a>
+                    <ul class="blog-info">
+                      <li><a href="{% url 'core:search' %}?search={{restaurant.city}}">{{ restaurant.city }}, {{ restaurant.state|title }}</a></li>
+                      <li>
+                        <p class="mono text-primary">{{ restaurant.food_set.all.count }} Dishes</p>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-            </div>
+              </div>
             {% endfor %}
         </div>
         <hr>
