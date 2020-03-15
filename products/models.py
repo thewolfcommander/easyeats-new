@@ -96,8 +96,6 @@ class Food(models.Model):
         verbose_name = "Food Item"
         verbose_name_plural = "Food Items"
 
-    def __str__(self):
-        return self.name
 
     def get_absolute_url(self):
         return reverse("products:food_detail", kwargs={"id": self.id})
