@@ -31,7 +31,7 @@ class RestaurantAdmin(ImportExportModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(ImportExportModelAdmin):
-    list_display = ['name', 'active', 'added']
+    list_display = ['id', 'name', 'active', 'added']
     list_filter = ['active', 'added', 'updated']
 
 
