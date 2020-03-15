@@ -34,4 +34,4 @@ class NewsletterForm(forms.ModelForm):
 class HotelReservationForm(forms.ModelForm):
     class Meta:
         model = HotelReservation
-        fields = ['full_name', 'restaurant', 'email', 'mobile_number', 'date', 'people']
+        fields = ['full_name', 'restaurant', 'email', 'mobile_number', 'people']
