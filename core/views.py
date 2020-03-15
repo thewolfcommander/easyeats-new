@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -9,6 +11,7 @@ from core.forms import (
     ReportIssueForm,
     NewsletterForm,
 )
+from cart.models import Cart
 from easyeats import utils
 from products.models import (
     Restaurant,
@@ -28,17 +31,28 @@ def search(request):
             Q(state__icontains=query)
         )
         featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
-        foods = Food.objects.filter(
+        foods_list = Food.objects.filter(
             Q(name__icontains=query) |
             Q(summary__icontains=query) |
             Q(category__name__icontains=query) |
             Q(foodtag__name__icontains=query)
         )
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        page = request.GET.get('page', 1)
+
+        paginator = Paginator(foods_list, 12)
+        try:
+            foods = paginator.page(page)
+        except PageNotAnInteger:
+            foods = paginator.page(1)
+        except EmptyPage:
+            foods = paginator.page(paginator.num_pages)
         context = {
             'query': query,
             'restaurants': restaurants,
             'featured_foods': featured_foods,
             'foods': foods,
+            'cart': cart_obj,
         }
     return render(request, 'core/search.html', context)
 

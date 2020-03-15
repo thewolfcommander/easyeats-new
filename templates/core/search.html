@@ -58,7 +58,7 @@
                             </h3>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="button">Add to Cart</a>
+                            {% include 'products/snippets/update-cart.html' with cart=cart food=item %}
                         </div>
                     </div>
                 </div>
@@ -122,28 +122,6 @@
                 {% endfor %}
         </div>
         <hr>
-
-        {% if restaurants.has_other_pages %}
-        <ul class="pagination justify-content-center mt-5">
-            {% if restaurants.has_previous %}
-            <li class="page-item"><a href="?page={{ restaurants.previous_page_number }}" class="page-link">&laquo;</a></li>
-            {% else %}
-            <li class="page-item disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in restaurants.paginator.page_range %}
-            {% if restaurants.number == i %}
-            <li class="btn"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if restaurants.has_next %}
-            <li class="page-item"><a href="?page={{ restaurants.next_page_number }}" class="page-link">&raquo;</a></li>
-            {% else %}
-            <li class="page-item disabled"><span>&raquo;</span></li>
-            {% endif %}
-        </ul>
-        {% endif %}
 
 
         {% else %}

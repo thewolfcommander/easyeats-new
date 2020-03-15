@@ -907,7 +907,7 @@ h4,
 }
 
 .hero-banner__video {
-    background: url(/static/svg/1.svg) left center no-repeat;
+    /* background: url(/static/svg/1.svg) left center no-repeat; */
     margin-left: 15px;
     padding: 12px 5px 12px 45px !important;
     font-size: 14px;
@@ -934,7 +934,7 @@ h4,
 
 .hero-wrapper {
     position: relative;
-    background: url(/static/svg/4.svg) no-repeat;
+    /* background: url(/static/svg/4.svg) no-repeat; */
 }
 
 .hero-wrapper .social-icons {

@@ -23,9 +23,13 @@
       <div class="d-sm-flex flex-wrap">
         <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
           <div class="input-group mb-3 shadow-lg" style="height: 50px;">
-            <input type="text" class="form-control w-75" placeholder="Search something awesome..." aria-label="Recipient's username" aria-describedby="basic-addon2"  style="height: 50px;" name="search">
+            <input type="text" class="form-control w-75" placeholder="Search something awesome..."
+              aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;" name="search">
             <div class="input-group-append w-25">
-              <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2" style="background-color: var(--main); color: #fff;"><center>Search</center></button>
+              <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+                style="background-color: var(--main); color: #fff;">
+                <center>Search</center>
+              </button>
             </div>
           </div>
         </form>
@@ -105,7 +109,8 @@
 <!--================Reservation section end =================-->
 
 <!--================Featured Section Start =================-->
-<section class="section-margin mb-lg-100" style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
+<section class="section-margin mb-lg-100"
+  style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
   <div class="container">
     <div class="section-intro mb-75px">
       <h4 class="intro-title">Featured Items</h4>
@@ -116,20 +121,25 @@
     <div class="owl-carousel owl-theme featured-carousel">
       {% for item in featured_foods %}
       <div class="featured-item">
-        <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+        <a href="{% url 'products:food_detail' item.id %}"><img class="card-img rounded-0"
+            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+            alt=""></a>
         <div class="item-body">
           <a href="{% url 'products:food_detail' item.id %}">
             <h3 style="color: var(--main);">{{ item.name }}</h3>
           </a>
-          <p>{{ item.summary }}</p>
+          <a href="{% url 'products:restaurant_detail' item.restaurant.id %}">
+            <p>{{ item.restaurant.name }}</p>
+          </a>
           <div class="d-flex justify-content-between">
-            <ul class="rating-star">
+            <!-- <ul class="rating-star">
               <li><i class="ti-star"></i></li>
               <li><i class="ti-star"></i></li>
               <li><i class="ti-star"></i></li>
               <li><i class="ti-star"></i></li>
               <li><i class="ti-star"></i></li>
-            </ul>
+            </ul> -->
+            <p class="lead" style="color: orangered">20% Off</p>
             <h3 class="price-tag"><strike
                 style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
             </h3>
@@ -179,9 +189,13 @@
     <div class="owl-carousel owl-theme featured-carousel">
       {% for category in categories %}
       <div class="featured-item">
-        <img class="card-img rounded-0" src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+        <a href="{% url 'products:category_detail' category.id %}">
+          <img class="card-img rounded-0"
+            src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+            alt="">
+        </a>
         <div class="item-body">
-          <a href="#">
+          <a href="{% url 'products:category_detail' category.id %}">
             <h3 style="color: var(--main);">{{ category.name }}</h3>
           </a>
           <p>{{ categoru.summary }}</p>
@@ -218,7 +232,9 @@
       {% for restaurant in restaurants|slice:":4" %}
       <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
         <div class="card-blog">
-          <img class="card-img rounded-0" src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+          <img class="card-img rounded-0"
+            src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+            alt="">
           <div class="blog-body">
             <ul class="blog-info">
               <li><a href="#">{{ restaurant.city }}, {{ restaurant.state|title }}</a></li>
@@ -263,18 +279,25 @@
     <div class="row">
       {% for item in foods %}
       <div class="col-lg-6">
-        <div class="media align-items-center food-card">
-          <img class="mr-3 mr-sm-4" src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="" width="100px">
-          <div class="media-body">
-            <div class="d-flex justify-content-between food-card-title">
-              <h4><a href="{% url 'products:food_detail' item.id %}" style="color: var(--main);">{{ item.name }}</a></h4>
-              <h3 class="price-tag"><strike
-                  style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-              </h3>
+        <a href="{% url 'products:food_detail' item.id %}">
+          <div class="media align-items-center food-card">
+            <img class="mr-3 mr-sm-4"
+              src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+              alt="" width="100px">
+            <div class="media-body">
+              <div class="d-flex justify-content-between food-card-title">
+                <h4><a href="{% url 'products:food_detail' item.id %}" style="color: var(--main);">{{ item.name }}</a>
+                </h4>
+
+                <h3 class="price-tag"><strike
+                    style="font-size: 14px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                </h3>
+              </div>
+              <p>{{ item.restaurant.name }}</p>
+              <p class="lead" style="color: orangered">20% Off</p>
             </div>
-            <p>{{ item.summary }}</p>
           </div>
-        </div>
+        </a>
       </div>
       {% endfor %}
     </div>
@@ -300,7 +323,9 @@
       {% for collection in collections %}
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
         <div class="chef-card">
-          <img class="card-img rounded-0" src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+          <img class="card-img rounded-0"
+            src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+            alt="">
           <div class="chef-footer">
             <h4>{{ collection.name }}</h4>
             <p>{{ collection.summary }}</p>
