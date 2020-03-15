@@ -44,11 +44,13 @@
         </div>
         <div class="hero-right">
             <div class="owl-carousel owl-theme hero-carousel">
+                {% if food.foodimage_set %}
                 {% for image in food.foodimage_set.all %}
                 <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{{ image.image.url }}" alt="">
+                    <img class="img-fluid" src="{% if image.image %}{{ image.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -65,11 +67,13 @@
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
                     <div class="owl-carousel owl-theme hero-carousel w-75">
+                        {% if food.foodimage_set %}
                         {% for item in food.foodimage_set.all %}
                         <div class="hero-carousel-item">
                             <img class="img-fluid" src="{{ item.image.url }}" alt="">
                         </div>
                         {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="blog_details">
                         <h2>{{ food.name|upper }}</h2>
@@ -193,7 +197,7 @@
                         {% if recommendations %}
                         {% for item in recommendations %}
                         <div class="media post_item">
-                            <img src="{{ item.foodimage_set.first.image.url }}" alt="post" width="70px">
+                            <img src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="post" width="70px">
                             <div class="media-body">
                                 <a href="{% url 'products:food_detail' item.id %}">
                                     <h3>{{ item.name }}</h3>
@@ -242,7 +246,7 @@
         <div class="owl-carousel owl-theme featured-carousel">
             {% for item in featured_foods %}
             <div class="featured-item">
-                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
                 <div class="item-body">
                     <a href="#">
                         <h3 style="color: var(--main);">{{ item.name }}</h3>

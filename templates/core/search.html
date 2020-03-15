@@ -46,7 +46,7 @@
                 {% for item in foods %}
                 <div class="col-md-3 col-sm-12">
                     <div class="card w-100 mt-3 p-4">
-                        <img class="card-img-top" src="{{ item.foodimage_set.first.image.url }}" alt="Card image cap">
+                        <img class="card-img-top" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><a href="{% url 'products:food_detail' item.id %}" style="color: var(--main);">{{ item.name }}</a></h5>
                             <p class="card-text">{{ item.summary }}</p>
@@ -111,7 +111,7 @@
                 {% for item in restaurants %}
                 <div class="col-md-3 col-sm-12">
                     <div class="card w-100 mt-3 p-4">
-                        <img class="card-img-top" src="{{ item.restaurantimage_set.first.image.url }}" alt="Card image cap">
+                        <img class="card-img-top" src="{% if item.restaurantimage_set.first.image %}{{ item.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><a href="{% url 'products:restaurant_detail' item.id %}" style="color: var(--main);">{{ item.name }}</a></h5>
                             <p class="card-text">{{ item.food_set.all.count }} Dishes</p>
@@ -167,7 +167,7 @@
         <div class="owl-carousel owl-theme featured-carousel">
             {% for item in featured_foods %}
             <div class="featured-item">
-                <img class="card-img rounded-0" src="{{ item.foodimage_set.first.image.url }}" alt="">
+                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
                 <div class="item-body">
                     <a href="{% url 'products:food_detail' item.id %}">
                         <h3 style="color: var(--main);">{{ item.name }}</h3>
