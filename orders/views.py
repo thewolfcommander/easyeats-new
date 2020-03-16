@@ -20,16 +20,15 @@ def create_order(request):
     order.update_total()
     order.user.order_count += 1
     order.user.save()
-    slack_message('notifications/ordered.slack', {
-        'order': order,
-        'user': request.user,
-    })
     print("Session ID before: {}".format(request.session["cart_id"]))
     del request.session["cart_id"]
     return redirect("orders:success")
 
 
 def order_success(request):
+    slack_message('notifications/ordered.slack', {
+        'user': request.user,
+    })
     return render(request, 'orders/success.html')
 
 def order_failed(request):

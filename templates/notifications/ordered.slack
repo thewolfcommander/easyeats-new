@@ -1,5 +1,8 @@
 {% extends django_slack %}
 
 {% block text %}
-{{ user.full_name }} with {{ user.user_id }} just placed a order with order id {{ order.order_id }} and order amount ({% url 'third:order_detail' order.id %}).
+{{ user.full_name }}
+{% endblock %}
+
+{% block channel %}
 {% endblock %}
