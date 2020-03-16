@@ -20,11 +20,14 @@
         {% for order in orders %}
         <div class="col-md-6 col-sm-12">
             <div class="card w-100 shadow-lg m-3" style="border-radius: 6px!important;">
-                <div class="card-body text-center" style="background: var(--main);">
-                    <h5 class="card-title"><a href="{% url 'accounts:order_detail' order.id %}"
-                            style="color: #fff;">Order ID - <strong>{{ order.order_id }}</strong> | Rs. {{ order.cart.total }}</a>
-                    </h5>
-                </div>
+                <a href="{% url 'third:order_detail' order.id %}">
+                    <div class="card-body text-center" style="background: var(--main);">
+                        <h5 class="card-title"><a href="{% url 'third:order_detail' order.id %}"
+                                style="color: #fff;">Order ID - <strong>{{ order.order_id }}</strong> | Rs. {{ order.cart.total }}</a>
+                        </h5>
+                    </div>
+                </a>
+                
                 <div class="card-footer">
                     <p class="text-muted">Created on {{ order.timestamp }} </p>
                     <p class="text-primary">Order Status: <strong>{{ order.status|title }}</strong></p>
