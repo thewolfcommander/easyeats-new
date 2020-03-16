@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'dashboard',
     'orders',
     'products',
+    'third',
 ]
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True

@@ -13,6 +13,7 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('products/', include('products.urls', namespace='products')),
+    path('third-party/', include('third.urls', namespace='third')),
 ]
 
 if settings.DEBUG:

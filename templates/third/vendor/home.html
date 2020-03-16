@@ -1,0 +1,137 @@
+{% extends 'accounts/myaccount/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block myacc_title %}My account - Vendor {% endblock myacc_title %}
+
+{% block main %}
+
+<div class="container">
+    <h4 class="display-4">Vendor Details</h4>
+    <div class="col-md-12 col-sm-12">
+        <div class="card w-100 shadow-lg m-3" style="border-radius: 6px!important;">
+            <div class="card-body text-center" style="background: var(--main);">
+                <h5 class="card-title" style="color: #fff;"><a href="{% url 'accounts:home' %}">See your Profile</a>
+                </h5>
+                <div class="row justify-content-center">
+                    <img src="{% if user.profile_photo %}{{ user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}" width="100px" style="border: 2px solid var(--main);" alt="">
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="table-responsive-md">
+                    <table class="table">
+                        <thead class="" style="background: var(--main)!important; color: #fff;">
+                            <tr>
+                                <th scope="col" class="col-md-2" style="min-width: 120px!important;"></th>
+                                <th scope="col" class="col-md-1">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Business Email</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.business_email }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Business Phone Number</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.business_phone }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Address Line 1</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.address1 }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Address Line 2</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.address2 }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>City</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.city }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Landmark</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.landmark }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>State</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.state }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>Country</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.country }}</p>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <p class="lead" style="color: var(--main);"><strong>PINCODE</strong>
+                                    </p>
+                                </th>
+                                <th>
+                                    <p class="lead">{{ vendor.pincode }}</p>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="display-4 mt-4">Edit your details</h4>
+    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                {{ field|as_crispy_field }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="ln_solid"></div>
+        <div class="form-group">
+            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <button class="btn btn-primary" type="button" onclick="window.history.back();">Cancel</button>
+                <button class="btn btn-primary" type="reset">Reset</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock main %}
