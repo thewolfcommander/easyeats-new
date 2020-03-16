@@ -3,7 +3,7 @@ import math
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 
-from accounts.models import User
+from accounts.models import User, DeliveryBoy
 from addresses.models import Address
 from cart.models import Cart
 
@@ -42,6 +42,7 @@ class Order(models.Model):
     This model gonna handle orders across the platform
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    delivery_boy = models.ForeignKey(DeliveryBoy, on_delete=models.CASCADE, null=True, blank=True)
     order_id = models.CharField(max_length=120, blank=True)
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)

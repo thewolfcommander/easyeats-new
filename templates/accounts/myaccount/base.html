@@ -33,25 +33,6 @@
                         <a class="nav-link button w-100 text-center" href="{% url 'accounts:logout' %}" >Logout</a>
                     </li>
                 </ul>
-                <!-- {% if request.user.is_vendor %}
-                <ul class="nav flex-column">
-                    <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'third:vendor_home' %}">Vendor Profile</a>
-                    </li>
-                    <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'third:vendor_restaurants' %}">My Restaurants</a>
-                    </li>
-                    <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:orders' %}">New Orders</a>
-                    </li>
-                    <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:addresses' %}">Completed Orders</a>
-                    </li>
-                    <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:logout' %}" >Delete Profile</a>
-                    </li>
-                </ul>
-                {% endif %} -->
                 {% if request.user.is_delivery %}
                 <ul class="nav flex-column">
                     <li class="nav-item py-1">

@@ -140,7 +140,9 @@ def cancel_delivery(request, pk=None, *args, **kwargs):
 @login_required
 def deactivate_profile(request):
     user = request.user
-    delivery = DeliveryBoy.objects.filter(user=user)
+    delivery = DeliveryBoy.objects.filter(user=user).first()
     user.is_delivery = False
     delivery.active = False
+    user.save()
+    delivery.save()
     return redirect('core:home')
