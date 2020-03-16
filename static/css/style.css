@@ -755,7 +755,7 @@ h4,
 
 @media (max-width: 480px) {
     .header_area .navbar-collapse {
-        max-height: 400px
+        max-height: 550px;
     }
 
     .home_banner_area .banner_inner .banner_content {
