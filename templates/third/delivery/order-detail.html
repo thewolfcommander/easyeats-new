@@ -159,7 +159,7 @@
                                                 Number</strong></p>
                                     </th>
                                     <th>
-                                        <p class="lead"><a href="tel:+{{ order.address.mobile_number }}">{{ order.address.mobile_number }}</a></p>
+                                        <p class="lead"><a href="tel:{{ order.address.mobile_number }}">{{ order.address.mobile_number }}</a></p>
                                     </th>
                                 </tr>
                                 <tr>
@@ -168,7 +168,7 @@
                                                 Number</strong></p>
                                     </th>
                                     <th>
-                                        <p class="lead"><a href="tel:+{{ order.address.alt_mobile }}">{{ order.address.alt_mobile }}</a></p>
+                                        <p class="lead"><a href="tel:{{ order.address.alt_mobile }}">{{ order.address.alt_mobile }}</a></p>
                                     </th>
                                 </tr>
                             </tbody>
@@ -198,7 +198,7 @@
                                             <p class="lead"><strong>{{ item.name }}</strong></p>
                                         </a>
                                         <small>{{ item.restaurant.name }}</small><br>
-                                        <a href="tel:+{{ item.restaurant.mobile_number}}" class="btn btn-link">Call Restaurant</a>
+                                        <a href="tel:{{ item.restaurant.mobile_number}}" class="btn btn-link">Call Restaurant</a>
                                     </td>
                                     <td>Rs. {{ item.discount_price }}</td>
                                 </tr>
