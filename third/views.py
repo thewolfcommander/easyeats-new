@@ -158,3 +158,12 @@ def assign_deliveryboy(request, pk=None, *args, **kwargs):
     order.delivery_boy = delivery_boy
     order.save()
     return redirect('third:new_delivery')
+
+
+@login_required
+def order_detail(request, pk=None, *args, **kwargs):
+    order = get_object_or_404(Order, id=pk)
+    context = {
+        'order': order,
+    }
+    return render(request, 'third/delivery/order-detail.html', context)
