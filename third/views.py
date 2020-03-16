@@ -157,4 +157,4 @@ def assign_deliveryboy(request, pk=None, *args, **kwargs):
     delivery_boy = DeliveryBoy.objects.filter(user=request.user).first()
     order.delivery_boy = delivery_boy
     order.save()
-    return redirect(request.path_info)
+    return redirect('third:new_delivery')
