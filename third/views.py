@@ -119,6 +119,7 @@ def cancelled_delivery(request):
 def ship_delivery(request, pk=None, *args, **kwargs):
     order = get_object_or_404(Order, id=pk)
     order.status = 'shipped'
+    order.save()
     return redirect('third:shipped_delivery')
 
 
@@ -126,15 +127,17 @@ def ship_delivery(request, pk=None, *args, **kwargs):
 @login_required
 def complete_delivery(request, pk=None, *args, **kwargs):
     order = get_object_or_404(Order, id=pk)
-    order.status = 'completed'
+    order.status = 'delivered'
+    order.save()
     return redirect('third:completed_delivery')
 
 
 @login_required
 def cancel_delivery(request, pk=None, *args, **kwargs):
     order = get_object_or_404(Order, id=pk)
-    order.status = 'completed'
-    return redirect('third:completed_delivery')
+    order.status = 'cancelled'
+    order.save()
+    return redirect('third:cancelled_delivery')
 
 
 @login_required
@@ -146,3 +149,12 @@ def deactivate_profile(request):
     user.save()
     delivery.save()
     return redirect('core:home')
+
+
+@login_required
+def assign_deliveryboy(request, pk=None, *args, **kwargs):
+    order = get_object_or_404(Order, id=pk)
+    delivery_boy = DeliveryBoy.objects.filter(user=request.user).first()
+    order.delivery_boy = delivery_boy
+    order.save()
+    return redirect(request.path_info)

@@ -11,7 +11,8 @@ urlpatterns = [
     path('delivery-partner/deliveries/shipped/', views.shipped_delivery, name='shipped_delivery'),
     path('delivery-partner/deliveries/delivered/', views.completed_delivery, name='completed_delivery'),
     path('delivery-partner/deliveries/cancelled/', views.cancelled_delivery, name='cancelled_delivery'),
-    path('order/update/ship/', views.ship_delivery, name='ship_delivery'),
-    path('order/update/deliver/', views.complete_delivery, name='complete_delivery'),
-    path('order/update/cancel/', views.cancel_delivery, name='cancel_delivery'),
+    path('order/update/ship/<int:pk>/', views.ship_delivery, name='ship_delivery'),
+    path('order/update/deliver/<int:pk>/', views.complete_delivery, name='complete_delivery'),
+    path('order/update/cancel/<int:pk>/', views.cancel_delivery, name='cancel_delivery'),
+    path('order/update/assign-delivery-boy/<int:pk>/', views.assign_deliveryboy, name='assign_deliveryboy'),
 ]

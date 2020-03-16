@@ -48,21 +48,17 @@
                               <ul class="dropdown-menu">
                                   <li class="nav-item"><a class="nav-link" href="{% url 'accounts:home' %}">My
                                           Account</a></li>
-                                  {% if request.user.is_vendor %}
+                                  <!-- {% if request.user.is_vendor %}
                                   <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">IAM
                                           Vendor</a></li>
-                                  {% endif %}
+                                  {% endif %} -->
                                   {% if request.user.is_delivery %}
-                                  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">IAM
+                                  <li class="nav-item"><a class="nav-link" href="{% url 'third:delivery_home' %}">IAM
                                           DBoy</a></li>
                                   {% endif %}
                                   {% if request.user.is_admin %}
-                                  <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:home' %}">IAM
+                                  <li class="nav-item"><a class="nav-link" href="/admin/">IAM
                                           ADMIN</a></li>
-                                  {% endif %}
-                                  {% if request.user.is_admin or request.user.is_client %}
-                                  <li class="nav-item"><a class="nav-link"
-                                          href="{% url 'dashboard:home' %}">Dashboard</a></li>
                                   {% endif %}
                                   <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
                                   </li>
