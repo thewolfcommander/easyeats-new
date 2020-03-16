@@ -69,3 +69,71 @@ def delivery_home(request):
         'form': form,
     }
     return render(request, 'third/delivery/home.html', context)
+
+
+@login_required
+def new_delivery(request):
+    title = 'New Deliveries'
+    orders = Order.objects.filter(status='created').order_by('-updated')
+    context = {
+        'orders': orders,
+        'title': title,
+    }
+    return render(request, 'third/delivery/delivery.html', context)
+
+
+@login_required
+def shipped_delivery(request):
+    title = 'Shipped Deliveries'
+    orders = Order.objects.filter(status='shipped').order_by('-updated')
+    context = {
+        'orders': orders,
+        'title': title,
+    }
+    return render(request, 'third/delivery/delivery.html', context)
+
+
+@login_required
+def completed_delivery(request):
+    title = 'Completed Deliveries'
+    orders = Order.objects.filter(status='delivered').order_by('-updated')
+    context = {
+        'orders': orders,
+        'title': title,
+    }
+    return render(request, 'third/delivery/delivery.html', context)
+
+
+@login_required
+def cancelled_delivery(request):
+    title = 'Cancelled Deliveries'
+    orders = Order.objects.filter(status='cancelled').order_by('-updated')
+    context = {
+        'orders': orders,
+        'title': title,
+    }
+    return render(request, 'third/delivery/delivery.html', context)
+
+
+@login_required
+def ship_delivery(request, pk=None, *args, **kwargs):
+    order = get_object_or_404(Order, id=pk)
+    order.status = 'shipped'
+    return redirect('third:shipped_delivery')
+
+
+
+@login_required
+def complete_delivery(request, pk=None, *args, **kwargs):
+    order = get_object_or_404(Order, id=pk)
+    order.status = 'completed'
+    return redirect('third:completed_delivery')
+
+
+
+
+@login_required
+def cancel_delivery(request, pk=None, *args, **kwargs):
+    order = get_object_or_404(Order, id=pk)
+    order.status = 'completed'
+    return redirect('third:completed_delivery')

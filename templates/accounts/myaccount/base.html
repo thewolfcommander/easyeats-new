@@ -55,19 +55,19 @@
                 {% if request.user.is_delivery %}
                 <ul class="nav flex-column">
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:home' %}">Delivery Profile</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:delivery_home' %}">Delivery Profile</a>
                     </li>
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:settings' %}">New Deliveries</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:new_delivery' %}">New Deliveries</a>
                     </li>
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:orders' %}">Previous Deliveries</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:previous_delivery' %}">Previous Deliveries</a>
                     </li>
                     <!-- <li class="nav-item py-1">
                         <a class="nav-link button w-100 text-center" href="{% url 'accounts:addresses' %}">Manage Sales</a>
                     </li> -->
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:logout' %}" >Delete Profile</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:deactivate_delivery' %}" >Deactivate Profile</a>
                     </li>
                 </ul>
                 {% endif %}
