@@ -42,7 +42,7 @@
                         <a class="btn btn-danger" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
                         {% endif %}
                         {% if order.delivery_boy is None %}
-                        <a class="button rounded-0 text-light" href="{% url 'third:complete_delivery' order.id %}">Handle</a>
+                        <a class="button rounded-0 text-light" href="{% url 'third:assign_deliveryboy' order.id %}">Handle</a>
                         {% else %}
                         <p class="text-muted">Delivery Boy:- {{ order.delivery_boy.user.full_name }}</p>
                         {% endif %}
