@@ -457,7 +457,7 @@ h4,
     }
 
     .header_area .navbar {
-        background: #d1cff4
+        background: #fff;
     }
 
     .header_area .navbar .nav-item.active .nav-link {
@@ -521,7 +521,7 @@ h4,
     }
 
     .header_area .navbar-collapse {
-        max-height: 340px;
+        max-height: 440px;
         overflow-y: scroll
     }
 
@@ -755,7 +755,7 @@ h4,
 
 @media (max-width: 480px) {
     .header_area .navbar-collapse {
-        max-height: 250px
+        max-height: 400px
     }
 
     .home_banner_area .banner_inner .banner_content {

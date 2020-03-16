@@ -37,10 +37,40 @@
 
 
 	{% block styles %}
+	
 	{% endblock styles %}
 </head>
 
 <body>
+
+	<style>
+		@media only screen and (max-width: 767px) {
+			#slide-navbar-collapse {
+				position: fixed;
+				top: 0;
+				left: 15px;
+				z-index: 99;
+				width: 280px;
+				height: 100%;
+				background-color: #ddd;
+				overflow: auto;
+			}
+  
+			.menu-overlay {
+				display: none;
+				background-color: #000;
+				bottom: 0;
+				left: 0;
+				opacity: 0.5;
+				filter: alpha(opacity=50);
+				/* IE7 & 8 */
+				position: fixed;
+				right: 0;
+				top: 0;
+				z-index: 49;
+			}
+		}
+	</style>
 
 	<!-- <div class="pulse-loader">
 		<div></div>
@@ -65,6 +95,21 @@
 	<script src="{% static 'js/mail-script.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
 	{% block scripts %}
+
+	<script>
+		$('[data-toggle="slide-collapse"]').on('click', function () {
+			$navMenuCont = $($(this).data('target'));
+			$navMenuCont.animate({
+				'width': 'toggle'
+			}, 350);
+			$(".menu-overlay").fadeIn(500);
+  
+		});
+		$(".menu-overlay").click(function (event) {
+			$(".navbar-toggle").trigger("click");
+			$(".menu-overlay").fadeOut(500);
+		});
+	</script>
 	{% endblock scripts %}
 
 </body>
