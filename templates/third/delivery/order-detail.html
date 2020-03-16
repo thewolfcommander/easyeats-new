@@ -12,7 +12,6 @@
 
 
 {% block main %}
-{% if order.user == request.user %}
 
 <div class="container">
     <h4 class="display-4">Order - {{ order.order_id }}</h4>
@@ -236,11 +235,5 @@
             </div>
         </div>
     </div>
-    {% else %}
 
-    <script>
-        alert("You are not allowed to access this page");
-    </script>
-
-    {% endif %}
     {% endblock main %}
