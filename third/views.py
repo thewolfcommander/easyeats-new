@@ -130,10 +130,17 @@ def complete_delivery(request, pk=None, *args, **kwargs):
     return redirect('third:completed_delivery')
 
 
-
-
 @login_required
 def cancel_delivery(request, pk=None, *args, **kwargs):
     order = get_object_or_404(Order, id=pk)
     order.status = 'completed'
     return redirect('third:completed_delivery')
+
+
+@login_required
+def deactivate_profile(request):
+    user = request.user
+    delivery = DeliveryBoy.objects.filter(user=user)
+    user.is_delivery = False
+    delivery.active = False
+    return redirect('core:home')

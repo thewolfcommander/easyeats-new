@@ -61,13 +61,16 @@
                         <a class="nav-link button w-100 text-center" href="{% url 'third:new_delivery' %}">New Deliveries</a>
                     </li>
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'third:previous_delivery' %}">Previous Deliveries</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:shipped_delivery' %}">Shipped Deliveries</a>
                     </li>
-                    <!-- <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'accounts:addresses' %}">Manage Sales</a>
-                    </li> -->
                     <li class="nav-item py-1">
-                        <a class="nav-link button w-100 text-center" href="{% url 'third:deactivate_delivery' %}" >Deactivate Profile</a>
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:completed_delivery' %}">Completed Deliveries</a>
+                    </li>
+                    <li class="nav-item py-1">
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:cancelled_delivery' %}">Cancelled Deliveries</a>
+                    </li>
+                    <li class="nav-item py-1">
+                        <a class="nav-link button w-100 text-center" href="{% url 'third:deactivate_profile' %}" >Deactivate Profile</a>
                     </li>
                 </ul>
                 {% endif %}
