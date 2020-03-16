@@ -28,23 +28,24 @@
                 <div class="card-footer">
                     <p class="text-muted">Created on {{ order.timestamp }} </p>
                     <p class="text-primary">Order Status: <strong>{{ order.status|title }}</strong></p>
+                    {% if order.delivery_boy %}
+                    <p class="text-muted">Delivery Boy:- {{ order.delivery_boy.user.full_name }}</p>
+                    {% endif %}
                 </div>
                 <div class="card-footer">
                     <div class="btn-group">
                         {% if order.status == 'created' %}
-                        <a class="btn btn-primary" href="{% url 'third:ship_delivery' order.id %}">Ship Order</a>
-                        <a class="btn btn-danger" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:ship_delivery' order.id %}">Ship Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
                         {% elif order.status == 'shipped' %}
-                        <a class="btn btn-success" href="{% url 'third:complete_delivery' order.id %}">Complete Order</a>
-                        <a class="btn btn-danger" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:complete_delivery' order.id %}">Complete Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
                         {% elif order.status == 'completed' %}
-                        <a class="btn btn-success" href="{% url 'third:complete_delivery' order.id %}">Complete Order</a>
-                        <a class="btn btn-danger" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:complete_delivery' order.id %}">Complete Order</a>
+                        <a class="btn btn-link mx-2" href="{% url 'third:cancel_delivery' order.id %}">Cancel Order</a>
                         {% endif %}
                         {% if order.delivery_boy is None %}
-                        <a class="button rounded-0 text-light" href="{% url 'third:assign_deliveryboy' order.id %}">Handle</a>
-                        {% else %}
-                        <p class="text-muted">Delivery Boy:- {{ order.delivery_boy.user.full_name }}</p>
+                        <a class="btn btn-link mx-2" href="{% url 'third:assign_deliveryboy' order.id %}">Handle</a>
                         {% endif %}
                     </div>
                 </div>
