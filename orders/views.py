@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from orders.models import Order
+from orders.models import Order, CashBack
 from addresses.models import Address
 from cart.models import Cart
 # Create your views here.

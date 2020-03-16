@@ -7,6 +7,7 @@ from django.conf import settings
 
 
 
+
 UPLOAD_DIRECTORY_PROFILEPHOTO = 'images_profilephoto'
 
 class CustomUserManager(BaseUserManager):
