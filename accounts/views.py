@@ -30,12 +30,17 @@ def signup(request):
 @login_required
 def myaccount(request):
     user = request.user
+    if user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     if request.method == 'POST':
         form = UserDetailForm(request.POST or None, instance=user)
         if form.is_valid():
             usr = form.save(commit=False)
             usr.save()
             return redirect(request.path_info)
+        messages.success(request, "You have successfully updated", extra_tags="success")
     else:
         form = UserDetailForm(instance=user)
     context = {
@@ -47,6 +52,10 @@ def myaccount(request):
 
 @login_required
 def addresses(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     addresses = Address.objects.filter(user=request.user)
     context = {
         'addresses': addresses
@@ -56,6 +65,10 @@ def addresses(request):
 
 @login_required
 def address_detail(request, pk=None, *args, **kwargs):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     address = get_object_or_404(Address, id=pk)
     if address.user == request.user:
         if request.method == 'POST':
@@ -86,6 +99,10 @@ def delete_address(request, pk=None, *args, **kwargs):
 
 @login_required
 def orders(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     orders = Order.objects.filter(user=request.user)
     context = {
         'orders': orders,
@@ -96,6 +113,10 @@ def orders(request):
 
 @login_required
 def order_detail(request, pk=None, *args, **kwargs):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     order = get_object_or_404(Order, id=pk)
     context = {
         'order': order,
@@ -106,6 +127,10 @@ def order_detail(request, pk=None, *args, **kwargs):
 @login_required
 def settings(request):
     user = request.user
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     try:
         facebook_login = user.social_auth.get(provider='facebook')
     except UserSocialAuth.DoesNotExist:
@@ -121,6 +146,10 @@ def settings(request):
 
 @login_required
 def password(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     if request.user.has_usable_password():
         PasswordForm = PasswordChangeForm
     else:

@@ -52,6 +52,10 @@ def vendor_restaurant_detail(request, pk=None, *args, **kwargs):
 
 @login_required
 def delivery_home(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     user = DeliveryBoy.objects.filter(user=request.user)
     if user.exists():
         delivery = user.first()
@@ -73,6 +77,10 @@ def delivery_home(request):
 
 @login_required
 def new_delivery(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     title = 'New Deliveries'
     orders = Order.objects.filter(status='created').order_by('-updated')
     context = {
@@ -84,6 +92,10 @@ def new_delivery(request):
 
 @login_required
 def shipped_delivery(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     title = 'Shipped Deliveries'
     orders = Order.objects.filter(status='shipped').order_by('-updated')
     context = {
@@ -95,6 +107,10 @@ def shipped_delivery(request):
 
 @login_required
 def completed_delivery(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     title = 'Completed Deliveries'
     orders = Order.objects.filter(status='delivered').order_by('-updated')
     context = {
@@ -106,6 +122,10 @@ def completed_delivery(request):
 
 @login_required
 def cancelled_delivery(request):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     title = 'Cancelled Deliveries'
     orders = Order.objects.filter(status='cancelled').order_by('-updated')
     context = {
@@ -162,6 +182,10 @@ def assign_deliveryboy(request, pk=None, *args, **kwargs):
 
 @login_required
 def order_detail(request, pk=None, *args, **kwargs):
+    if request.user.is_delivery:
+        new_orders = Order.objects.filter(status="created")
+        if new_orders.exists():
+            messages.info(request, "You have {} new orders. Handle it now. {}".format(new_orders.count(), new_orders.first().updated), extra_tags="info")
     order = get_object_or_404(Order, id=pk)
     context = {
         'order': order,

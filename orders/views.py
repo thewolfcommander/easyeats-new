@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from orders.models import Order, CashBack
 from addresses.models import Address
@@ -23,11 +24,12 @@ def create_order(request):
     del request.session["cart_id"]
     return redirect("orders:success")
 
-
+@login_required
 def order_success(request):
     messages.success(request, 'Your order created successfully...', extra_tags="success")
     return render(request, 'orders/success.html')
 
+@login_required
 def order_failed(request):
     messages.error(request, 'Your order failed, we seriously get into it very soon...', extra_tags="danger")
     return render(request, 'orders/failed.html')
