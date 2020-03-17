@@ -52,8 +52,10 @@ def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
         if instance.sub_total > 0:
             if instance.sub_total < 80.00:
                 instance.shipping = 25.00
-            else:
+            elif instance.sub_total > 80.00 and instance.sub_total < 280.00:
                 instance.shipping = 30.00
+            else:
+                instance.shipping = 25.00
         else:
             instance.shipping = 0.00
         instance.total = instance.shipping + instance.sub_total
