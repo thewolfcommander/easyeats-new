@@ -26,16 +26,28 @@ def search(request):
     if request.method == 'GET':
         query = request.GET.get("search")
         restaurants = Restaurant.objects.filter(
-            Q(name__icontains=query)
+            Q(name__icontains=query) |
+            Q(city__icontains=query) |
+            Q(state__icontains=query)
         )
         featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
-        foods = Food.objects.filter(
+        foods_list = Food.objects.filter(
             Q(name__icontains=query) |
             Q(summary__icontains=query) |
-            Q(category__name__icontains=query)
+            Q(category__name__icontains=query) |
+            Q(foodtag__name__icontains=query)
         )
         cart_obj, new_obj = Cart.objects.new_or_get(request)
-        f_count =foods.count()
+        page = request.GET.get('page', 1)
+
+        paginator = Paginator(foods_list, 12)
+        try:
+            foods = paginator.page(page)
+        except PageNotAnInteger:
+            foods = paginator.page(1)
+        except EmptyPage:
+            foods = paginator.page(paginator.num_pages)
+        f_count =foods_list.count()
         r_count = restaurants.count()
         context = {
             'query': query,
