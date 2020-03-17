@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.contrib.postgres.search import SearchQuery, SearchVector
+
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -24,16 +26,21 @@ from products.models import (
 
 def search(request):
     if request.method == 'GET':
-        query = ''
-        restaurants = None
-        foods_list = None
-        if ('search' in request.GET) and request.GET['search'].strip():
-            query = request.GET['search']
-        restaurant_query = utils.get_query(query, ['name', 'city', 'state'])
-        restaurants = Restaurant.objects.filter(restaurant_query)
+        query = request.GET.get('search')
+        restaurants = Restaurant.objects.filter(
+            Q(name__icontains=query) |
+            Q(city__icontains=query) |
+            Q(state__icontains=query)
+        )
         featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
-        foods_query = utils.get_query(query, ['name', 'summary', 'category__name', 'foodtag__name', 'restaurant__name', 'restaurant__city'])
-        foods_list = Food.objects.filter(foods_query).order_by('updated')
+        foods_list = Food.objects.filter(
+            Q(name__icontains=query) |
+            Q(summary__icontains=query) |
+            Q(category__name__icontains=query) |
+            Q(foodtag__name__icontains=query) |
+            Q(restaurant__name__icontains=query) |
+            Q(restaurant__city__icontains=query)
+        )
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         page = request.GET.get('page', 1)
 
