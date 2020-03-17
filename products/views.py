@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from cart.models import Cart
 from products.models import *
@@ -40,8 +41,10 @@ def food_detail(request, pk=None, *args, **kwargs):
                 review.food = food
                 review.save()
                 return redirect(request.path_info)
+            messages.success(request, "You have successfully submitted a review", extra_tags="success")
         else:
             form = ReviewForm()
+            messages.success(request, "Review not submitted", extra_tags="danger")
         reviews = Review.objects.filter(food=food)
         categories = Category.objects.filter(food=food)
         tags = FoodTag.objects.filter(food=food)
@@ -86,8 +89,10 @@ def restaurant_detail(request, pk=None, *args, **kwargs):
             review.restaurant = restaurant
             review.save()
             return redirect(request.path_info)
+        messages.success(request, "You have successfully submitted a review", extra_tags="success")
     else:
         form = RestaurantReviewForm()
+        messages.success(request, "Review not submitted", extra_tags="danger")
     reviews = RestaurantReview.objects.filter(restaurant=restaurant)
     context = {
         'restaurant': restaurant,
