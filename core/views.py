@@ -27,8 +27,7 @@ def search(request):
         query = request.GET.get("search")
         restaurants = Restaurant.objects.filter(
             Q(name__icontains=query) |
-            Q(city__icontains=query) |
-            Q(state__icontains=query)
+            Q(city__icontains=query)
         )
         featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
         foods_list = Food.objects.filter(
