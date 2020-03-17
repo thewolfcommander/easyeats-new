@@ -11,6 +11,11 @@
 	<meta name="description" content="{% block description %}{% endblock description %}" />
 	<meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
 	<meta name="author" content="{% block author %}{% endblock author %}" />
+	{% if request.user.is_authenticated %}
+	{% if request.user.is_delivery %}
+	<meta http-equiv="refresh" content="300">
+	{% endif %}
+	{% endif %}
 
 	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content="" />
