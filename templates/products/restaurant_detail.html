@@ -70,7 +70,7 @@
                         {% if restaurant.restaurantimage_set %}
                         {% for item in restaurant.restaurantimage_set.all %}
                         <div class="hero-carousel-item">
-                            <img class="img-fluid" src="{{ item.image.url }}" alt="">
+                            <img class="img-fluid" src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
                         </div>
                         {% endfor %}
                         {% endif %}
