@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from easyeats.slackmessages import send_notification
+from django_slack import slack_message
 from orders.models import Order, CashBack
 from addresses.models import Address
 from cart.models import Cart
@@ -25,7 +25,6 @@ def create_order(request):
 
 
 def order_success(request):
-    send_notification(message="Hello", channel="#general")
     return render(request, 'orders/success.html')
 
 def order_failed(request):
