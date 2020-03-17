@@ -61,7 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('TRANSGENDER', "TRANSGENDER"),
         ('PREFER_NOT_TO_SAY', "PREFER_NOT_TO_SAY")
     ]
-    user_id = models.CharField(max_length=24, null=True, unique=True, help_text="User's unique user id, keep it irrelated with respect to your name or email.")
+    user_id = models.CharField(max_length=24, null=True, unique=True, help_text="User's unique user id, keep it irrelated with respect to your name or email.", verbose_name='username')
     full_name = models.CharField(max_length=255, null=True, help_text="User's full name")
     gender = models.CharField(max_length=255, choices=GENDER, null=True, help_text="User's Gender")
     email = models.EmailField(max_length=255, null=True, default='', help_text="User's Email")
