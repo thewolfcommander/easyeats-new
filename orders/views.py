@@ -25,8 +25,9 @@ def create_order(request):
 
 
 def order_success(request):
-    messages.success(request, 'Your order created successfully...')
+    messages.success(request, 'Your order created successfully...', extra_tags="success")
     return render(request, 'orders/success.html')
 
 def order_failed(request):
+    messages.error(request, 'Your order failed, we seriously get into it very soon...', extra_tags="danger")
     return render(request, 'orders/failed.html')
