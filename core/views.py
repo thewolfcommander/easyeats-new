@@ -35,7 +35,6 @@ def search(request):
         featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
         foods_list = Food.objects.filter(
             Q(name__icontains=query) |
-            Q(summary__icontains=query) |
             Q(category__name__icontains=query) |
             Q(foodtag__name__icontains=query) |
             Q(restaurant__name__icontains=query) |
