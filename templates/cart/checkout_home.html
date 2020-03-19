@@ -111,7 +111,7 @@
                     <tbody>
                         {% for item in cart.foods.all %}
                         <tr>
-                            <th scope="row"><img src="{% item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}" alt="{{ item.name }}"
+                            <th scope="row"><img src="{% item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="{{ item.name }}"
                                     width="90px"></th>
                             <th>1</th>
                             <td><a href="{% url 'products:food_detail' item.id %}">

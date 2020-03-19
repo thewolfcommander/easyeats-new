@@ -23,6 +23,7 @@ from products.models import (
     RestaurantImage,
     FoodImage
 )
+from easyeats.utils import imageUrls
 
 def search(request):
     if request.method == 'GET':
@@ -59,6 +60,7 @@ def search(request):
             'foods': foods,
             'count': int(f_count) + int(r_count), 
             'cart': cart_obj,
+            'image': imageUrls,
         }
     return render(request, 'core/search.html', context)
 
@@ -75,6 +77,7 @@ def home(request):
         'featured_foods': featured_foods,
         'foods': foods,
         'collections': collections,
+        'image': imageUrls,
     }
     return render(request, 'core/home.html', context)
 
@@ -93,6 +96,7 @@ def contact(request):
         form = ContactForm()
     context = {
         'form': form,
+        'image': imageUrls,
     }
     return render(request, 'core/contact.html', context)
 
@@ -111,6 +115,7 @@ def report(request):
         form = ReportIssueForm()
     context = {
         'form': form,
+        'image': imageUrls,
     }
     return render(request, 'core/report.html', context)
 
@@ -119,6 +124,7 @@ def about(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     context = {
         'featured_foods': featured_foods,
+        'image': imageUrls,
     }
     return render(request, 'core/about.html', context)
 
@@ -150,6 +156,7 @@ def join_as_vendor(request):
     context = {
         'form': form,
         'vendor': vendor,
+        'image': imageUrls,
     }
     return render(request, 'core/join_as_vendor.html', context)
 
@@ -170,6 +177,7 @@ def join_as_delivery_boy(request):
     context = {
         'form': form,
         'delivery_boy': delivery_boy,
+        'image': imageUrls,
     }
     return render(request, 'core/join_as_delivery_boy.html', context)
 

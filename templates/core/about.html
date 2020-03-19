@@ -119,7 +119,7 @@
             {% for item in featured_foods %}
             <div class="featured-item">
                 <a href="{% url 'products:food_detail' item.id %}">
-                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}" alt=""></a>
+                <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt=""></a>
                 <div class="item-body">
                     <a href="{% url 'products:food_detail' item.id %}">
                         <h3 style="color: var(--main);">{{ item.name }}</h3>

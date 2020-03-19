@@ -122,7 +122,7 @@
       {% for item in featured_foods %}
       <div class="featured-item">
         <a href="{% url 'products:food_detail' item.id %}"><img class="card-img rounded-0"
-            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}"
+            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
             alt=""></a>
         <div class="item-body">
           <a href="{% url 'products:food_detail' item.id %}">
@@ -233,7 +233,7 @@
         <div class="card-blog">
           <a href="{% url 'products:restaurant_detail' restaurant.id %}">
           <img class="card-img rounded-0"
-            src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}"
+            src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
             alt=""></a>
           <div class="blog-body">
             <a href="{% url 'products:restaurant_detail' restaurant.id %}">
@@ -285,7 +285,7 @@
         <a href="{% url 'products:food_detail' item.id %}">
           <div class="media align-items-center food-card">
             <img class="mr-3 mr-sm-4"
-              src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}"
+              src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
               alt="" width="100px">
             <div class="media-body">
               <div class="d-flex justify-content-between food-card-title">
@@ -328,7 +328,7 @@
         <div class="chef-card">
           <a href="{% url 'products:collection_detail' collection.id %}">
           <img class="card-img rounded-0"
-            src="{% if collection.image %}{{ collection.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}"
+            src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
             alt=""></a>
           <div class="chef-footer">
             <a href="{% url 'products:collection_detail' collection.id %}"><h4>{{ collection.name }}</h4></a>

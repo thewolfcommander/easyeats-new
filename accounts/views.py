@@ -12,6 +12,8 @@ from addresses.models import Address
 from addresses.forms import AddressForm
 from orders.models import Order
 
+from easyeats.utils import imageUrls
+
 
 def signup(request):
     if request.method == 'POST':
@@ -120,6 +122,7 @@ def order_detail(request, pk=None, *args, **kwargs):
     order = get_object_or_404(Order, id=pk)
     context = {
         'order': order,
+        'image': imageUrls,
     }
     return render(request, 'accounts/myaccount/order_detail.html', context)
 

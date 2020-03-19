@@ -6,6 +6,8 @@ from cart.models import Cart
 from products.models import *
 from products.forms import *
 
+from easyeats.utils import imageUrls
+
 
 def menu(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
@@ -26,7 +28,8 @@ def menu(request):
         'featured_foods': featured_foods,
         'foods': foods,
         'categories': categories,
-        'cart': cart_obj
+        'cart': cart_obj,
+        'image': imageUrls,
     }
     return render(request, 'products/menu.html', context)
 
@@ -61,10 +64,12 @@ def food_detail(request, pk=None, *args, **kwargs):
             'form': form,
             'reviews': reviews,
             'cart': cart_obj,
+            'image': imageUrls,
         }
     else:
         context = {
             'featured_foods': featured_foods,
+            'image': imageUrls,
         }
     return render(request, 'products/food_detail.html', context)
 
@@ -75,6 +80,7 @@ def restaurant_list(request):
     context = {
         'restaurants': restaurants,
         'featured_foods': featured_foods,
+        'image': imageUrls,
     }
     return render(request, 'products/restaurant_list.html', context)
 
@@ -102,6 +108,7 @@ def restaurant_detail(request, pk=None, *args, **kwargs):
         'foods': foods,
         'reviews': reviews,
         'form': form,
+        'image': imageUrls,
     }
     return render(request, 'products/restaurant_detail.html', context)
 
@@ -111,7 +118,8 @@ def categories_list(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     context = {
         'categories': categories,
-        'featured_foods': featured_foods
+        'featured_foods': featured_foods,
+        'image': imageUrls,
     }
     return render(request, 'products/category_list.html', context)
 
@@ -124,6 +132,7 @@ def categories_detail(request, pk=None, *args, **kwargs):
         'category': category,
         'featured_foods': featured_foods,
         'foods': foods,
+        'image': imageUrls,
     }
     return render(request, 'products/category_detail.html', context)
 
@@ -133,7 +142,8 @@ def collection_list(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     context = {
         'collections': collections,
-        'featured_foods': featured_foods
+        'featured_foods': featured_foods,
+        'image': imageUrls,
     }
     return render(request, 'products/collection_list.html', context)
 
@@ -146,5 +156,6 @@ def collection_detail(request, pk=None, *args, **kwargs):
         'collection': collection,
         'featured_foods': featured_foods,
         'foods': foods,
+        'image': imageUrls,
     }
     return render(request, 'products/collection_detail.html', context)
