@@ -39,6 +39,7 @@ class CategoryAdmin(ImportExportModelAdmin):
 class FoodAdmin(ImportExportModelAdmin):
     list_display = ['name', 'active', 'added', 'gross_price', 'discount_price', 'added_by']
     list_filter = ['active', 'added', 'updated']
+    search_fields = ['name',]
     inlines = [FoodImageInline, FoodTagInline, ReviewInline]
 
 

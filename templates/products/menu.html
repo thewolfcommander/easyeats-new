@@ -190,14 +190,10 @@
             <h2>Best suited meals, only for you</h2>
         </div>
 
-        {% if categories %}
-        {% for category in categories %}
-        <a href="{% url 'products:categories_detail' category.id %}">
-            <h4 class="intro-title">{{ category.name }}</h4>
-        </a>
-        {% for food in foods %}
-        {% if food.category == category %}
         <div class="owl-carousel owl-theme featured-carousel">
+        {{ foods.count }}
+
+        {% for food in foods %}
             <div class="featured-item">
                 <a href="">
                     <img class="card-img rounded-0"
@@ -205,7 +201,7 @@
                         alt="">
                 </a>
                 <div class="item-body">
-                    <a href="{% url 'products:categories_detail' category.id %}">
+                    <a href="{% url 'products:food_detail' food.id %}">
                         <h3 style="color: var(--main);">{{ food.name }}</h3>
                     </a>
                     <center>
@@ -217,18 +213,13 @@
                                 style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
                         </h3>
                     </center>
+                    <br>
                     <center>{% include 'products/snippets/update-cart.html' with cart=cart food=food %}</center>
                 </div>
             </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
 
-        <center><a class="button" href="{% url 'products:categories' %}">All Categories</a></center>
-        {% else %}
-        <p class="lead">Sorry, no categories found</p>
-        {% endif %}
+        {% endfor %}
+        </div>
     </div>
 </section>
 
