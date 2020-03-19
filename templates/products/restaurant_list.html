@@ -73,7 +73,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12 mb-5 mb-lg-0">
         <article class="blog_item">
           <div class="blog_item_img">
-            <img class="card-img rounded-0" src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+            <img class="card-img rounded-0" src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}" alt="">
             <a href="{% url 'products:menu' %}" class="blog_item_date">
               <h3>{{ restaurant.food_set.all.count }}</h3>
               <p>Dishes</p>
@@ -137,7 +137,7 @@
     <div class="owl-carousel owl-theme featured-carousel">
       {% for item in featured_foods %}
       <div class="featured-item">
-        <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+        <img class="card-img rounded-0" src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}" alt="">
         <div class="item-body">
           <a href="{% url 'products:food_detail' item.id %}">
             <h3 style="color: var(--main);">{{ item.name }}</h3>

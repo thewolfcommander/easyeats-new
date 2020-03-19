@@ -177,13 +177,13 @@
                             <tbody>
                                 {% for item in order.cart.foods.all %}
                                 <tr>
-                                    <th scope="row"><img src="{{ item.foodimage_set.first.image.url }}"
+                                    <th scope="row"><img src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}http://lorempixel.com/500/250/food/{{forloop.counter}}{% endif %}"
                                             alt="{{ item.name }}" width="90px"></th>
                                     <th>1</th>
                                     <td><a href="{% url 'products:food_detail' item.id %}">
                                             <p class="lead"><strong>{{ item.name }}</strong></p>
                                         </a>
-                                        <small>{{ item.summary }}</small><br>
+                                        <small>{{ item.restaurant.name }}</small><br>
                                     </td>
                                     <td>Rs. {{ item.discount_price }}</td>
                                 </tr>
@@ -198,7 +198,7 @@
                                     <th></th>
                                     <th></th>
                                     <th>Discount (If Any)</th>
-                                    <th>0.00</th>
+                                    <th>26%</th>
                                 </tr>
                                 <tr>
                                     <th></th>
