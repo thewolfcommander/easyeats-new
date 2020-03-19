@@ -120,7 +120,7 @@
             <h4 class="intro-title">Food Menu</h4>
             <h2>Delicious food</h2>
         </div>
-        {% if foods %}
+        {% if not foods %}
         <div class="row">
             {% for food in foods %}
             <div class="col-md-4 col-sm-12">
@@ -129,13 +129,19 @@
                         src="{% if food.foodimage_set.first.image %}{{ food.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
                         alt="Card image cap" height="250px">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'products:food_detail' food.id %}"
-                                style="color: var(--main);">{{ food.name }}</a></h5>
-                        <p class="card-text">{{ food.category.name }} | {{ food.restaurant.name }}</p>
+                        <center>
+                            <h5 class="card-title"><a href="{% url 'products:food_detail' food.id %}"
+                                    style="color: var(--main);">{{ food.name }}</a></h5>
+                        </center>
+                        <center>
+                            <p class="card-text">{{ food.category.name }} | {{ food.restaurant.name }}</p>
+                        </center>
 
-                        <center><h3 class="price-tag"><strike
-                            style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
-                    </h3></center>
+                        <center>
+                            <h3 class="price-tag"><strike
+                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
+                            </h3>
+                        </center>
                         <center>{% include 'products/snippets/update-cart.html' with cart=cart food=food %}</center>
                     </div>
                 </div>
@@ -175,6 +181,58 @@
 <!--================Food menu section end =================-->
 
 
+<!-- ===================== Food menu section start =========================== -->
+
+<section class="section-margin mb-lg-100">
+    <div class="container">
+        <div class="section-intro mb-75px">
+            <h4 class="intro-title">Explore the Food Items</h4>
+            <h2>Best suited meals, only for you</h2>
+        </div>
+
+        {% if categories %}
+        {% for category in categories %}
+        <a href="{% url 'products:categories_detail' category.id %}">
+            <h4 class="intro-title">{{ category.name }}</h4>
+        </a>
+        {% for food in foods %}
+        {% if food.category == category %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            <div class="featured-item">
+                <a href="">
+                    <img class="card-img rounded-0"
+                        src="{% if food.foodimage_set.first.image %}{{ food.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                        alt="">
+                </a>
+                <div class="item-body">
+                    <a href="{% url 'products:categories_detail' category.id %}">
+                        <h3 style="color: var(--main);">{{ food.name }}</h3>
+                    </a>
+                    <center>
+                        <p class="card-text">{{ food.category.name }} | {{ food.restaurant.name }}</p>
+                    </center>
+
+                    <center>
+                        <h3 class="price-tag"><strike
+                                style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ food.gross_price }}</strike>{{ food.discount_price }}
+                        </h3>
+                    </center>
+                    <center>{% include 'products/snippets/update-cart.html' with cart=cart food=food %}</center>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+        <center><a class="button" href="{% url 'products:categories' %}">All Categories</a></center>
+        {% else %}
+        <p class="lead">Sorry, no categories found</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- ===================== Food menu section end =========================== -->
 
 
 {% endblock content %}
