@@ -1,0 +1,3 @@
+Razorpay test kEy: rzp_test_V0MroxbClTzB12
+
+Razorpay test secret: GRquYcsQ1EEwZwk7yL3wQTD1

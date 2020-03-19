@@ -10,6 +10,11 @@ from products.models import Restaurant
 
 from orders.models import Order
 
+import razorpay
+
+client = razorpay.Client(auth=("rzp_test_V0MroxbClTzB12", "GRquYcsQ1EEwZwk7yL3wQTD1"))
+api_key_id = 'rzp_test_V0MroxbClTzB12'
+
 @login_required
 def vendor_home(request):
     user = Vendor.objects.filter(user=request.user)
@@ -193,3 +198,23 @@ def order_detail(request, pk=None, *args, **kwargs):
         'order': order,
     }
     return render(request, 'third/delivery/order-detail.html', context)
+
+
+
+def pay(request):
+    """
+    Test payment gateway
+    """
+    order_amount = 50000
+    order_currency = 'INR'
+    order_receipt = 'order_rcptid_11'
+    notes = {'Shipping address': 'Bommanahalli, Bangalore'}
+    client.order.create(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0')
+    context = {
+        'order_amount': order_amount,
+        'order_currency': order_currency,
+        'order_receipt': order_receipt,
+        'notes': notes,
+        'api_key_id': api_key_id,
+    }
+    return render(request, 'pay.html', context)
