@@ -57,6 +57,7 @@ class Category(models.Model):
     """
     image = models.ImageField(upload_to='category_feature_image', null=True)
     name = models.CharField(max_length=255, null=True)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, default=4)
     summary = models.CharField(max_length=255, null=True)
     description = models.TextField(null=True)
     active = models.BooleanField(default=True)
