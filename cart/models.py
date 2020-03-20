@@ -65,7 +65,7 @@ def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
         # Checking for the user is ordering the food for first time or not
         if instance.user:
             if instance.user.order_count == 0:
-                discount = instance.shipping.copy()
+                discount = instance.shipping
         instance.total = instance.shipping + instance.sub_total - discount
         instance.save()
 
