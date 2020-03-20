@@ -46,6 +46,7 @@ def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         foods = instance.foods.all()
         sub_total = 0.00
+        discount = 0.00
         for food in foods:
             sub_total += float(food.discount_price)
         instance.sub_total = sub_total
@@ -64,8 +65,8 @@ def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
         # Checking for the user is ordering the food for first time or not
         if instance.user:
             if instance.user.order_count == 0:
-                instance.shipping = 0.00
-        instance.total = instance.shipping + instance.sub_total
+                discount = instance.shipping.copy()
+        instance.total = instance.shipping + instance.sub_total - discount
         instance.save()
 
 m2m_changed.connect(pre_save_cart_reciever, sender=Cart.foods.through)
