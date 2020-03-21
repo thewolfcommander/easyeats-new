@@ -70,7 +70,7 @@ class Category(models.Model):
         verbose_name_plural = 'Food Categories'
 
     def __str__(self):
-        return self.name
+        return '{} - {}'.format(str(self.id), self.name)
 
     
 class Food(models.Model):
