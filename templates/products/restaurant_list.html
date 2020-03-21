@@ -74,7 +74,7 @@
         <article class="blog_item">
           <div class="blog_item_img">
             <img class="card-img rounded-0" src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
-            <a href="{% url 'products:menu' %}" class="blog_item_date">
+            <a href="{% url 'products:restaurant_detail' restaurant.id %}" class="blog_item_date">
               <h3>{{ restaurant.food_set.all.count }}</h3>
               <p>Dishes</p>
             </a>
