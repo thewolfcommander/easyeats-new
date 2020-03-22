@@ -12,7 +12,7 @@ from easyeats.utils import imageUrls
 def menu(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     categories = Category.objects.filter(active=True).order_by('name')
-    food_list = Food.objects.filter(active=True)
+    food_list = Food.objects.filter(active=True).order_by('name')
     page = request.GET.get('page', 1)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
 
