@@ -25,6 +25,7 @@ def cart_update(request):
         if food_obj.restaurant.active==False:
             messages.error(request, "The restaurant is currently Closed, Please check back later when it is open again....", extra_tags="warning")
             return redirect("core:home")
+        messages.success(request, '{} is successfully added to your cart.'.format(food_obj.name), extra_tags="info")
         cart_obj.foods.add(food_obj)
     return redirect("cart:home")
 
