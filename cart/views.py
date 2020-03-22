@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from addresses.models import Address
 from cart.models import Cart
@@ -21,6 +22,9 @@ def cart_update(request):
     if food_obj in cart_obj.foods.all():
         cart_obj.foods.remove(food_obj)
     else:
+        if food_obj.restaurant.active==False:
+            messages.error(request, "The restaurant is currently Closed, Please check back later when it is open again....", extra_tags="warning")
+            return redirect("core:home")
         cart_obj.foods.add(food_obj)
     return redirect("cart:home")
 

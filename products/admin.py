@@ -27,6 +27,23 @@ class RestaurantAdmin(ImportExportModelAdmin):
     list_display = ['name', 'mobile_number', 'email', 'vendor', 'added', 'active']
     list_filter = ['added', 'updated', 'pincode']
     inlines = [RestaurantImageInline]
+    actions = ['make_inactive', 'make_active']
+    
+
+    def make_inactive(self, request, queryset):
+        """
+        Make restaurants inactive
+        """
+        queryset.update(active=False)
+    make_inactive.short_description = "Make Restaurant Inactive"
+
+
+    def make_active(self, request, queryset):
+        """
+        Make restaurants active
+        """
+        queryset.update(active=True)
+    make_active.short_description = "Make Restaurant Active"
 
 
 @admin.register(Category)
