@@ -70,19 +70,6 @@
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post">
-                    <div class="owl-carousel owl-theme hero-carousel w-75">
-                        {% if food.foodimage_set %}
-                        {% for item in food.foodimage_set.all %}
-                        <div class="hero-carousel-item">
-                            <img class="img-fluid" src="{{ item.image.url }}" alt="">
-                        </div>
-                        {% endfor %}
-                        {% else %}
-                        <div class="hero-carousel-item">
-                            <img src="http://lorempixel.com/500/250/food/" alt="" class="img-fluid">
-                        </div>
-                        {% endif %}
-                    </div>
                     <div class="blog_details">
                         <h2>{{ food.name|upper }}</h2>
                         <ul class="blog-info-link mt-3 mb-4">
