@@ -14,6 +14,12 @@
 
 {% block content %}
 
+<!-- Modal start  here -->
+
+{% include 'includes/modal.html' %}
+
+<!-- Modal ends here -->
+
 
 <!--================Hero Banner Section start =================-->
 <section class="hero-banner">
@@ -166,7 +172,8 @@
       <div class="col-sm">
         <div class="offer-card offer-card-position">
           <h3>Never Before Offer</h3>
-          <p class="lead">Get Free Delivery on first order | Not only this. Get upto <strong>20%</strong> OFF on every order</p>
+          <p class="lead">Get Free Delivery on first order | Not only this. Get upto <strong>20%</strong> OFF on every
+            order</p>
           <br>
           <a class="button" href="{% url 'products:menu' %}">Read More</a>
         </div>
@@ -232,15 +239,16 @@
       <div class="col-sm-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card-blog">
           <a href="{% url 'products:restaurant_detail' restaurant.id %}">
-          <img class="card-img rounded-0"
-            src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-            alt=""></a>
+            <img class="card-img rounded-0"
+              src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+              alt=""></a>
           <div class="blog-body">
             <a href="{% url 'products:restaurant_detail' restaurant.id %}">
               <h3>{{ restaurant.name }}</h3>
             </a>
             <ul class="blog-info">
-              <li><a href="{% url 'core:search' %}?search={{restaurant.city}}">{{ restaurant.city }}, {{ restaurant.state|title }}</a></li>
+              <li><a href="{% url 'core:search' %}?search={{restaurant.city}}">{{ restaurant.city }},
+                  {{ restaurant.state|title }}</a></li>
               <li>
                 <p class="mono text-primary">{{ restaurant.food_set.all.count }} Dishes</p>
               </li>
@@ -327,11 +335,13 @@
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
         <div class="chef-card">
           <a href="{% url 'products:collection_detail' collection.id %}">
-          <img class="card-img rounded-0"
-            src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-            alt=""></a>
+            <img class="card-img rounded-0"
+              src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+              alt=""></a>
           <div class="chef-footer">
-            <a href="{% url 'products:collection_detail' collection.id %}"><h4>{{ collection.name }}</h4></a>
+            <a href="{% url 'products:collection_detail' collection.id %}">
+              <h4>{{ collection.name }}</h4>
+            </a>
             <p>{{ collection.summary }}</p>
           </div>
 

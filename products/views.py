@@ -16,7 +16,7 @@ def menu(request):
     page = request.GET.get('page', 1)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
 
-    paginator = Paginator(food_list, 12)
+    paginator = Paginator(food_list, 24)
     try:
         foods = paginator.page(page)
     except PageNotAnInteger:
