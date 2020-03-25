@@ -334,12 +334,12 @@
       {% for collection in collections %}
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
         <div class="chef-card">
-          <a href="{% url 'products:collection_detail' collection.id %}">
+          <a href="{% url 'products:collections_detail' collection.id %}">
             <img class="card-img rounded-0"
               src="{% if collection.image %}{{ collection.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
               alt=""></a>
           <div class="chef-footer">
-            <a href="{% url 'products:collection_detail' collection.id %}">
+            <a href="{% url 'products:collections_detail' collection.id %}">
               <h4>{{ collection.name }}</h4>
             </a>
             <p>{{ collection.summary }}</p>
