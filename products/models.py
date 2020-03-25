@@ -126,7 +126,6 @@ class Collection(models.Model):
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    foods = models.ManyToManyField(Food)
 
     class Meta:
         verbose_name = 'Food Collection'
