@@ -131,7 +131,6 @@
   @media screen and (max-width: 540px) {
     .easy-gallery-cell {
       width: 80%;
-      height: 190px;
     }
   }
 
@@ -148,7 +147,7 @@
       <a href="">
         <img class="img-fluid rounded-0"
           src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-          alt="" height=""></a>
+          alt="" height="200px"></a>
       <div class="chef-footer mb-5" style="">
         <a href="{% url 'products:food_detail' item.id %}">
           <h4 style="color: var(--main);">{{ item.name }}</h4>
@@ -183,7 +182,7 @@
           <a href="">
             <img class="img-fluid rounded-0"
               src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt=""></a>
+              alt="" height="200px"></a>
           <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:food_detail' item.id %}">
               <h4 style="color: var(--main);">{{ item.name }}</h4>
