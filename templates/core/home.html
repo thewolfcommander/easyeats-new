@@ -121,7 +121,7 @@
 
   .easy-gallery-cell {
     width: 28%;
-    height: 200px;
+    height: 250px;
     margin-right: 10px;
     background: #f3f3f3;
     counter-increment: gallery-cell;
@@ -135,7 +135,7 @@
   }
 </style>
 
-<div class="easy-gallery js-flickity"
+<div class="easy-gallery js-flickity mt-5"
   data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
   {% for item in foods %}
   <div class="easy-gallery-cell">
@@ -143,7 +143,7 @@
       <a href="{% url 'products:food_detail' item.id %}">
         <img class="img-fluid rounded-0"
           src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-          alt="" style="height: 200px!important; width: 100%!important;"></a>
+          alt="" style="height: 250px!important; width: 100%!important;"></a>
       <div class="chef-footer mb-5" style="">
         <a href="{% url 'products:food_detail' item.id %}">
           <h4 style="color: var(--main);">{{ item.name }}</h4>
@@ -178,7 +178,7 @@
           <a href="{% url 'products:food_detail' item.id %}">
             <img class="img-fluid rounded-0"
               src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt="" height="200px"></a>
+              alt="" height="250px"></a>
           <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:food_detail' item.id %}">
               <h4 style="color: var(--main);">{{ item.name }}</h4>
@@ -282,7 +282,7 @@
           <a href="{% url 'products:restaurant_detail' restaurant.id %}">
             <img class="img-fluid rounded-0"
               src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt="" height="200px"></a>
+              alt="" height="250px"></a>
           <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:restaurant_detail' restaurant.id %}">
               <h4 style="color: var(--main);">{{ restaurant.name }}</h4>
@@ -336,7 +336,7 @@
           <a href="{% url 'products:food_detail' item.id %}">
             <img class="img-fluid rounded-0"
               src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt="" style="height: 200px!important; width: 100%!important;"></a>
+              alt="" style="height: 250px!important; width: 100%!important;"></a>
           <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:food_detail' item.id %}">
               <h4 style="color: var(--main);">{{ item.name }}</h4>
