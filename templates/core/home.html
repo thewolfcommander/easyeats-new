@@ -276,7 +276,7 @@
     {% if restaurants %}
     <div class="easy-gallery js-flickity"
       data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
-      {% for item in featured_foods %}
+      {% for restaurant in restaurants %}
       <div class="easy-gallery-cell">
         <div class="chef-card">
           <a href="{% url 'products:restaurant_detail' restaurant.id %}">
