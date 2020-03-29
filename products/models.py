@@ -72,12 +72,33 @@ class Category(models.Model):
     def __str__(self):
         return '{} - {}'.format(str(self.id), self.name)
 
+
+class Collection(models.Model):
+    """
+    This model gonna hold the featured collections on the platform
+    """
+    image = models.ImageField(upload_to='collection_feature_image', null=True)
+    name = models.CharField(max_length=255, null=True)
+    summary = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True)
+    active = models.BooleanField(default=True)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Food Collection'
+        verbose_name_plural = 'Food Collections'
+
+    def __str__(self):
+        return self.name
+
     
 class Food(models.Model):
     """
     This model gonna hold the available food items for a particular category and a particular restaurant
     """
     category = models.ManyToManyField(Category)
+    collection = models.ManyToManyField(Collection)
     name = models.CharField(max_length=255, null=True)
     summary = models.CharField(max_length=255, null=True)
     description = models.TextField(null=True)
@@ -114,25 +135,6 @@ class FoodImage(models.Model):
     def __str__(self):
         return self.food.name
         
-
-class Collection(models.Model):
-    """
-    This model gonna hold the featured collections on the platform
-    """
-    image = models.ImageField(upload_to='collection_feature_image', null=True)
-    name = models.CharField(max_length=255, null=True)
-    summary = models.CharField(max_length=255, null=True)
-    description = models.TextField(null=True)
-    active = models.BooleanField(default=True)
-    added = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name = 'Food Collection'
-        verbose_name_plural = 'Food Collections'
-
-    def __str__(self):
-        return self.name
 
     
 class FoodTag(models.Model):

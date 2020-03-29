@@ -114,6 +114,57 @@
 </section> -->
 <!--================Reservation section end =================-->
 
+<style>
+  .easy-gallery {
+    background: #EEE;
+  }
+
+  .easy-gallery-cell {
+    width: 28%;
+    height: 200px;
+    margin-right: 10px;
+    background: #f3f3f3;
+    counter-increment: gallery-cell;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.15);
+  }
+
+  @media screen and (max-width: 540px) {
+    .easy-gallery-cell {
+      width: 80%;
+      height: 190px;
+    }
+  }
+
+  .easy-gallery-cell.is-selected {
+    background: #ED2;
+  }
+</style>
+
+<div class="easy-gallery js-flickity"
+  data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
+  {% for item in foods %}
+  <div class="easy-gallery-cell">
+    <div class="chef-card">
+      <a href="">
+        <img class="card-img rounded-0"
+          src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+          alt=""></a>
+      <div class="chef-footer " style="">
+        <a href="{% url 'products:food_detail' item.id %}">
+          <h4 style="color: var(--main);">{{ item.name }}</h4>
+        </a>
+        <a href="{% url 'products:restaurant_detail' item.restaurant.id %}">
+          <p>{{ item.restaurant.name }}</p>
+        </a>
+      </div>
+
+      <div class="chef-overlay justify-content-center">
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
 <!--================Featured Section Start =================-->
 <section class="section-margin mb-lg-100"
   style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
@@ -124,31 +175,25 @@
     </div>
 
     {% if featured_foods %}
-    <div class="owl-carousel owl-theme featured-carousel">
+    <div class="easy-gallery js-flickity"
+      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
       {% for item in featured_foods %}
-      <div class="featured-item">
-        <a href="{% url 'products:food_detail' item.id %}"><img class="card-img rounded-0"
-            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-            alt=""></a>
-        <div class="item-body">
-          <a href="{% url 'products:food_detail' item.id %}">
-            <h3 style="color: var(--main);">{{ item.name }}</h3>
-          </a>
-          <a href="{% url 'products:restaurant_detail' item.restaurant.id %}">
-            <p>{{ item.restaurant.name }}</p>
-          </a>
-          <div class="d-flex justify-content-between">
-            <!-- <ul class="rating-star">
-              <li><i class="ti-star"></i></li>
-              <li><i class="ti-star"></i></li>
-              <li><i class="ti-star"></i></li>
-              <li><i class="ti-star"></i></li>
-              <li><i class="ti-star"></i></li>
-            </ul> -->
-            <p class="lead" style="color: orangered">20% Off</p>
-            <h3 class="price-tag"><strike
-                style="font-size: 20px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-            </h3>
+      <div class="easy-gallery-cell">
+        <div class="chef-card">
+          <a href="">
+            <img class="card-img rounded-0"
+              src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+              alt=""></a>
+          <div class="chef-footer " style="">
+            <a href="{% url 'products:food_detail' item.id %}">
+              <h4 style="color: var(--main);">{{ item.name }}</h4>
+            </a>
+            <a href="{% url 'products:restaurant_detail' item.restaurant.id %}">
+              <p>{{ item.restaurant.name }}</p>
+            </a>
+          </div>
+
+          <div class="chef-overlay justify-content-center">
           </div>
         </div>
       </div>
