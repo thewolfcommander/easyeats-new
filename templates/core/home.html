@@ -281,14 +281,14 @@
 <!--================Food menu section start =================-->
 <section class="section-margin">
   <div class="container">
-    <div class="section-intro mb-75px">
+    <div class="section-intro">
       <h4 class="intro-title">Food Menu</h4>
       <h2>Delicious food</h2>
     </div>
     {% if foods %}
     <div class="row">
       {% for item in foods %}
-      <div class="col-lg-6 col-12 col-sm-12 col-md-6 p-1">
+      <div class="col-lg-4 col-12 col-sm-12 col-md-6 p-0">
         <a href="{% url 'products:food_detail' item.id %}">
           <div class="media align-items-center food-card mx-0">
             <img class="mr-3 mr-sm-4"
@@ -304,7 +304,8 @@
               <h3 class="price-tag" style="font-size: 14px;"><strike
                   style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
               </h3>
-              <p class="lead" style="color: orangered; font-size: 12px">20% Off</p>
+              <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
+              <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
             </div>
           </div>
         </a>

@@ -71,6 +71,8 @@ def home(request):
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     foods = Food.objects.filter(active=True).order_by('-updated')[:16]
     collections = Collection.objects.filter(active=True).order_by('-updated')[:10]
+
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
     context = {
         'restaurants': restaurants,
         'categories': categories,
@@ -78,6 +80,7 @@ def home(request):
         'foods': foods,
         'collections': collections,
         'image': imageUrls,
+        'cart': cart_obj,
     }
     return render(request, 'core/home.html', context)
 
