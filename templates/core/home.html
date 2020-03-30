@@ -130,13 +130,13 @@
 
   @media screen and (max-width: 540px) {
     .easy-gallery-cell {
-      width: 50%;
+      width: 80%;
     }
   }
 </style>
 
 <div class="easy-gallery js-flickity mt-5"
-  data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false, "groupCell": true }'>
+  data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
   {% for item in foods %}
   <div class="easy-gallery-cell">
     <div class="chef-card">
@@ -144,7 +144,7 @@
         <img class="img-fluid rounded-0"
           src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
           alt="" style="height: 250px!important; width: 100%!important;"></a>
-      <div class="chef-footer mb-5" style="height: 150px!important;">
+      <div class="chef-footer mb-5" style="">
         <a href="{% url 'products:food_detail' item.id %}">
           <h4 style="color: var(--main);">{{ item.name }}</h4>
         </a>
@@ -171,7 +171,7 @@
 
     {% if featured_foods %}
     <div class="easy-gallery js-flickity"
-      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false, "groupCell":true }'>
+      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
       {% for item in featured_foods %}
       <div class="easy-gallery-cell">
         <div class="chef-card">
@@ -179,7 +179,7 @@
             <img class="img-fluid rounded-0"
               src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
               alt="" height="250px"></a>
-          <div class="chef-footer mb-5" style="height: 150px!important;">
+          <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:food_detail' item.id %}">
               <h4 style="color: var(--main);">{{ item.name }}</h4>
             </a>
@@ -275,7 +275,7 @@
 
     {% if restaurants %}
     <div class="easy-gallery js-flickity"
-      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false, "groupCell":true }'>
+      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
       {% for restaurant in restaurants %}
       <div class="easy-gallery-cell">
         <div class="chef-card">
@@ -283,7 +283,7 @@
             <img class="img-fluid rounded-0"
               src="{% if restaurant.restaurantimage_set.first.image %}{{ restaurant.restaurantimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
               alt="" height="250px"></a>
-          <div class="chef-footer mb-5" style="height: 150px!important;">
+          <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:restaurant_detail' restaurant.id %}">
               <h4 style="color: var(--main);">{{ restaurant.name }}</h4>
             </a>
@@ -329,7 +329,7 @@
     </div>
     {% if foods %}
     <div class="easy-gallery js-flickity"
-      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false, "groupCell":true }'>
+      data-flickity='{ "cellAlign": "center", "contain": true, "freeScroll": true, "prevNextButtons": false,"pageDots": false }'>
       {% for item in foods %}
       <div class="easy-gallery-cell">
         <div class="chef-card">
@@ -337,7 +337,7 @@
             <img class="img-fluid rounded-0"
               src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
               alt="" style="height: 250px!important; width: 100%!important;"></a>
-          <div class="chef-footer mb-5" style="height: 150px!important;">
+          <div class="chef-footer mb-5" style="">
             <a href="{% url 'products:food_detail' item.id %}">
               <h4 style="color: var(--main);">{{ item.name }}</h4>
             </a>
