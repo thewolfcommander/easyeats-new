@@ -84,6 +84,20 @@
 	
 	{% endblock content %}
 
+	<!-- Loading line -->
+
+	<style>
+		.loading-line {
+			position: fixed;
+			left: 0px;
+			bottom: 0px;
+			width: 0px;
+			height: 5px;
+			background: var(--main);
+		}
+	</style>
+	<div class="loading-line" id="loading-line"></div>
+
 	<!-- Footer -->
 	{% include 'includes/footer.html' %}
 
@@ -108,6 +122,21 @@
 		});
 	
 	</script>
+
+
+<script>
+	let loading_line;
+
+	window.onload = () => {
+		loading_line = document.getElementById('loading-line');
+	};
+
+	window.onscroll = (e) => {
+		let d_height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		let percentage = (window.scrollY / d_height) * 100;
+		loading_line.style.width = percentage + '%';
+	};
+</script>
 	{% block scripts %}
 
 	{% endblock scripts %}
