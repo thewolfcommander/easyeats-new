@@ -98,7 +98,6 @@ class Food(models.Model):
     This model gonna hold the available food items for a particular category and a particular restaurant
     """
     category = models.ManyToManyField(Category)
-    collection = models.ManyToManyField(Collection)
     name = models.CharField(max_length=255, null=True)
     summary = models.CharField(max_length=255, null=True)
     description = models.TextField(null=True)
