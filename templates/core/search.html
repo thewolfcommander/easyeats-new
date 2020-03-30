@@ -49,30 +49,28 @@
         {% if foods %}
         <div class="row">
             {% for item in foods %}
-            <div class="col-md-3 col-sm-12">
-                <div class="card w-100 my-3">
-                    <a href="{% url 'products:food_detail' item.id %}">
-                        <img class="card-img-top"
-                            src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                            alt="Card image cap"></a>
-                    <div class="card-body">
-                        <h5 class="card-title text-center"><a href="{% url 'products:food_detail' item.id %}"
-                                style="color: var(--main);">{{ item.name }}</a></h5>
-                        <p class="card-text text-center">{{ item.restaurant.name }}
-                        </p>
-
-                        <center>
-                            <h3 class="price-tag"><strike
-                                    style="font-size: 16px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}<small
-                                    class="text-muted" style="font-size: 10px;">
-                                    <center>20% off</center>
-                                </small>
-                            </h3>
-                        </center>
-                        <center>{% include 'products/snippets/update-cart.html' with cart=cart food=item %}</center>
+            <div class="col-lg-4 col-12 col-sm-12 col-md-6 p-0">
+                <a href="{% url 'products:food_detail' item.id %}">
+                  <div class="media align-items-center food-card mx-0">
+                    <img class="mr-3 mr-sm-4"
+                      src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                      alt="" style="width: 80px!important;">
+                    <div class="media-body">
+                      <div class="d-flex justify-content-between food-card-title">
+                        <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                        </h4>
+                      </div>
+        
+                      <p style="font-size: 11px">{{ item.restaurant.name }}</p>
+                      <h3 class="price-tag" style="font-size: 14px;"><strike
+                          style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                      </h3>
+                      <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
+                      <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
                     </div>
-                </div>
-            </div>
+                  </div>
+                </a>
+              </div>
             {% endfor %}
         </div>
         <hr>
