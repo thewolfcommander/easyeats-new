@@ -173,7 +173,7 @@
     {% if featured_foods %}
     <div class="owl-carousel owl-theme featured-carousel">
       {% for item in featured_foods %}
-      <div class="col-lg-12 col-12 col-sm-12 col-md-12 p-1">
+      <div class="col-lg-12 col-12 col-sm-12 col-md-12 px-3">
         <a href="{% url 'products:food_detail' item.id %}">
           <div class="media align-items-center food-card mx-0">
             <img class="mr-3 mr-sm-4"
