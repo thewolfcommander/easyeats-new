@@ -185,3 +185,5 @@ class RestaurantReview(models.Model):
 
     def __str__(self):
         return self.restaurant.name
+
+    

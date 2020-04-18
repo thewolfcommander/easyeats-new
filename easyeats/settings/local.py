@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'core',
     'cart',
     'dashboard',
+    'grocery',
     'orders',
     'products',
     'third',
