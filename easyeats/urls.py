@@ -13,9 +13,9 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace='social')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('products/', include('products.urls', namespace='products')),
+    path('groceries/', include('grocery.urls', namespace='grocery')),
     path('third-party/', include('third.urls', namespace='third')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
