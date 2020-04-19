@@ -130,7 +130,7 @@
     }
 
     .panel-default>.panel-heading a[aria-expanded="true"] {
-        background-color: #eee;
+        background-color: #fff;
     }
 
     .panel-default>.panel-heading a[aria-expanded="true"]:after {
@@ -242,149 +242,152 @@
 </div>
 <!--================Categories Section End =================-->
 
-
-<!--================Offer Section Start =================-->
-<section class="bg-lightGray section-padding">
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-sm">
-                <img class="card-img rounded-0" src="{% static 'img/home/offer-img.png' %}" alt="">
-            </div>
-            <div class="col-sm">
-                <div class="offer-card offer-card-position">
-                    <h3>Never Before Offer</h3>
-                    <p class="lead">Get Free Delivery on first order | Not only this. Get upto <strong>20%</strong> OFF
-                        on every
-                        order</p>
-                    <br>
-                    <a class="button" href="{% url 'products:menu' %}">Read More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--================Offer Section End =================-->
-
-<!-- ================= Grocery Items Category Wise Start ========================= -->
-
-<div class="container">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default border border-info rounded-1 border-1 shadow shadow-sm mt-2">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne" style="color: var(--main)!important;">
-                        Collapsible Group Item #1
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body px-2">
-                    1
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                        href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Collapsible Group Item #2
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    2
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
-                        href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Collapsible Group Item #3
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                    3
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ================= Grocery Items Category Wise End ========================== -->
-
-<!--================Food menu section start =================-->
-<section class="section-margin">
+<!-- ================= Grocery Items Sub Category Wise Start ========================= -->
+<div class="section-margin">
     <div class="container">
         <div class="section-intro">
-            <h4 class="intro-title">Food Menu</h4>
-            <h2>Delicious food</h2>
+            <h4 class="intro-title">Grocery Products</h4>
+            <h2>Explore the Purity and Trust</h2>
         </div>
-        {% if foods %}
-        <div class="row">
-            {% for item in foods %}
-            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
-                <a href="{% url 'products:food_detail' item.id %}">
-                    <div class="media align-items-center food-card p-3 w-100">
-                        <div class="media-body">
-                            <img class=""
-                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                alt="" style="width: 100%;">
-                            <div class="d-flex justify-content-center mt-2">
-                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                                </h4>
-                            </div>
-
-                            <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
-                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
-                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                            </h3>
-                            <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20%
-                                Off</p>
-                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                {% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
+        {% if sub_categories %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% for sub_category in sub_categories %}
+            <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
+                <div class="panel-heading px-4" role="tab" id="sub-heading-{{ forloop.counter }}">
+                    <h5 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#sub-collapse-{{ forloop.counter }}" aria-expanded="true"
+                            aria-controls="sub-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
+                            {{ sub_category.name }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="sub-collapse-{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel"
+                    aria-labelledby="sub-heading-{{ forloop.counter }}">
+                    <div class="panel-body px-3">
+                        <div class="row p-3">
+                            <a href="{% url 'grocery:subcategory_detail' sub_category.id %}" class="btn button">Learn
+                                More</a>
                         </div>
+                        {% if groceries %}
+                        <div class="row">
+                            {% for item in groceries %}
+                            {% if item.sub_category == sub_category %}
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                                <a href="{% url 'grocery:grocery_detail' item.id %}">
+                                    <div class="media align-items-center food-card p-3 w-100">
+                                        <div class="media-body">
+                                            <img class=""
+                                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                alt="" style="width: 100%;">
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                                </h4>
+                                            </div>
+
+                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted"><center>{{ item.quantity }} {{ item.scale }}</center></p>
+                                            <div class="d-flex justify-content-between">
+                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                                </h3>
+                                                <p class="lead"
+                                                    style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                    20%
+                                                    Off</p>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No Products</p>
+                        {% endif %}
                     </div>
-                </a>
+                </div>
             </div>
             {% endfor %}
         </div>
-
-        <center><a class="button mt-5" href="{% url 'products:menu' %}">All Dishes</a></center>
-        {% else %}
-        <p class="lead">No Products found</p>
         {% endif %}
     </div>
-</section>
-<!--================Food menu section end =================-->
+</div>
 
 
-<script>
-    $('.owl-carousel').owlCarousel({
-        stagePadding: 50,
-        loop: true,
-        margin: 10,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 5
-            }
-        }
-    })
-</script>
+<!-- ================= Sub Categories Category Wise Start ========================= -->
+<div class="section-margin">
+    <div class="container">
+        <div class="section-intro">
+            <h4 class="intro-title">Sub Categories</h4>
+            <h2>Making your choice more easy</h2>
+        </div>
+        {% if categories %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% for category in categories %}
+            <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
+                <div class="panel-heading px-4" role="tab" id="cat-heading-{{ forloop.counter }}">
+                    <h5 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#cat-collapse-{{ forloop.counter }}" aria-expanded="true"
+                            aria-controls="cat-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
+                            {{ category.name }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="cat-collapse-{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel"
+                    aria-labelledby="cat-heading-{{ forloop.counter }}">
+                    <div class="panel-body px-3">
+                        <div class="row p-3">
+                            <a href="{% url 'grocery:category_detail' category.id %}" class="btn button">Learn
+                                More</a>
+                        </div>
+                        {% if sub_categories%}
+                        <div class="row">
+                            {% for item in sub_categories %}
+                            {% if item.category == category %}
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                                <a href="{% url 'products:food_detail' item.id %}">
+                                    <div class="media align-items-center food-card p-3 w-100">
+                                        <div class="media-body">
+                                            <img class=""
+                                                src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                alt="" style="width: 100%;">
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                                </h4>
+                                            </div>
 
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                    <a href="{% url 'grocery:subcategory_detail' item.id %}" class="btn btn-sm button">See Products</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No Products</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- ================= Sub Categories Category Wise End ========================== -->
 
 {% endblock content %}
 

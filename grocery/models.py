@@ -44,11 +44,15 @@ class Grocery(models.Model):
     """
     Model for defining the Grocery Information
     """
+    SCALE_CHOICES = [
+        ('gram', 'Gram'),
+        ('kg', 'Kilogram'),
+    ]
     grocery_category = models.ForeignKey(GroceryCategory, on_delete=models.CASCADE, default=1)
     sub_category = models.ForeignKey(GrocerySubCategory, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=255, null=True)
-    summary = models.CharField(max_length=255, null=True)
-    description = models.TextField(null=True)
+    quantity = models.CharField(max_length=10, default="1")
+    scale = models.CharField(max_length=100, choices=SCALE_CHOICES, default="kg")
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -24,7 +24,7 @@
                     <thead class="" style="background: var(--main)!important; color: #fff;">
                         <tr>
                             <th scope="col" class="col-md-7" style="min-width: 250px!important;">Item Name</th>
-                            <th scope="col" class="col-md-2 col-sm-12" >Price</th>
+                            <th scope="col" class="col-md-2 col-sm-12" style="min-width: 100px!important;" >Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +42,14 @@
                         <tr>
                             <th>Sub Total</th>
                             <th>{{ cart.sub_total }}</th>
+                        </tr>
+                        <tr>
+                            <th>Shipping Charges</th>
+                            <th>{% if request.user.is_authenticated %}{% if request.user.order_count != 0 %}{{ cart.shipping }}{% else %}<span style="color: var(--main);">(Reduced)</span> {{cart.shipping}} {% endif %}{% else %}{{ cart.shipping{% endif %}</th>
+                        </tr>
+                        <tr>
+                            <th>Discount (If Any)</th>
+                            <th>{% if request.user.is_authenticated %}{% if request.user.order_count == 0 %}{{ cart.shipping }}{% else %}0.00{% endif %}{% else %}0.00{% endif %}</th>
                         </tr>
                         <tr>
                             <th>Total</th>

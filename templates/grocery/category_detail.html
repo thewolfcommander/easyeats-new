@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Grocery Category - {{ category.name }} - Home{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block home %}active{% endblock home %}
+
+{% block content %}
+
+<!-- Modal start  here -->
+
+{% include 'includes/modal.html' %}
+
+<!-- Modal ends here -->
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .carousel-cell {
+        width: 40%;
+        height: 100px;
+        padding: 0 10px;
+    }
+
+    .carousel-cell .carousel-image-fli {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* brighten selected image */
+    .carousel-cell.is-selected .carousel-image-fli {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        .carousel-cell {
+            height: 100px;
+        }
+    }
+
+    @media screen and (min-width: 960px) {
+        .carousel-cell {
+            width: 20%;
+        }
+    }
+
+    /* buttons, no circle */
+    .flickity-prev-next-button {
+        width: 30px;
+        height: 30px;
+        background: var(--main);
+        opacity: 0.6;
+    }
+
+    .flickity-prev-next-button:hover {
+        background: var(--main);
+        opacity: 1;
+    }
+
+    /* arrow color */
+    .flickity-prev-next-button .arrow {
+        fill: white;
+    }
+
+    .flickity-prev-next-button.no-svg {
+        color: white;
+    }
+
+    /* closer to edge */
+    .flickity-prev-next-button.previous {
+        left: 0;
+    }
+
+    .flickity-prev-next-button.next {
+        right: 0;
+    }
+
+    /* hide disabled button */
+    .flickity-prev-next-button:disabled {
+        display: none;
+    }
+
+
+    /* Category Wise Grocery Items */
+
+
+    .panel-default>.panel-heading {
+        color: var(--main);
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .panel-default>.panel-heading a {
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .panel-default>.panel-heading a:after {
+        content: "";
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        float: right;
+        transition: transform .25s linear;
+        -webkit-transition: -webkit-transform .25s linear;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"] {
+        background-color: #fff;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"]:after {
+        content: "\2212";
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="false"]:after {
+        content: "\002b";
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+</style>
+
+
+<div class="container-fluid mt-3">
+    <div class="row justify-content-center">
+        <div class="section-intro" >
+            <h6 class="intro-title" style="font-size: 17px!important;">Added {{ category.added|timesince }} ago</h6>
+            <h2>{{ category.name }}</h2>
+        </div>
+    </div>
+    <img src="{% if category.image %}{{ category.image.url }}{% else %}{% endif %}" alt="{{ category.name }}" class="img-fluid">
+</div>
+
+<!-- ================= Grocery Items Sub Category Wise Start ========================= -->
+<div class="section-margin">
+    <div class="container">
+        <div class="section-intro">
+            <h4 class="intro-title">Grocery Products</h4>
+            <h2>Explore the Purity and Trust</h2>
+        </div>
+        {% if sub_categories %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            {% for sub_category in sub_categories %}
+            <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
+                <div class="panel-heading px-4" role="tab" id="sub-heading-{{ forloop.counter }}">
+                    <h5 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion"
+                            href="#sub-collapse-{{ forloop.counter }}" aria-expanded="true"
+                            aria-controls="sub-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
+                            {{ sub_category.name }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="sub-collapse-{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel"
+                    aria-labelledby="sub-heading-{{ forloop.counter }}">
+                    <div class="panel-body px-3">
+                        <div class="row p-3">
+                            <a href="{% url 'grocery:subcategory_detail' sub_category.id %}" class="btn button">Learn
+                                More</a>
+                        </div>
+                        {% if groceries %}
+                        <div class="row">
+                            {% for item in groceries %}
+                            {% if item.sub_category == sub_category %}
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                                <a href="{% url 'grocery:grocery_detail' item.id %}">
+                                    <div class="media align-items-center food-card p-3 w-100">
+                                        <div class="media-body">
+                                            <img class=""
+                                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                alt="" style="width: 100%;">
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                                </h4>
+                                            </div>
+
+                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted"><center>{{ item.quantity }} {{ item.scale }}</center></p>
+                                            <div class="d-flex justify-content-between">
+                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                                </h3>
+                                                <p class="lead"
+                                                    style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                    20%
+                                                    Off</p>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No Products</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+
+<!--================Categories Section Start =================-->
+<div class="container mt-5">
+    <div class="section-intro">
+        <h4 class="intro-title">Explore the categories in Grocery Items</h4>
+    </div>
+    {% if categories %}
+    <div class="carousel js-flickity"
+        data-flickity='{"pageDots": false, "groupCells": 2, "wrapAround": true, "autoPlay": true }'>
+        {% for category in categories %}
+        <div class="carousel-cell">
+            <div class="chef-card">
+                <a href="">
+                    <img class="carousel-image-fli"
+                        src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/1831825/pexels-photo-1831825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                        alt="" /></a>
+                <div class="chef-overlay justify-content-center">
+                    <center>
+                        <p class="text-light">{{ category.name }}</p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead">Sorry, no categories found</p>
+    {% endif %}
+</div>
+<!--================Categories Section End =================-->
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
