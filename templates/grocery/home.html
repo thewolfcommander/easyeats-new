@@ -1,0 +1,392 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Groceries - Home{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block home %}active{% endblock home %}
+
+{% block content %}
+
+<!-- Modal start  here -->
+
+{% include 'includes/modal.html' %}
+
+<!-- Modal ends here -->
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .carousel-cell {
+        width: 40%;
+        height: 100px;
+        padding: 0 10px;
+    }
+
+    .carousel-cell .carousel-image-fli {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* brighten selected image */
+    .carousel-cell.is-selected .carousel-image-fli {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        .carousel-cell {
+            height: 100px;
+        }
+    }
+
+    @media screen and (min-width: 960px) {
+        .carousel-cell {
+            width: 20%;
+        }
+    }
+
+    /* buttons, no circle */
+    .flickity-prev-next-button {
+        width: 30px;
+        height: 30px;
+        background: var(--main);
+        opacity: 0.6;
+    }
+
+    .flickity-prev-next-button:hover {
+        background: var(--main);
+        opacity: 1;
+    }
+
+    /* arrow color */
+    .flickity-prev-next-button .arrow {
+        fill: white;
+    }
+
+    .flickity-prev-next-button.no-svg {
+        color: white;
+    }
+
+    /* closer to edge */
+    .flickity-prev-next-button.previous {
+        left: 0;
+    }
+
+    .flickity-prev-next-button.next {
+        right: 0;
+    }
+
+    /* hide disabled button */
+    .flickity-prev-next-button:disabled {
+        display: none;
+    }
+
+
+    /* Category Wise Grocery Items */
+
+
+    .panel-default>.panel-heading {
+        color: var(--main);
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .panel-default>.panel-heading a {
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .panel-default>.panel-heading a:after {
+        content: "";
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        float: right;
+        transition: transform .25s linear;
+        -webkit-transition: -webkit-transform .25s linear;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"] {
+        background-color: #eee;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"]:after {
+        content: "\2212";
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="false"]:after {
+        content: "\002b";
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+</style>
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <h1 class="hero-title">Groceries</h1>
+            <div class="d-sm-flex flex-wrap">
+                <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
+                    <div class="input-group mb-3 shadow-lg" style="height: 50px;">
+                        <input type="text" class="form-control w-75" placeholder="Search something awesome..."
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;"
+                            name="search">
+                        <div class="input-group-append w-25">
+                            <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+                                style="background-color: var(--main); color: #fff;">
+                                <center>Search</center>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="{% static 'img/banner/fresh-food-icon.png' %}" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right mt-md-5">
+            <div class="owl-carousel owl-theme hero-carousel">
+                <div class="hero-carousel-item">
+                    <img class="img-fluid"
+                        src="https://images.pexels.com/photos/1727684/pexels-photo-1727684.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid"
+                        src="https://images.pexels.com/photos/2292919/pexels-photo-2292919.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid"
+                        src="https://images.pexels.com/photos/3687999/pexels-photo-3687999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="">
+                </div>
+                <div class="hero-carousel-item">
+                    <img class="img-fluid"
+                        src="https://images.pexels.com/photos/942320/pexels-photo-942320.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+<!--================Categories Section Start =================-->
+<div class="container mt-5">
+    <div class="section-intro">
+        <h4 class="intro-title">Explore the categories in Grocery Items</h4>
+    </div>
+    {% if categories %}
+    <div class="carousel js-flickity"
+        data-flickity='{"pageDots": false, "groupCells": 2, "wrapAround": true, "autoPlay": true }'>
+        {% for category in categories %}
+        <div class="carousel-cell">
+            <div class="chef-card">
+                <a href="">
+                    <img class="carousel-image-fli"
+                        src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/1831825/pexels-photo-1831825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                        alt="" /></a>
+                <div class="chef-overlay justify-content-center">
+                    <center>
+                        <p class="text-light">{{ category.name }}</p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <center><a class="button mt-3" href="{% url 'products:categories' %}">All Categories</a></center>
+    {% else %}
+    <p class="lead">Sorry, no categories found</p>
+    {% endif %}
+</div>
+<!--================Categories Section End =================-->
+
+
+<!--================Offer Section Start =================-->
+<section class="bg-lightGray section-padding">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-sm">
+                <img class="card-img rounded-0" src="{% static 'img/home/offer-img.png' %}" alt="">
+            </div>
+            <div class="col-sm">
+                <div class="offer-card offer-card-position">
+                    <h3>Never Before Offer</h3>
+                    <p class="lead">Get Free Delivery on first order | Not only this. Get upto <strong>20%</strong> OFF
+                        on every
+                        order</p>
+                    <br>
+                    <a class="button" href="{% url 'products:menu' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Offer Section End =================-->
+
+<!-- ================= Grocery Items Category Wise Start ========================= -->
+
+<div class="container">
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default border border-info rounded-1 border-1 shadow shadow-sm mt-2">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne" style="color: var(--main)!important;">
+                        Collapsible Group Item #1
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body px-2">
+                    1
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                        href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Collapsible Group Item #2
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                    2
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                        href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Collapsible Group Item #3
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                    3
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= Grocery Items Category Wise End ========================== -->
+
+<!--================Food menu section start =================-->
+<section class="section-margin">
+    <div class="container">
+        <div class="section-intro">
+            <h4 class="intro-title">Food Menu</h4>
+            <h2>Delicious food</h2>
+        </div>
+        {% if foods %}
+        <div class="row">
+            {% for item in foods %}
+            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                <a href="{% url 'products:food_detail' item.id %}">
+                    <div class="media align-items-center food-card p-3 w-100">
+                        <div class="media-body">
+                            <img class=""
+                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                alt="" style="width: 100%;">
+                            <div class="d-flex justify-content-center mt-2">
+                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                </h4>
+                            </div>
+
+                            <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
+                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                            </h3>
+                            <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20%
+                                Off</p>
+                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                {% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <center><a class="button mt-5" href="{% url 'products:menu' %}">All Dishes</a></center>
+        {% else %}
+        <p class="lead">No Products found</p>
+        {% endif %}
+    </div>
+</section>
+<!--================Food menu section end =================-->
+
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        stagePadding: 50,
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
+</script>
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

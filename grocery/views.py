@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from cart.models import Cart
-from .models import Grocery, GroceryCategory
+from grocery.models import Grocery, GroceryCategory
 
+from easyeats.utils import imageUrls
 
 def home(request):
     """

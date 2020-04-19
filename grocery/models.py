@@ -7,7 +7,6 @@ class GroceryCategory(models.Model):
     """
     image = models.ImageField(upload_to='grocery_category_feature_image', null=True)
     name = models.CharField(max_length=255, null=True)
-    description = models.TextField(null=True)
     active = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -21,11 +20,32 @@ class GroceryCategory(models.Model):
         return '{} - {}'.format(str(self.id), self.name)
 
     
+class GrocerySubCategory(models.Model):
+    """
+    Model for defining the sub categories of the categories
+    """
+    category = models.ForeignKey(GroceryCategory, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='grocery_category_feature_image', null=True)
+    name = models.CharField(max_length=255, null=True)
+    active = models.BooleanField(default=True)
+    added = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-updated',)
+        verbose_name = 'Grocery Sub Category'
+        verbose_name_plural = 'Grocery Sub Categories'
+
+    def __str__(self):
+        return '{} - {}'.format(str(self.id), self.name)
+
+    
 class Grocery(models.Model):
     """
     Model for defining the Grocery Information
     """
-    grocery_category = models.ManyToManyField(GroceryCategory)
+    grocery_category = models.ForeignKey(GroceryCategory, on_delete=models.CASCADE, default=1)
+    sub_category = models.ForeignKey(GrocerySubCategory, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=255, null=True)
     summary = models.CharField(max_length=255, null=True)
     description = models.TextField(null=True)

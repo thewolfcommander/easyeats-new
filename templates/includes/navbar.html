@@ -6,7 +6,9 @@
               <div class="container box_1620">
                   <a class="navbar-brand logo_h" href="{% url 'core:home' %}"><img src="{% static 'img/logo.png' %}"
                           alt="" width="150px"></a>
-                  <a class="d-md-none d-lg-none d-xl-none d-sm-block" style="margin-left: 15%!important;" href="{% url 'cart:home' %}"><i class="ti-shopping-cart" style="color: var(--main); font-size: 28px; font-weight: bolder"></i></a>
+                  <a class="d-md-none d-lg-none d-xl-none d-sm-block" style="margin-left: 15%!important;"
+                      href="{% url 'cart:home' %}"><i class="ti-shopping-cart"
+                          style="color: var(--main); font-size: 28px; font-weight: bolder"></i></a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse"
                       data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                       aria-label="Toggle navigation">
@@ -34,7 +36,10 @@
                               </form>
                           </li>
                           <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}">
-                    <i class="ti-home"></i> Home</a></li>
+                                  <i class="ti-home"></i> Home</a></li>
+                                
+                          <li class="nav-item"><a class="nav-link" href="{% url 'grocery:home' %}">
+                            <i class="ti-package"></i> Groceries</a></li>
                           {% if request.user.is_authenticated %}
                           <li class="nav-item submenu dropdown">
                               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
