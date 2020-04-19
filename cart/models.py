@@ -3,6 +3,7 @@ from django.db.models.signals import m2m_changed
 
 from products.models import Food
 from accounts.models import User
+from grocery.models import Grocery
 
 class CartManager(models.Manager):
     def new_or_get(self, request):
@@ -33,6 +34,7 @@ class Cart(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     foods = models.ManyToManyField(Food)
+    groceries = models.ManyToManyField(Grocery)
     sub_total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     shipping = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
@@ -45,10 +47,13 @@ class Cart(models.Model):
 def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         foods = instance.foods.all()
+        groceries = instance.groceries.all()
         sub_total = 0.00
         discount = 0.00
         for food in foods:
             sub_total += float(food.discount_price)
+        for grocery in groceries:
+            sub_total += float(grocery.discount_price)
         instance.sub_total = sub_total
 
         # calculating the shipping
@@ -70,3 +75,4 @@ def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):
         instance.save()
 
 m2m_changed.connect(pre_save_cart_reciever, sender=Cart.foods.through)
+m2m_changed.connect(pre_save_cart_reciever, sender=Cart.groceries.through)

@@ -102,8 +102,8 @@
                 <table class="table">
                     <thead class="" style="background: var(--main)!important; color: #fff;">
                         <tr>
-                            <th scope="col" class="col-md-7" style="min-width: 450px!important;">Item Name</th>
-                            <th scope="col" class="col-md-2 col-sm-12" >Price</th>
+                            <th scope="col" class="col-md-7" style="min-width: 250px!important;">Item Name</th>
+                            <th scope="col" class="col-md-2 col-sm-12" style="min-width: 100px!important;" >Price</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,6 +113,18 @@
                                     <p class="lead"><strong>{{ item.name }}</strong></p>
                                 </a>
                                 <small>{{ item.summary }}</small><br>
+                                {% include 'products/snippets/update-cart.html' with cart=cart food=item %}
+                            </td>
+                            <td>Rs. {{ item.discount_price }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for item in cart.groceries.all %}
+                        <tr>
+                            <td><a href="{% url 'grocery:grocery_detail' item.id %}">
+                                    <p class="lead"><strong>{{ item.name }}</strong></p>
+                                </a>
+                                <small>{{ item.quantity }} {{ item.scale }}</small><br>
+                                {% include 'grocery/snippets/update-cart.html' with cart=cart grocery=item %}
                             </td>
                             <td>Rs. {{ item.discount_price }}</td>
                         </tr>

@@ -70,7 +70,7 @@ class Grocery(models.Model):
 
 
     def get_absolute_url(self):
-        # return reverse("products:food_detail", kwargs={"id": self.id})
+        return reverse("grocery:grocery_detail", kwargs={"id": self.id})
         pass
 
     def __str__(self):

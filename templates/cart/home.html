@@ -39,6 +39,17 @@
                             <td>Rs. {{ item.discount_price }}</td>
                         </tr>
                         {% endfor %}
+                        {% for item in cart.groceries.all %}
+                        <tr>
+                            <td><a href="{% url 'grocery:grocery_detail' item.id %}">
+                                    <p class="lead"><strong>{{ item.name }}</strong></p>
+                                </a>
+                                <small>{{ item.quantity }} {{ item.scale }}</small><br>
+                                {% include 'grocery/snippets/update-cart.html' with cart=cart grocery=item %}
+                            </td>
+                            <td>Rs. {{ item.discount_price }}</td>
+                        </tr>
+                        {% endfor %}
                         <tr>
                             <th>Sub Total</th>
                             <th>{{ cart.sub_total }}</th>
@@ -57,7 +68,7 @@
                         </tr>
                     </tbody>
                 </table>
-                {% if cart.foods.count != 0 %}
+                {% if cart.foods.count != 0 or cart.groceries.count != 0 %}
                 {% if request.user.is_authenticated %}
                 <a href="{% url 'addresses:select' %}" class="button m-4" style="float: right!important;">Continue</a>
                 {% else %}

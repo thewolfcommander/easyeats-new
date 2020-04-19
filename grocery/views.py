@@ -62,6 +62,7 @@ def subcategory_detail(request, pk=None, *args, **kwargs):
     """
     sub_category = get_object_or_404(GrocerySubCategory, id=pk)
     groceries = Grocery.objects.filter(active=True, sub_category=sub_category)
+    categories = GroceryCategory.objects.filter(active=True)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
 
     context = {
@@ -69,6 +70,7 @@ def subcategory_detail(request, pk=None, *args, **kwargs):
         'sub_category': sub_category,
         'cart': cart_obj,
         'image': imageUrls,
+        'categories': categories,
     }
     return render(request, 'grocery/subcategory_detail.html', context)
 

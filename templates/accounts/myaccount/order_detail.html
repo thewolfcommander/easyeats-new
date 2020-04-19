@@ -188,6 +188,19 @@
                                     <td>Rs. {{ item.discount_price }}</td>
                                 </tr>
                                 {% endfor %}
+                                {% for item in order.cart.groceries.all %}
+                                <tr>
+                                    <th scope="row"><img src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                            alt="{{ item.name }}" width="90px"></th>
+                                    <th>1</th>
+                                    <td><a href="{% url 'grocery:grocery_detail' item.id %}">
+                                            <p class="lead"><strong>{{ item.name }}</strong></p>
+                                        </a>
+                                        <small>{{ item.quantity }} {{ item.scale }}</small><br>
+                                    </td>
+                                    <td>Rs. {{ item.discount_price }}</td>
+                                </tr>
+                                {% endfor %}
                                 <tr>
                                     <th></th>
                                     <th></th>

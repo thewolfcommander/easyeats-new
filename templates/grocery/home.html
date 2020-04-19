@@ -235,7 +235,6 @@
         </div>
         {% endfor %}
     </div>
-    <center><a class="button mt-3" href="{% url 'products:categories' %}">All Categories</a></center>
     {% else %}
     <p class="lead">Sorry, no categories found</p>
     {% endif %}
@@ -297,7 +296,7 @@
                                             </div>
                                             <div class="d-flex justify-content-center mt-4">
                                                 <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
+                                                    {% include 'grocery/snippets/update-cart.html' with grocery=item cart=cart %}
                                                 </div>
                                             </div>
                                         </div>
