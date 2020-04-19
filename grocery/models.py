@@ -36,7 +36,7 @@ class Grocery(models.Model):
     discount_price = models.DecimalField(default=0.0, max_digits=100, decimal_places=2)
     original_price = models.DecimalField(default=0.0, max_digits=100, decimal_places=2)
     tax = models.DecimalField(default=0.0, max_digits=100, decimal_places=2)
-    added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    added_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=1)
     featured = models.BooleanField(default=False)
 
     class Meta:
