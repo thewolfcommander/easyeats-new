@@ -355,7 +355,7 @@
                             {% for item in sub_categories %}
                             {% if item.category == category %}
                             <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
-                                <a href="{% url 'products:food_detail' item.id %}">
+                                <a href="{% url 'grocery:subcategory_detail' item.id %}">
                                     <div class="media align-items-center food-card p-3 w-100">
                                         <div class="media-body">
                                             <img class=""
