@@ -253,10 +253,13 @@
             {% for sub_category in sub_categories %}
             <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
                 <div class="panel-heading px-4" role="tab" id="sub-heading-{{ forloop.counter }}">
+                    
                     <h5 class="panel-title">
+                        
                         <a role="button" data-toggle="collapse" data-parent="#accordion"
                             href="#sub-collapse-{{ forloop.counter }}" aria-expanded="true"
                             aria-controls="sub-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
+                            <img src="https://i.ya-webdesign.com/images/vegetables-icon-png-14.png" alt="" width="60px">
                             {{ sub_category.name }}
                         </a>
                     </h5>
@@ -335,6 +338,7 @@
                         <a role="button" data-toggle="collapse" data-parent="#accordion"
                             href="#cat-collapse-{{ forloop.counter }}" aria-expanded="true"
                             aria-controls="cat-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
+                            <img src="https://i.ya-webdesign.com/images/vegetables-icon-png-14.png" alt="" width="60px">
                             {{ category.name }}
                         </a>
                     </h5>

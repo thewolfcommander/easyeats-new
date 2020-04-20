@@ -149,12 +149,15 @@
 
 <div class="container-fluid mt-3">
     <div class="row justify-content-center">
-        <div class="section-intro" >
-            <h6 class="intro-title" style="font-size: 17px!important;">Belongs to <a href="{% url 'grocery:category_detail' sub_category.category.id %}">{{ sub_category.category.name }}</a></h6>
+        <div class="section-intro">
+            <h6 class="intro-title" style="font-size: 17px!important;">Belongs to <a
+                    href="{% url 'grocery:category_detail' sub_category.category.id %}">{{ sub_category.category.name }}</a>
+            </h6>
             <h2>{{ sub_category.name }}</h2>
         </div>
     </div>
-    <img src="{% if sub_category.image %}{{ sub_category.image.url }}{% else %}{% endif %}" alt="{{ sub_category.name }}" class="img-fluid">
+    <img src="{% if sub_category.image %}{{ sub_category.image.url }}{% else %}{% endif %}"
+        alt="{{ sub_category.name }}" class="img-fluid">
 </div>
 
 <!-- ================= Grocery Items Sub Category Wise Start ========================= -->
@@ -164,72 +167,48 @@
             <h4 class="intro-title">Grocery Products</h4>
             <h2>Explore the Purity and Trust</h2>
         </div>
-        {% if sub_categories %}
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            {% for sub_category in sub_categories %}
-            <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
-                <div class="panel-heading px-4" role="tab" id="sub-heading-{{ forloop.counter }}">
-                    <h5 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion"
-                            href="#sub-collapse-{{ forloop.counter }}" aria-expanded="true"
-                            aria-controls="sub-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
-                            {{ sub_category.name }}
-                        </a>
-                    </h5>
-                </div>
-                <div id="sub-collapse-{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel"
-                    aria-labelledby="sub-heading-{{ forloop.counter }}">
-                    <div class="panel-body px-3">
-                        <div class="row p-3">
-                            <a href="{% url 'grocery:subcategory_detail' sub_category.id %}" class="btn button">Learn
-                                More</a>
-                        </div>
-                        {% if groceries %}
-                        <div class="row">
-                            {% for item in groceries %}
-                            {% if item.sub_category == sub_category %}
-                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
-                                <a href="{% url 'grocery:grocery_detail' item.id %}">
-                                    <div class="media align-items-center food-card p-3 w-100">
-                                        <div class="media-body">
-                                            <img class=""
-                                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                alt="" style="width: 100%;">
-                                            <div class="d-flex justify-content-center mt-2">
-                                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                                                </h4>
-                                            </div>
 
-                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted"><center>{{ item.quantity }} {{ item.scale }}</center></p>
-                                            <div class="d-flex justify-content-between">
-                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
-                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                                                </h3>
-                                                <p class="lead"
-                                                    style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
-                                                    20%
-                                                    Off</p>
-                                            </div>
-                                            <div class="d-flex justify-content-center mt-4">
-                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
+        {% if groceries %}
+        <div class="row">
+            {% for item in groceries %}
+            {% if item.sub_category == sub_category %}
+            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                <a href="{% url 'grocery:grocery_detail' item.id %}">
+                    <div class="media align-items-center food-card p-3 w-100">
+                        <div class="media-body">
+                            <img class=""
+                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                alt="" style="width: 100%;">
+                            <div class="d-flex justify-content-center mt-2">
+                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                </h4>
                             </div>
-                            {% endif %}
-                            {% endfor %}
+
+                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted">
+                                <center>{{ item.quantity }} {{ item.scale }}</center>
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                </h3>
+                                <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                    20%
+                                    Off</p>
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
+                                </div>
+                            </div>
                         </div>
-                        {% else %}
-                        <p class="lead">No Products</p>
-                        {% endif %}
                     </div>
-                </div>
+                </a>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
+        {% else %}
+        <p class="lead">No Products</p>
         {% endif %}
     </div>
 </div>
