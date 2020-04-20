@@ -80,10 +80,14 @@ def grocery_detail(request, pk=None, *args, **kwargs):
     Detail Page for Groceries
     """
     grocery = get_object_or_404(Grocery, id=pk)
+    groceries = Grocery.objects.filter(active=True, sub_category=grocery.sub_category)
     cart_obj, new_obj = Cart.objects.new_or_get(request)
+    categories = GroceryCategory.objects.filter(active=True)
 
     context = {
+        'grocery': grocery,
         'groceries': groceries,
+        'categories': categories,
         'cart': cart_obj,
         'image': imageUrls,
     }

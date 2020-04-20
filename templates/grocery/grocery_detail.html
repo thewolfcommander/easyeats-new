@@ -1,0 +1,434 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Grocery Sub Category - {{ sub_category.name }} - Home{% endblock title %}
+{% block description %}{% endblock description %}
+{% block authors %}{% endblock authors %}
+{% block keywords %}{% endblock keywords %}
+{% block styles %}{% endblock styles %}
+
+{% block home %}active{% endblock home %}
+
+{% block content %}
+
+<!-- Modal start  here -->
+
+{% include 'includes/modal.html' %}
+
+<!-- Modal ends here -->
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .carousel-cell {
+        width: 40%;
+        height: 100px;
+        padding: 0 10px;
+    }
+
+    .carousel-cell .carousel-image-fli {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* brighten selected image */
+    .carousel-cell.is-selected .carousel-image-fli {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        .carousel-cell {
+            height: 100px;
+        }
+    }
+
+    @media screen and (min-width: 960px) {
+        .carousel-cell {
+            width: 20%;
+        }
+    }
+
+    /* buttons, no circle */
+    .flickity-prev-next-button {
+        width: 30px;
+        height: 30px;
+        background: var(--main);
+        opacity: 0.6;
+    }
+
+    .flickity-prev-next-button:hover {
+        background: var(--main);
+        opacity: 1;
+    }
+
+    /* arrow color */
+    .flickity-prev-next-button .arrow {
+        fill: white;
+    }
+
+    .flickity-prev-next-button.no-svg {
+        color: white;
+    }
+
+    /* closer to edge */
+    .flickity-prev-next-button.previous {
+        left: 0;
+    }
+
+    .flickity-prev-next-button.next {
+        right: 0;
+    }
+
+    /* hide disabled button */
+    .flickity-prev-next-button:disabled {
+        display: none;
+    }
+
+
+    /* Category Wise Grocery Items */
+
+
+    .panel-default>.panel-heading {
+        color: var(--main);
+        background-color: #fff;
+        border-color: #e4e5e7;
+        padding: 0;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .panel-default>.panel-heading a {
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .panel-default>.panel-heading a:after {
+        content: "";
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        float: right;
+        transition: transform .25s linear;
+        -webkit-transition: -webkit-transform .25s linear;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"] {
+        background-color: #fff;
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="true"]:after {
+        content: "\2212";
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .panel-default>.panel-heading a[aria-expanded="false"]:after {
+        content: "\002b";
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+</style>
+
+
+
+
+<!--================Hero Banner Section start =================-->
+<section class="hero-banner">
+    <div class="hero-wrapper">
+        <div class="hero-left">
+            <h1 class="hero-title">{{ grocery.name }}</h1>
+            <div class="d-sm-flex flex-wrap">
+                <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
+                  <div class="input-group mb-3 shadow-lg" style="height: 50px;">
+                    <input type="text" class="form-control w-75" placeholder="Search something awesome..." aria-label="Recipient's username" aria-describedby="basic-addon2"  style="height: 50px;" name="search">
+                    <div class="input-group-append w-25">
+                      <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2" style="background-color: var(--main); color: #fff;"><center>Search</center></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            <ul class="hero-info d-none d-lg-block">
+                <li>
+                    <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
+                    <h4>Fast Service</h4>
+                </li>
+                <li>
+                    <img src="{% static 'img/banner/fresh-food-icon.png' %}" alt="">
+                    <h4>Fresh Food</h4>
+                </li>
+                <li>
+                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
+                        width="35px">
+                    <h4>No Minimum order</h4>
+                </li>
+            </ul>
+        </div>
+        <div class="hero-right">
+            <div class="owl-carousel owl-theme hero-carousel">
+                {% if grocery.groceryimage_set %}
+                {% for image in grocery.groceryimage_set.all %}
+                <div class="hero-carousel-item">
+                    <img class="img-fluid" src="{% if image.image %}{{ image.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="hero-carousel-item">
+                    <img src="http://lorempixel.com/500/250/food/" alt="" class="img-fluid">
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Hero Banner Section end =================-->
+
+
+
+
+
+{% if grocery %}
+<!--================Detail Area =================-->
+<section class="blog_area single-post-area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                <div class="single-post">
+                    <div class="blog_details">
+                        <h2>{{ grocery.name|upper }}</h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#">Added {{ grocery.added|timesince }} ago</a></li>
+                        </ul>
+
+                        {% if cart %}
+                        <div class="quotes-wrapper my-3">
+                            {% include 'grocery/snippets/update-cart.html' with grocery=grocery cart=cart %}
+                        </div>
+                        {% endif %}
+                        <div class="quote-wrapper">
+                                {{ grocery.quantity }} {{ grocery.scale }}
+                        </div>
+                        <p class="excert">
+
+                            {{ food.description }}
+
+                        </p>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <p class="like-info"><span class="align-middle"><i class="ti-heart"></i></span> 4
+                            people love this</p>
+                        <div class="col-sm-4 text-center my-2 my-sm-0">
+                            <p class="comment-count"><span class="align-middle"><i class="ti-comment"></i></span> 06
+                                Comments</p>
+                        </div>
+                        <ul class="social-icons">
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                            <li><a href="#"><i class="ti-dribbble"></i></a></li>
+                            <li><a href="#"><i class="ti-wordpress"></i></a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="comments-area">
+                        {% if reviews %}
+                        <h4>{{ reviews.count }} Reviews</h4>
+                        <div class="comment-list">
+                            {% for review in reviews %}
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb py-2">
+                                        <img src="{% if review.user.profile_photo %}{{ review.user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}" alt="{{ review.user.user_id }}">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            {{ review.comment }}
+                                        </p>
+
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#">{{ review.user.full_name }}</a>
+                                                </h5>
+                                                <p class="date">{{ review.added }} </p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No reviews found for this food</p>
+                        {% endif %}
+                    </div>
+                    <div class="comment-form">
+                        <h4>Leave a Review about {{ food.name }} below</h4>
+                        {% if request.user.is_authenticated %}
+                        <form class="form-contact comment_form" action="#" id="commentForm" method="POST">
+                            {% csrf_token %}
+                            {% include 'includes/form.html' %}
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm">Submit Review</button>
+                            </div>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'accounts:login' %}">Login</a> here to review the dish
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title"><a href="{% url 'grocery:category_detail' grocery.grocery_category.id %}">Category</a></h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="{% url 'grocery:category_detail' grocery.grocery_category.id %}" class="d-flex">
+                                    <p>{{ grocery.grocery_category.name }}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <aside class="single_sidebar_widget post_category_widget">
+                        <h4 class="widget_title"><a href="{% url 'grocery:subcategory_detail' grocery.sub_category.id %}">Sub Category</a></h4>
+                        <ul class="list cat-list">
+                            <li>
+                                <a href="{% url 'grocery:subcategory_detail' grocery.sub_category.id %}" class="d-flex">
+                                    <p class="lead">{{ grocery.sub_category.name }}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">Recommended Items</h3>
+                        <div class="row">
+                        {% if groceries %}
+                            {% for item in groceries %}
+                            {% if item.sub_category == grocery.sub_category %}
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                                <a href="{% url 'grocery:grocery_detail' item.id %}">
+                                    <div class="media align-items-center food-card p-1 w-100">
+                                        <div class="media-body">
+                                            <img class=""
+                                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                alt="" style="width: 100%;">
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                                </h4>
+                                            </div>
+                
+                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted">
+                                                <center>{{ item.quantity }} {{ item.scale }}</center>
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                                </h3>
+                                                <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                    20%
+                                                    Off</p>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                    {% include 'products/snippets/update-cart.html' with food=item cart=cart %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="lead">No Products</p>
+                        {% endif %}
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">Tag Clouds</h4>
+                        {% if tags %}
+                        <ul class="list">
+                            {% for tag in tags %}
+                            <li>
+                                <a href="{% url 'core:search' %}?search={{ tag.name }}">{{ tag.name }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Detail Area =================-->
+{% else %}
+<div class="row justify-content-center">
+    <p class="lead">No food found. Maybe you are facing some issue. Kindly <a href="{% url 'core:report' %}"
+            class="button"> Report the issue</a> in order to get the proper assistance.</p>
+</div>
+{% endif %}
+
+
+
+
+<!--================Categories Section Start =================-->
+<div class="container mt-5">
+    <div class="section-intro">
+        <h4 class="intro-title">Explore the categories in Grocery Items</h4>
+    </div>
+    {% if categories %}
+    <div class="carousel js-flickity"
+        data-flickity='{"pageDots": false, "groupCells": 2, "wrapAround": true, "autoPlay": true }'>
+        {% for category in categories %}
+        <div class="carousel-cell">
+            <div class="chef-card">
+                <a href="">
+                    <img class="carousel-image-fli"
+                        src="{% if category.image %}{{ category.image.url }}{% else %}https://images.pexels.com/photos/1831825/pexels-photo-1831825.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                        alt="" /></a>
+                <div class="chef-overlay justify-content-center">
+                    <center>
+                        <p class="text-light">{{ category.name }}</p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead">Sorry, no categories found</p>
+    {% endif %}
+</div>
+<!--================Categories Section End =================-->
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
