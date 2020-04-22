@@ -1,0 +1,29 @@
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        opacity: 1!important;
+    }
+
+    input[type=number]:focus {
+        outline: none;
+    }
+</style>
+
+<form action="{% url 'cart:add' %}" class="form-product-ajax" method="post" data-endpoint="{% url 'cart:add' %}"
+    class="form" {% if request.user.is_authenticated %}data-user='abc' {% endif %}>
+    {% csrf_token %}
+    <input type="hidden" name="food_id" value='{{ food.id }}'>
+
+    <span class="submit-span">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button class="btn-sm button rounded-0 px-2" type="submit"><i class="ti-plus"></i></button>
+            </div>
+            <input type="number" id="tentacles" name="food_quantity" min="1" max="100" value="1" style="padding: 0 7px; border: 2px solid var(--main); font-weight: bolder; color: var(--main);">
+        </div>
+    </span>
+</form>
+
+<script>
+
+</script>

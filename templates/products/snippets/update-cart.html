@@ -2,11 +2,17 @@
     {% csrf_token %}
     <input type="hidden" name="food_id" value='{{ food.id }}'>
         <span class="submit-span">
-            {% if food in cart.foods.all %}
+            {% if cart.foods.count == 0 %}
+            <button class="btn-sm button rounded-1 px-4" type="submit">Add</button>
+            {% else %}
+            {% for entry in cart.foods.all %}
+            {% if food.id == entry.food.id %}
             <div class="btn-group"><button type="submit" class="bg-warning button btn-sm rounded-1 px-4">Remove</button></div>
             {% else %}
-            <!-- <input type="number" name="quantity" value="1" class="my-2"> -->
             <button class="btn-sm button rounded-1 px-4" type="submit">Add</button>
+            {% endif %}
+            {% endfor %}
+            <!-- <input type="number" name="quantity" value="1" class="my-2"> -->
             {% endif %}
         </span>
 </form>

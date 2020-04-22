@@ -13,57 +13,55 @@
 
 <!--================Hero Banner Section start =================-->
 <section class="hero-banner">
-    <div class="hero-wrapper">
-        <div class="hero-left">
-            <h1 class="hero-title">Enjoy the <br> best food near you</h1>
-            <div class="d-sm-flex flex-wrap">
-                <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
-                    <div class="input-group mb-3 shadow-lg" style="height: 50px;">
-                        <input type="text" class="form-control w-75" placeholder="Search something awesome..."
-                            aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;"
-                            name="search">
-                        <div class="input-group-append w-25">
-                            <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
-                                style="background-color: var(--main); color: #fff;">
-                                <center>Search</center>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+  <div class="hero-wrapper">
+    <div class="hero-left">
+      <h1 class="hero-title">Enjoy the <br> best food near you</h1>
+      <div class="d-sm-flex flex-wrap">
+        <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
+          <div class="input-group mb-3 shadow-lg" style="height: 50px;">
+            <input type="text" class="form-control w-75" placeholder="Search something awesome..."
+              aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;" name="search">
+            <div class="input-group-append w-25">
+              <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+                style="background-color: var(--main); color: #fff;">
+                <center>Search</center>
+              </button>
             </div>
-            <ul class="hero-info d-none d-lg-block">
-                <li>
-                    <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
-                    <h4>Fast Service</h4>
-                </li>
-                <li>
-                    <img src="{% static 'img/banner/fresh-food-icon.png' %}" alt="">
-                    <h4>Fresh Food</h4>
-                </li>
-                <li>
-                    <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt=""
-                        width="35px">
-                    <h4>No Minimum order</h4>
-                </li>
-            </ul>
-        </div>
-        <div class="hero-right">
-            <div class="owl-carousel owl-theme hero-carousel">
-                <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{% static 'img/banner/hero-banner1.png' %}" alt="">
-                </div>
-                <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{% static 'img/banner/hero-banner2.png' %}" alt="">
-                </div>
-                <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{% static 'img/banner/hero-banner1.png' %}" alt="">
-                </div>
-                <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{% static 'img/banner/hero-banner2.png' %}" alt="">
-                </div>
-            </div>
-        </div>
+          </div>
+        </form>
+      </div>
+      <ul class="hero-info d-none d-lg-block">
+        <li>
+          <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
+          <h4>Fast Service</h4>
+        </li>
+        <li>
+          <img src="{% static 'img/banner/fresh-food-icon.png' %}" alt="">
+          <h4>Fresh Food</h4>
+        </li>
+        <li>
+          <img src="https://i.pinimg.com/originals/fd/80/ec/fd80ecec48eba2a9adb76e4133905879.png" alt="" width="35px">
+          <h4>No Minimum order</h4>
+        </li>
+      </ul>
     </div>
+    <div class="hero-right">
+      <div class="owl-carousel owl-theme hero-carousel">
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="{% static 'img/banner/hero-banner1.png' %}" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="{% static 'img/banner/hero-banner2.png' %}" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="{% static 'img/banner/hero-banner1.png' %}" alt="">
+        </div>
+        <div class="hero-carousel-item">
+          <img class="img-fluid" src="{% static 'img/banner/hero-banner2.png' %}" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!--================Hero Banner Section end =================-->
 
@@ -81,24 +79,25 @@
     {% if featured_foods %}
     <div class="owl-carousel owl-theme featured-carousel">
       {% for item in featured_foods %}
-      <div class="col-lg-12 col-12 col-sm-12 col-md-12 px-3">
+      <div class="col-lg-12 col-12 col-sm-12 col-md-12 p-0">
         <a href="{% url 'products:food_detail' item.id %}">
-          <div class="media align-items-center food-card mx-0">
-            <img class="mr-3 mr-sm-4"
-              src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt="" style="width: 80px!important;">
+          <div class="media align-items-center food-card p-3 w-100">
             <div class="media-body">
-              <div class="d-flex justify-content-between food-card-title">
+              <img class=""
+                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                alt="" style="width: 100%;">
+              <div class="d-flex justify-content-center mt-2">
                 <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
                 </h4>
               </div>
 
-              <p style="font-size: 11px">{{ item.restaurant.name }}</p>
-              <h3 class="price-tag" style="font-size: 14px;"><strike
+              <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
+              <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
                   style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
               </h3>
-              <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
-              <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
+              <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20% Off</p>
+              <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
             </div>
           </div>
         </a>
@@ -115,67 +114,68 @@
 
 <!--================Food menu section start =================-->
 <section class="section-margin">
-    <div class="container">
-        <div class="section-intro mb-75px">
-            <h4 class="intro-title">Food Menu</h4>
-            <h2>Delicious food</h2>
-        </div>
-        {% if foods %}
-        <div class="row">
-            {% for item in foods %}
-            <div class="col-lg-4 col-12 col-sm-12 col-md-6 p-0">
-                <a href="{% url 'products:food_detail' item.id %}">
-                  <div class="media align-items-center food-card mx-0">
-                    <img class="mr-3 mr-sm-4"
-                      src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                      alt="" style="width: 80px!important;">
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between food-card-title">
-                        <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                        </h4>
-                      </div>
-        
-                      <p style="font-size: 11px">{{ item.restaurant.name }}</p>
-                      <h3 class="price-tag" style="font-size: 14px;"><strike
-                          style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                      </h3>
-                      <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
-                      <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            {% endfor %}
-        </div>
-        <hr>
-
-        {% if foods.has_other_pages %}
-        <ul class="pagination justify-content-center mt-5">
-            {% if foods.has_previous %}
-            <li class="page-item"><a href="?page={{ foods.previous_page_number }}" class="page-link">&laquo;</a></li>
-            {% else %}
-            <li class="page-item disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in foods.paginator.page_range %}
-            {% if foods.number == i %}
-            <li class="btn"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if foods.has_next %}
-            <li class="page-item"><a href="?page={{ foods.next_page_number }}" class="page-link">&raquo;</a></li>
-            {% else %}
-            <li class="page-item disabled"><span>&raquo;</span></li>
-            {% endif %}
-        </ul>
-        {% endif %}
-
-
-        {% else %}
-        <p class="lead">No Products found</p>
-        {% endif %}
+  <div class="container">
+    <div class="section-intro mb-75px">
+      <h4 class="intro-title">Food Menu</h4>
+      <h2>Delicious food</h2>
     </div>
+    {% if foods %}
+    <div class="row">
+      {% for item in foods %}
+      <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+        <a href="{% url 'products:food_detail' item.id %}">
+          <div class="media align-items-center food-card p-3 w-100">
+            <div class="media-body">
+              <img class=""
+                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                alt="" style="width: 100%;">
+              <div class="d-flex justify-content-center mt-2">
+                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                </h4>
+              </div>
+
+              <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
+              <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                  style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+              </h3>
+              <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20% Off</p>
+              <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <hr>
+
+    {% if foods.has_other_pages %}
+    <ul class="pagination justify-content-center mt-5">
+      {% if foods.has_previous %}
+      <li class="page-item"><a href="?page={{ foods.previous_page_number }}" class="page-link">&laquo;</a></li>
+      {% else %}
+      <li class="page-item disabled"><span>&laquo;</span></li>
+      {% endif %}
+      {% for i in foods.paginator.page_range %}
+      {% if foods.number == i %}
+      <li class="btn"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+      <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+      {% endif %}
+      {% endfor %}
+      {% if foods.has_next %}
+      <li class="page-item"><a href="?page={{ foods.next_page_number }}" class="page-link">&raquo;</a></li>
+      {% else %}
+      <li class="page-item disabled"><span>&raquo;</span></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+
+
+    {% else %}
+    <p class="lead">No Products found</p>
+    {% endif %}
+  </div>
 </section>
 <!--================Food menu section end =================-->
 

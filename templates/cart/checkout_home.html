@@ -55,8 +55,8 @@
                 <table class="table">
                     <thead class="" style="background: var(--main)!important; color: #fff;">
                         <tr>
-                            <th scope="col" class="col-md-2" style="min-width: 120px!important;"></th>
-                            <th scope="col" class="col-md-1">Value</th>
+                            <th scope="col" class="col-md-2" style="min-width: 80px!important;"></th>
+                            <th scope="col" class="col-md-8" style="min-width: 240px!important;">Value</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,47 +103,54 @@
                     <thead class="" style="background: var(--main)!important; color: #fff;">
                         <tr>
                             <th scope="col" class="col-md-7" style="min-width: 250px!important;">Item Name</th>
-                            <th scope="col" class="col-md-2 col-sm-12" style="min-width: 100px!important;" >Price</th>
+                            <th scope="col" class="col-md-2 col-sm-12" style="min-width: 100px!important;">Price</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for item in cart.foods.all %}
                         <tr>
-                            <td><a href="{% url 'products:food_detail' item.id %}">
-                                    <p class="lead"><strong>{{ item.name }}</strong></p>
+                            <td><a href="{% url 'products:food_detail' item.food.id %}">
+                                    <p class="lead"><strong>{{ item.food.name }}</strong></p>
                                 </a>
-                                <small>{{ item.summary }}</small><br>
-                                {% include 'products/snippets/update-cart.html' with cart=cart food=item %}
+                                <small>{{ item.food.summary }}</small><br>
+                                {% include 'products/snippets/add-to-cart.html' with cart=cart food=item.food %}
+                                <div style="margin: 5px 0;"></div>
+                                {% include 'products/snippets/remove-from-cart.html' with cart=cart food=item.food %}
                             </td>
-                            <td>Rs. {{ item.discount_price }}</td>
+                            <td>{{ item.quantity }} x Rs. {{ item.food.discount_price }} = {{ item.cost }}</td>
                         </tr>
                         {% endfor %}
                         {% for item in cart.groceries.all %}
                         <tr>
-                            <td><a href="{% url 'grocery:grocery_detail' item.id %}">
-                                    <p class="lead"><strong>{{ item.name }}</strong></p>
+                            <td><a href="{% url 'products:grocery_detail' item.grocery.id %}">
+                                    <p class="lead"><strong>{{ item.grocery.name }}</strong></p>
                                 </a>
-                                <small>{{ item.quantity }} {{ item.scale }}</small><br>
-                                {% include 'grocery/snippets/update-cart.html' with cart=cart grocery=item %}
+                                <small>{{ item.grocery.quantity }} {{ item.grocery.scale }}</small><br>
+                                {% include 'grocery/snippets/add-to-cart.html' with cart=cart grocery=item.grocery %}
+                                <div style="margin: 5px 0;"></div>
+                                {% include 'grocery/snippets/remove-from-cart.html' with cart=cart grocery=item.grocery %}
                             </td>
-                            <td>Rs. {{ item.discount_price }}</td>
+                            <td>{{ item.quantity }} x Rs. {{ item.grocery.discount_price }} = {{ item.cost }}</td>
                         </tr>
                         {% endfor %}
                         <tr>
                             <th>Sub Total</th>
-                            <th>{{ cart.sub_total }}</th>
+                            <th>{% if cart.foods.count == 0 and cart.groceries.count == 0 %}0.00{% else %}{{ cart.sub_total }}{% endif %}</th>
                         </tr>
                         <tr>
                             <th>Shipping Charges</th>
-                            <th>{% if request.user.is_authenticated %}{% if request.user.order_count != 0 %}{{ cart.shipping }}{% else %}<span style="color: var(--main);">(Reduced)</span> {{cart.shipping}} {% endif %}{% else %}{{ cart.shipping{% endif %}</th>
+                            <th>{% if cart.foods.count == 0 and cart.groceries.count == 0 %}0.00{% else %}{% if request.user.is_authenticated %}{% if request.user.order_count != 0 %}{{ cart.shipping }}{% else %}<span
+                                    style="color: var(--main);">(Reduced)</span> {{cart.shipping}}
+                                {% endif %}{% else %}{{ cart.shipping{% endif %}{% endif %}</th>
                         </tr>
                         <tr>
                             <th>Discount (If Any)</th>
-                            <th>{% if request.user.is_authenticated %}{% if request.user.order_count == 0 %}{{ cart.shipping }}{% else %}0.00{% endif %}{% else %}0.00{% endif %}</th>
+                            <th>{% if cart.foods.count == 0 and cart.groceries.count == 0 %}0.00{% else %}{% if request.user.is_authenticated %}{% if request.user.order_count == 0 %}{{ cart.shipping }}{% else %}0.00{% endif %}{% else %}0.00{% endif %}{% endif %}
+                            </th>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <th>{{ cart.total }}</th>
+                            <th>{% if cart.foods.count == 0 and cart.groceries.count == 0 %}0.00{% else %}{{ cart.total }}{% endif %}</th>
                         </tr>
                     </tbody>
                 </table>

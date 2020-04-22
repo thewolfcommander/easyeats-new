@@ -18,14 +18,19 @@
             <h1 class="hero-title">{{ restaurant.name }}</h1>
             <div class="d-sm-flex flex-wrap">
                 <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
-                  <div class="input-group mb-3 shadow-lg" style="height: 50px;">
-                    <input type="text" class="form-control w-75" placeholder="Search something awesome..." aria-label="Recipient's username" aria-describedby="basic-addon2"  style="height: 50px;" name="search">
-                    <div class="input-group-append w-25">
-                      <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2" style="background-color: var(--main); color: #fff;"><center>Search</center></button>
+                    <div class="input-group mb-3 shadow-lg" style="height: 50px;">
+                        <input type="text" class="form-control w-75" placeholder="Search something awesome..."
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;"
+                            name="search">
+                        <div class="input-group-append w-25">
+                            <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+                                style="background-color: var(--main); color: #fff;">
+                                <center>Search</center>
+                            </button>
+                        </div>
                     </div>
-                  </div>
                 </form>
-              </div>
+            </div>
             <ul class="hero-info d-none d-lg-block">
                 <li>
                     <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
@@ -52,7 +57,8 @@
                 {% endfor %}
                 {% else %}
                 <div class="hero-carousel-item">
-                    <img src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="img-fluid">
+                    <img src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        alt="" class="img-fluid">
                 </div>
                 {% endif %}
             </div>
@@ -74,12 +80,15 @@
                         {% if restaurant.restaurantimage_set %}
                         {% for item in restaurant.restaurantimage_set.all %}
                         <div class="hero-carousel-item">
-                            <img class="img-fluid" src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+                            <img class="img-fluid"
+                                src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                alt="">
                         </div>
                         {% endfor %}
                         {% else %}
                         <div class="hero-carousel-item">
-                            <img src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="img-fluid">
+                            <img src="https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="" class="img-fluid">
                         </div>
                         {% endif %}
                     </div>
@@ -108,28 +117,33 @@
                             <p class="lead">Top Dishes</p>
                             <div class="row">
                                 {% for item in foods %}
-                                <div class="col-lg-4 col-12 col-sm-12 col-md-6 p-0">
+                                <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
                                     <a href="{% url 'products:food_detail' item.id %}">
-                                      <div class="media align-items-center food-card mx-0">
-                                        <img class="mr-3 mr-sm-4"
-                                          src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                          alt="" style="width: 80px!important;">
-                                        <div class="media-body">
-                                          <div class="d-flex justify-content-between food-card-title">
-                                            <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                                            </h4>
-                                          </div>
-                            
-                                          <p style="font-size: 11px">{{ item.restaurant.name }}</p>
-                                          <h3 class="price-tag" style="font-size: 14px;"><strike
-                                              style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                                          </h3>
-                                          <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
-                                          <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
+                                        <div class="media align-items-center food-card p-3 w-100">
+                                            <div class="media-body">
+                                                <img class=""
+                                                    src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                    alt="" style="width: 100%;">
+                                                <div class="d-flex justify-content-center mt-2">
+                                                    <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                                    </h4>
+                                                </div>
+
+                                                <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}
+                                                </p>
+                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                                </h3>
+                                                <p class="lead"
+                                                    style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                    20% Off</p>
+                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                    {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
                                     </a>
-                                  </div>
+                                </div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -217,44 +231,46 @@
 
 <!--================Featured Section Start =================-->
 <section class="section-margin mb-lg-0 mb-md-0"
-  style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
-  <div class="container">
-    <div class="section-intro">
-      <h4 class="intro-title">Featured Items</h4>
-      <h2>Fresh taste at great price</h2>
-    </div>
+    style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
+    <div class="container">
+        <div class="section-intro">
+            <h4 class="intro-title">Featured Items</h4>
+            <h2>Fresh taste at great price</h2>
+        </div>
 
-    {% if featured_foods %}
-    <div class="owl-carousel owl-theme featured-carousel">
-      {% for item in featured_foods %}
-      <div class="col-lg-12 col-12 col-sm-12 col-md-12 px-3">
-        <a href="{% url 'products:food_detail' item.id %}">
-          <div class="media align-items-center food-card mx-0">
-            <img class="mr-3 mr-sm-4"
-              src="{% if foodimage_ser.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-              alt="" style="width: 80px!important;">
-            <div class="media-body">
-              <div class="d-flex justify-content-between food-card-title">
-                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                </h4>
-              </div>
+        {% if featured_foods %}
+        <div class="owl-carousel owl-theme featured-carousel">
+            {% for item in featured_foods %}
+            <div class="col-lg-12 col-12 col-sm-12 col-md-12 p-0">
+                <a href="{% url 'products:food_detail' item.id %}">
+                    <div class="media align-items-center food-card p-3 w-100">
+                        <div class="media-body">
+                            <img class=""
+                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                alt="" style="width: 100%;">
+                            <div class="d-flex justify-content-center mt-2">
+                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                                </h4>
+                            </div>
 
-              <p style="font-size: 11px">{{ item.restaurant.name }}</p>
-              <h3 class="price-tag" style="font-size: 14px;"><strike
-                  style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-              </h3>
-              <p class="lead" style="color: orangered; font-size: 12px; float: left;">20% Off</p>
-              <div style="float: right; margin-top: -20px">{% include 'products/snippets/update-cart.html' with food=item cart=cart %}</div>
+                            <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
+                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                            </h3>
+                            <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20%
+                                Off</p>
+                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
-        </a>
-      </div>
-      {% endfor %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">No food items found</p>
+        {% endif %}
     </div>
-    {% else %}
-    <p class="lead">No food items found</p>
-    {% endif %}
-  </div>
 </section>
 <!--================Featured Section End =================-->
 
