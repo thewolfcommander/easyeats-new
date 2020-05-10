@@ -193,9 +193,11 @@
                                 <a href="{% url 'grocery:grocery_detail' item.id %}">
                                     <div class="media align-items-center food-card p-3 w-100">
                                         <div class="media-body">
-                                            <img class=""
+                                            <center>
+                                                <img class=""
                                                 src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                alt="" style="width: 100%;">
+                                                alt="" style="height: 120px">
+                                            </center>
                                             <div class="d-flex justify-content-center mt-2">
                                                 <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
                                                 </h4>
