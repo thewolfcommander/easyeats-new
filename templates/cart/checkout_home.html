@@ -141,7 +141,7 @@
                             <th>Shipping Charges</th>
                             <th>{% if cart.foods.count == 0 and cart.groceries.count == 0 %}0.00{% else %}{% if request.user.is_authenticated %}{% if request.user.order_count != 0 %}{{ cart.shipping }}{% else %}<span
                                     style="color: var(--main);">(Reduced)</span> {{cart.shipping}}
-                                {% endif %}{% else %}{{ cart.shipping{% endif %}{% endif %}</th>
+                                {% endif %}{% else %}{{ cart.shipping }}{% endif %}{% endif %}</th>
                         </tr>
                         <tr>
                             <th>Discount (If Any)</th>
