@@ -9,14 +9,14 @@
         <div class="modal-header">
   
   
-          <center><h4 class="modal-title" style="color: var(--main);">Greatest Deal Ever</h4></center>
+          <center><h4 class="modal-title" style="color: var(--main);">Get Groceries now</h4></center>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="float: right!important;">&times;</button>
         </div>
   
         <div class="modal-body">
             <center><img src="{% static 'svg/8.svg' %}" alt="" width="100%"></center>
-          <center><p>Get minimum 20% off on every order upto 30th April. Get Free delivery on your first order</p></center>
-          <center><a href="{% url 'products:menu' %}" class="button">Grab Now</a></center>
+          <center><p>Get super fast delivery during this lockdown.</p></center>
+          <center><a href="{% url 'grocery:home' %}" class="button">Grab Now</a></center>
         </div>
         {% else %}
   

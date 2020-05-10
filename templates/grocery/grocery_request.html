@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Request for Grocery on EasyEats
+{% endblock title %}
+
+{% block styles_custom %}
+
+<style>
+	
+</style>
+
+{% endblock styles_custom %}
+
+{% block content %}
+<div class="container-fluid c-shadow-medium-s c-content-back c-margin-top-resp pt-5" style="">
+	<div class="row justify-content-center">
+		<div class="col-lg-4 col-md-6 col-sm-12">
+			<div class="card shadow mb-3">
+				<div class="card-body">
+					<h3 class="card-title">Request a grocery product</h3>
+					<form method="post">
+						{% csrf_token %}
+						{% include 'includes/form.html' %}
+						<center><button type="submit" class="button button-hero button-shadow">Send Request</button></center>
+					</form>
+				</div>
+				{% if not request.user.is_authenticated %}
+				<div class="card-footer text-muted text-center c-shadow-small-s">
+					Don't have an account until now? <a href="{% url 'accounts:signup' %}" class="c-text-inverted" style="text-decoration: none;">Register Here</a>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}

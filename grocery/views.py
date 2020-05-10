@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
 from cart.models import Cart
 from grocery.models import Grocery, GroceryCategory, GrocerySubCategory
+from grocery.forms import GroceryRequestForm
 
 from easyeats.utils import imageUrls
 
@@ -92,3 +93,18 @@ def grocery_detail(request, pk=None, *args, **kwargs):
         'image': imageUrls,
     }
     return render(request, 'grocery/grocery_detail.html', context)
+
+
+def grocery_request(request):
+    """
+    Request View for Groceries
+    """
+    if request.method == 'POST':
+        form = GroceryRequestForm(request.POST)
+        if form.is_valid():
+            req = form.save(commit=False)
+            req.save()
+            return redirect("grocery:home")
+    else:
+        form = GroceryRequestForm()
+    return render(request, 'grocery/grocery_request.html', {'form': form})

@@ -1,6 +1,14 @@
 from django.contrib import admin
 
-from .models import Grocery, GroceryCategory, GroceryImage, GroceryReview, GroceryTag, GrocerySubCategory
+from .models import (
+    Grocery, 
+    GroceryCategory, 
+    GroceryImage, 
+    GroceryReview, 
+    GroceryTag, 
+    GrocerySubCategory,
+    GroceryRequest
+)
 
 class GroceryImageInline(admin.TabularInline):
     model = GroceryImage
@@ -43,3 +51,11 @@ class GrocerySubCategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'active', 'updated', 'category']
     list_filter = ['active', 'added', 'updated']
     search_fields = ['name',]
+
+
+@admin.register(GroceryRequest)
+class GroceryRequestAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'phone_number', 'fullfilled', 'added', 'updated']
+    list_filter = ['fullfilled', 'added', 'updated']
+    list_display_links = ['id', 'name']
+    search_fields = ['name', 'info']
