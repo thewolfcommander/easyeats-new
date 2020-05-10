@@ -156,14 +156,19 @@
             <h1 class="hero-title">{{ grocery.name }}</h1>
             <div class="d-sm-flex flex-wrap">
                 <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
-                  <div class="input-group mb-3 shadow-lg" style="height: 50px;">
-                    <input type="text" class="form-control w-75" placeholder="Search something awesome..." aria-label="Recipient's username" aria-describedby="basic-addon2"  style="height: 50px;" name="search">
-                    <div class="input-group-append w-25">
-                      <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2" style="background-color: var(--main); color: #fff;"><center>Search</center></button>
+                    <div class="input-group mb-3 shadow-lg" style="height: 50px;">
+                        <input type="text" class="form-control w-75" placeholder="Search something awesome..."
+                            aria-label="Recipient's username" aria-describedby="basic-addon2" style="height: 50px;"
+                            name="search">
+                        <div class="input-group-append w-25">
+                            <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2"
+                                style="background-color: var(--main); color: #fff;">
+                                <center>Search</center>
+                            </button>
+                        </div>
                     </div>
-                  </div>
                 </form>
-              </div>
+            </div>
             <ul class="hero-info d-none d-lg-block">
                 <li>
                     <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
@@ -185,7 +190,9 @@
                 {% if grocery.groceryimage_set %}
                 {% for image in grocery.groceryimage_set.all %}
                 <div class="hero-carousel-item">
-                    <img class="img-fluid" src="{% if image.image %}{{ image.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}" alt="">
+                    <img class="img-fluid"
+                        src="{% if image.image %}{{ image.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                        alt="">
                 </div>
                 {% endfor %}
                 {% else %}
@@ -222,7 +229,7 @@
                         </div>
                         {% endif %}
                         <div class="quote-wrapper">
-                                {{ grocery.quantity }} {{ grocery.scale }}
+                            {{ grocery.quantity }} {{ grocery.scale }}
                         </div>
                         <p class="excert">
 
@@ -256,7 +263,8 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb py-2">
-                                        <img src="{% if review.user.profile_photo %}{{ review.user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}" alt="{{ review.user.user_id }}">
+                                        <img src="{% if review.user.profile_photo %}{{ review.user.profile_photo.url }}{% else %}https://cdn.iconscout.com/icon/free/png-512/avatar-370-456322.png{% endif %}"
+                                            alt="{{ review.user.user_id }}">
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
@@ -302,10 +310,12 @@
                 <div class="blog_right_sidebar">
 
                     <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title"><a href="{% url 'grocery:category_detail' grocery.grocery_category.id %}">Category</a></h4>
+                        <h4 class="widget_title"><a
+                                href="{% url 'grocery:category_detail' grocery.grocery_category.id %}">Category</a></h4>
                         <ul class="list cat-list">
                             <li>
-                                <a href="{% url 'grocery:category_detail' grocery.grocery_category.id %}" class="d-flex">
+                                <a href="{% url 'grocery:category_detail' grocery.grocery_category.id %}"
+                                    class="d-flex">
                                     <p>{{ grocery.grocery_category.name }}</p>
                                 </a>
                             </li>
@@ -313,7 +323,9 @@
                     </aside>
 
                     <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title"><a href="{% url 'grocery:subcategory_detail' grocery.sub_category.id %}">Sub Category</a></h4>
+                        <h4 class="widget_title"><a
+                                href="{% url 'grocery:subcategory_detail' grocery.sub_category.id %}">Sub Category</a>
+                        </h4>
                         <ul class="list cat-list">
                             <li>
                                 <a href="{% url 'grocery:subcategory_detail' grocery.sub_category.id %}" class="d-flex">
@@ -326,42 +338,46 @@
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Recommended Items</h3>
                         <div class="row">
-                        {% if groceries %}
+                            {% if groceries %}
                             {% for item in groceries %}
                             {% if item.sub_category == grocery.sub_category %}
                             <div class="col-lg-6 col-6 col-sm-6 col-md-6 p-0">
-                                <a href="{% url 'grocery:grocery_detail' item.id %}">
-                                    <div class="media align-items-center food-card p-1 w-100">
-                                        <div class="media-body">
-                                            <center>
+
+                                <div class="media align-items-center food-card p-1 w-100">
+                                    <div class="media-body">
+                                        <center>
+                                            <a href="{% url 'grocery:grocery_detail' item.id %}">
                                                 <img class=""
-                                                src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                alt="" style="height: 120px">
-                                            </center>
-                                            <div class="d-flex justify-content-center mt-2">
+                                                    src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                    alt="" style="height: 120px">
+                                            </a>
+                                        </center>
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <a href="{% url 'grocery:grocery_detail' item.id %}">
                                                 <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
                                                 </h4>
-                                            </div>
-                
-                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted">
-                                                <center>{{ item.quantity }} {{ item.scale }}</center>
-                                            </p>
-                                            <div class="d-flex justify-content-between">
-                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
-                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                                                </h3>
-                                                <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
-                                                    20%
-                                                    Off</p>
-                                            </div>
-                                            <div class="d-flex justify-content-center mt-4">
-                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                                    {% include 'grocery/snippets/add-to-cart.html' with grocery=item cart=cart %}
-                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <p style="font-size: 11px;  margin: 0 6px;" class="text-muted">
+                                            <center>{{ item.quantity }} {{ item.scale }}</center>
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                            </h3>
+                                            <p class="lead"
+                                                style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                20%
+                                                Off</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                {% include 'grocery/snippets/add-to-cart.html' with grocery=item cart=cart %}
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                             {% endif %}
                             {% endfor %}

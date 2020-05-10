@@ -253,9 +253,9 @@
             {% for sub_category in sub_categories %}
             <div class="panel panel-default border border-danger rounded-1 border-1 shadow shadow-sm mt-2">
                 <div class="panel-heading px-4" role="tab" id="sub-heading-{{ forloop.counter }}">
-                    
+
                     <h5 class="panel-title">
-                        
+
                         <a role="button" data-toggle="collapse" data-parent="#accordion"
                             href="#sub-collapse-{{ forloop.counter }}" aria-expanded="true"
                             aria-controls="sub-collapse-{{ forloop.counter }}" style="color: var(--main)!important;">
@@ -276,37 +276,40 @@
                             {% for item in groceries %}
                             {% if item.sub_category == sub_category %}
                             <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
-                                <a href="{% url 'grocery:grocery_detail' item.id %}">
-                                    <div class="media align-items-center food-card p-3 w-100">
-                                        <div class="media-body">
-                                            <center>
+                                <div class="media align-items-center food-card p-3 w-100">
+                                    <div class="media-body">
+                                        <center>
+                                            <a href="{% url 'grocery:grocery_detail' item.id %}">
                                                 <img class=""
-                                                src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                alt="" style="height: 120px">
-                                            </center>
-                                            <div class="d-flex justify-content-center mt-2">
+                                                    src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                    alt="" style="height: 120px"></a>
+                                        </center>
+                                        <div class="d-flex justify-content-center mt-2">
+                                            <a href="{% url 'grocery:grocery_detail' item.id %}">
                                                 <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
                                                 </h4>
-                                            </div>
+                                            </a>
+                                        </div>
 
-                                            <p style="font-size: 11px;  margin: 0 6px;" class="text-muted"><center>{{ item.quantity }} {{ item.scale }}</center></p>
-                                            <div class="d-flex justify-content-between">
-                                                <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
-                                                        style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                                                </h3>
-                                                <p class="lead"
-                                                    style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
-                                                    20%
-                                                    Off</p>
-                                            </div>
-                                            <div class="d-flex justify-content-center mt-4">
-                                                <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                                    {% include 'grocery/snippets/add-to-cart.html' with grocery=item cart=cart %}
-                                                </div>
+                                        <p style="font-size: 11px;  margin: 0 6px;" class="text-muted">
+                                            <center>{{ item.quantity }} {{ item.scale }}</center>
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+                                            </h3>
+                                            <p class="lead"
+                                                style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">
+                                                20%
+                                                Off</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                                                {% include 'grocery/snippets/add-to-cart.html' with grocery=item cart=cart %}
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -362,8 +365,8 @@
                                         <div class="media-body">
                                             <center>
                                                 <img class=""
-                                                src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                alt="" style="height: 120px">
+                                                    src="{% if item.image %}{{ item.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+                                                    alt="" style="height: 120px">
                                             </center>
                                             <div class="d-flex justify-content-center mt-2">
                                                 <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
@@ -372,7 +375,8 @@
 
                                             <div class="d-flex justify-content-center mt-4">
                                                 <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                                    <a href="{% url 'grocery:subcategory_detail' item.id %}" class="btn btn-sm button">See Products</a>
+                                                    <a href="{% url 'grocery:subcategory_detail' item.id %}"
+                                                        class="btn btn-sm button">See Products</a>
                                                 </div>
                                             </div>
                                         </div>
