@@ -47,6 +47,8 @@ class Grocery(models.Model):
     SCALE_CHOICES = [
         ('gram', 'Gram'),
         ('kg', 'Kilogram'),
+        ('ml', 'MiliLitre'),
+        ('l', 'Litre')
     ]
     grocery_category = models.ForeignKey(GroceryCategory, on_delete=models.CASCADE, default=1)
     sub_category = models.ForeignKey(GrocerySubCategory, on_delete=models.CASCADE, default=1)
