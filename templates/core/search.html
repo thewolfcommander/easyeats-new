@@ -44,12 +44,10 @@
     <div class="row justify-content-center">
       <div class="col-md-6 col-sm-12">
         <form action="{% url 'core:search' %}?search={{ query}}" method="GET">
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <center>
-                <input type="text" class="form-control" style="max-width: 90%;" value="{{ query }}" name="search"
+          <div class="form-group row justify-content-center mt-5">
+            <div class="input-group mb-3 px-3" style="max-width: 400px;">
+                <input type="text" class="form-control" value="{{ query }}" name="search"
                 placeholder="Search Awesome foods here">
-              </center>
             </div>
           </div>
           <center>
