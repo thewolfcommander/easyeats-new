@@ -61,12 +61,13 @@ def search(request):
             foods = paginator.page(paginator.num_pages)
         f_count =foods_list.count()
         r_count = restaurants.count()
+        g_count = grocery_list.count()
         context = {
             'query': query,
             'restaurants': restaurants,
             'featured_foods': featured_foods,
             'foods': foods,
-            'count': int(f_count) + int(r_count), 
+            'count': int(f_count) + int(r_count) + int(g_count), 
             'cart': cart_obj,
             'image': imageUrls,
             'groceries': grocery_list
