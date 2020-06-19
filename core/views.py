@@ -23,6 +23,9 @@ from products.models import (
     RestaurantImage,
     FoodImage
 )
+
+from grocery.models import Grocery
+
 from easyeats.utils import imageUrls
 
 def search(request):
@@ -40,6 +43,11 @@ def search(request):
             Q(foodtag__name__icontains=query) |
             Q(restaurant__name__icontains=query) |
             Q(restaurant__city__icontains=query)
+        )
+        grocery_list = Grocery.objects.filter(
+            Q(name__icontains=query) |
+            Q(grocery_category__name__icontains=query) |
+            Q(sub_category__name__icontains=query)
         )
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         page = request.GET.get('page', 1)
@@ -61,6 +69,7 @@ def search(request):
             'count': int(f_count) + int(r_count), 
             'cart': cart_obj,
             'image': imageUrls,
+            'groceries': grocery_list
         }
     return render(request, 'core/search.html', context)
 
