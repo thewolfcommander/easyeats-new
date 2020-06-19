@@ -198,7 +198,7 @@
                                             <a href="{% url 'grocery:grocery_detail' item.id %}">
                                                 <img class=""
                                                     src="{% if item.groceryimage_set.first.image %}{{ item.groceryimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                                    alt="" style="height: 120px">
+                                                    alt="" style="height: 120px; max-width: 200px">
                                             </a>
                                         </center>
                                         <div class="d-flex justify-content-center mt-2">
