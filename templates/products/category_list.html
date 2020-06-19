@@ -42,16 +42,7 @@
   <div class="hero-wrapper">
     <div class="hero-left">
       <h1 class="hero-title">Categories<br></h1>
-      <div class="d-sm-flex flex-wrap">
-        <form action="{% url 'core:search' %}?search={{ query}}" method="get" class="w-100">
-          <div class="input-group mb-3 shadow-lg" style="height: 50px;">
-            <input type="text" class="form-control w-75" placeholder="Search something awesome..." aria-label="Recipient's username" aria-describedby="basic-addon2"  style="height: 50px;" name="search">
-            <div class="input-group-append w-25">
-              <button type="submit" class="input-group-text w-100 text-center" id="basic-addon2" style="background-color: var(--main); color: #fff;"><center>Search</center></button>
-            </div>
-          </div>
-        </form>
-      </div>
+      
       <ul class="hero-info d-none d-lg-block">
         <li>
           <img src="{% static 'img/banner/fas-service-icon.png' %}" alt="">
