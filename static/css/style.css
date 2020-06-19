@@ -1319,6 +1319,13 @@ h4,
     transition: all 0.3s ease 0s
 }
 
+.food-card img {
+    max-height:  120px!important;
+    max-width:  200px!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+}
+
 @media (min-width: 600px) {
     .food-card {
         padding: 30px 40px 30px 40px
