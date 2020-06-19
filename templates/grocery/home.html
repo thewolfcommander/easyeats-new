@@ -97,14 +97,14 @@
     /* Category Wise Grocery Items */
 
     .panel {
-        border:1px solid rgba(0,0,0,0.12)!important;
-        box-shadow: 2px 4px 8px rgba(0,0,0,0.12)!important;
-        border-radius: 12px!important;
+        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 12px !important;
     }
 
-    .panel-title > a {
-        margin-left: 10px!important;
-        margin-top: 5px!important;
+    .panel-title>a {
+        margin-left: 10px !important;
+        margin-top: 5px !important;
     }
 
 
@@ -112,7 +112,7 @@
         color: var(--main);
         background-color: #fff;
         border-color: #e4e5e7;
-        text-shadow: 2px 4px 6px rgba(0,0,0,0.12);
+        text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.12);
         padding: 0;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -155,6 +155,23 @@
         content: "\002b";
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
+    }
+
+    @media screen and (max-width:720px) {
+        .main-item-card {
+            padding: 5px 6px !important;
+        }
+
+        .food-card {
+            max-width: 300px !important;
+        }
+
+        .food-card img {
+            max-width: 150px!important;
+            margin-left: auto!important;
+            margin-right: auto!important;
+            height: 90px!important;
+        }
     }
 </style>
 
@@ -287,8 +304,9 @@
                         <div class="row">
                             {% for item in groceries %}
                             {% if item.sub_category == sub_category %}
-                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
-                                <div class="media align-items-center food-card p-3 w-100" class="max-height: 400px!important;">
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0 main-item-card">
+                                <div class="media align-items-center food-card p-3 w-100"
+                                    class="max-height: 400px!important;">
                                     <div class="media-body">
                                         <center>
                                             <a href="{% url 'grocery:grocery_detail' item.id %}">
@@ -373,7 +391,8 @@
                             {% if item.category == category %}
                             <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
                                 <a href="{% url 'grocery:subcategory_detail' item.id %}">
-                                    <div class="media align-items-center food-card p-3 w-100" class="max-height: 400px!important;">
+                                    <div class="media align-items-center food-card p-3 w-100"
+                                        class="max-height: 400px!important;">
                                         <div class="media-body">
                                             <center>
                                                 <img class=""
