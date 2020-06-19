@@ -164,6 +164,9 @@
 
         .food-card {
             max-width: 300px !important;
+            height: 250px!important;
+            padding-left: 5px!important; 
+            padding-right: 5px!important; 
         }
 
         .food-card img {
@@ -389,7 +392,7 @@
                         <div class="row">
                             {% for item in sub_categories %}
                             {% if item.category == category %}
-                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+                            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0 main-item-card">
                                 <a href="{% url 'grocery:subcategory_detail' item.id %}">
                                     <div class="media align-items-center food-card p-3 w-100"
                                         class="max-height: 400px!important;">

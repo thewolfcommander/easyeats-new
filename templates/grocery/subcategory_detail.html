@@ -144,6 +144,26 @@
         -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
     }
+
+    @media screen and (max-width:720px) {
+        .main-item-card {
+            padding: 5px 6px !important;
+        }
+
+        .food-card {
+            max-width: 300px !important;
+            height: 250px!important;
+            padding-left: 5px!important; 
+            padding-right: 5px!important; 
+        }
+
+        .food-card img {
+            max-width: 150px!important;
+            margin-left: auto!important;
+            margin-right: auto!important;
+            height: 90px!important;
+        }
+    }
 </style>
 
 
@@ -172,7 +192,7 @@
         <div class="row">
             {% for item in groceries %}
             {% if item.sub_category == sub_category %}
-            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0">
+            <div class="col-lg-3 col-6 col-sm-6 col-md-3 p-0 main-item-card">
                 <div class="media align-items-center food-card p-3 w-100">
                     <div class="media-body">
                         <center>
