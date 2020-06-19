@@ -30,11 +30,6 @@
       height: 90px !important;
     }
   }
-
-  .food-card {
-    margin-right: auto !important;
-    margin-left: auto !important;
-  }
 </style>
 
 
@@ -109,7 +104,7 @@
                         style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
                     </h3>
                     <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20% Off</p>
-                    <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                    <div style="float: right; margin-top: -20px;  margin-right: 2px; margin-left: 5px!important;">
                       {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
                   </div>
                 </div>

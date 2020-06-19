@@ -15,11 +15,11 @@
     <input type="hidden" name="grocery_id" value='{{ grocery.id }}'>
 
     <span class="submit-span">
-        <div class="input-group">
+        <div class="input-group" style="max-width: 75px;">
             <div class="input-group-prepend">
                 <button class="btn-sm button rounded-0 px-2" type="submit"><i class="ti-plus"></i></button>
             </div>
-            <input type="number" id="tentacles" name="grocery_quantity" min="1" max="100" value="1" style="padding: 0 7px; border: 2px solid var(--main); font-weight: bolder; color: var(--main);">
+            <input type="number" id="tentacles" name="grocery_quantity" min="1" max="100" value="1" style="padding: 0 7px; border: 2px solid var(--main); font-weight: bolder; color: var(--main); max-width: 40px;">
         </div>
     </span>
 </form>
