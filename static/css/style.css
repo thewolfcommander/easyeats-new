@@ -1311,19 +1311,14 @@ h4,
     background: #fff8f7;
     padding: 20px 10px 20px 10px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
     border-radius: 4px;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s
-}
-
-.food-card img {
-    max-height:  120px!important;
-    max-width:  200px!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
 }
 
 @media (min-width: 600px) {
