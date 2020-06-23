@@ -5,8 +5,6 @@ from django.conf.urls.static import static
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    # Redirects
-    path('', RedirectView.as_view(url='groceries/')),
 
     # Normal Views
     path('', include('core.urls', namespace='core')),

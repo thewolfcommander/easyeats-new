@@ -1,11 +1,24 @@
 <style>
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
-        opacity: 1!important;
+        opacity: 1 !important;
     }
 
     input[type=number]:focus {
         outline: none;
+    }
+
+    @media screen and (max-width: 720px) {
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            opacity: 1 !important;
+            color: #000 !important;
+        }
+
+        input[type=number]:focus {
+            outline: none;
+        }
     }
 </style>
 
@@ -19,11 +32,14 @@
             <div class="input-group-prepend">
                 <button class="btn-sm button rounded-0 px-2" type="submit"><i class="ti-plus"></i></button>
             </div>
-            <input type="number" id="tentacles" name="grocery_quantity" min="1" max="100" value="1" style="padding: 0 7px; border: 2px solid var(--main); font-weight: bolder; color: var(--main); max-width: 40px;">
+            <input type="number" id="tentacles" name="grocery_quantity" min="1" max="100" value="1"
+                style="padding: 0 7px; border: 2px solid var(--main); font-weight: bolder; color: var(--main); max-width: 40px;" data-toggle="tooltip" data-placement="top" title="Type Quantity">
         </div>
     </span>
 </form>
 
 <script>
-
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>

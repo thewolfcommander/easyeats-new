@@ -24,6 +24,7 @@ from products.models import (
     FoodImage
 )
 
+
 from grocery.models import Grocery
 
 from easyeats.utils import imageUrls
@@ -80,7 +81,7 @@ def home(request):
     categories = Category.objects.filter(active=True).order_by('-updated')[:10]
     featured_foods = Food.objects.filter(active=True, featured=True).order_by('-updated')[:3]
     foods = Food.objects.filter(active=True).order_by('-updated')[:16]
-    collections = Collection.objects.filter(active=True).order_by('-updated')[:10]
+    groceries = Grocery.objects.filter(active=True)[:10]
 
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     context = {
@@ -88,7 +89,7 @@ def home(request):
         'categories': categories,
         'featured_foods': featured_foods,
         'foods': foods,
-        'collections': collections,
+        'groceries': groceries,
         'image': imageUrls,
         'cart': cart_obj,
     }

@@ -34,7 +34,6 @@
                                     <p class="lead"><strong>{{ item.food.name }}</strong></p>
                                 </a>
                                 <small>{{ item.food.summary }}</small><br>
-                                {% include 'products/snippets/add-to-cart.html' with cart=cart food=item.food %}
                                 <div style="margin: 5px 0;"></div>
                                 {% include 'products/snippets/remove-from-cart.html' with cart=cart food=item.food %}
                             </td>
@@ -47,7 +46,6 @@
                                     <p class="lead"><strong>{{ item.grocery.name }}</strong></p>
                                 </a>
                                 <small>{{ item.grocery.quantity }} {{ item.grocery.scale }}</small><br>
-                                {% include 'grocery/snippets/add-to-cart.html' with cart=cart grocery=item.grocery %}
                                 <div style="margin: 5px 0;"></div>
                                 {% include 'grocery/snippets/remove-from-cart.html' with cart=cart grocery=item.grocery %}
                             </td>
