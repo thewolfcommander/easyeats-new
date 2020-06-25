@@ -58,6 +58,23 @@ class FoodAdmin(ImportExportModelAdmin):
     list_filter = ['active', 'added', 'updated']
     search_fields = ['name',]
     inlines = [FoodImageInline, FoodTagInline, ReviewInline]
+    actions = ['make_inactive', 'make_active']
+    
+
+    def make_inactive(self, request, queryset):
+        """
+        Make restaurants inactive
+        """
+        queryset.update(active=False)
+    make_inactive.short_description = "Make Foods Inactive"
+
+
+    def make_active(self, request, queryset):
+        """
+        Make restaurants active
+        """
+        queryset.update(active=True)
+    make_active.short_description = "Make Foods Active"
 
 
 @admin.register(Collection)
