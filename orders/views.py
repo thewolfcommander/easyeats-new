@@ -1,3 +1,6 @@
+import json
+import requests
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,6 +25,15 @@ def create_order(request):
     order.user.save()
     print("Session ID before: {}".format(request.session["cart_id"]))
     del request.session["cart_id"]
+    text = "{} ==> Order with ID - {}, USER - {}, STATUS - {}, SHIPPING TOTAL - {}, TOTAL - {}, placed at {} awaiting for response. Please check the admin panel.".format(order.id, order.order_id, order.user.user_id, order.status, order.shipping_total, order.total, order.timestamp)
+    try:
+        data = {
+            "text": text
+        }
+        resp = requests.post('https://hooks.slack.com/services/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', json.dumps(data))
+        print(resp.json())
+    except:
+        print("Error")
     return redirect("orders:success")
 
 @login_required
