@@ -81,7 +81,7 @@
 	{% endif %}
 
 	{% block content %}
-	
+
 	{% endblock content %}
 
 	<!-- Loading line -->
@@ -112,31 +112,33 @@
 	<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
 	<script src="{% static 'js/mail-script.js' %}"></script>
 	<script src="{% static 'js/main.js' %}"></script>
+	<!-- <script src="{% static 'js/service.js' %}"></script> -->
 
 	<script>
+		$(document).ready(function () {
 
-		$(document).ready(function(){
-	
 			$("#myModal").modal('show');
-	
+
 		});
-	
 	</script>
 
 
-<script>
-	let loading_line;
+	<script>
+		let loading_line;
 
-	window.onload = () => {
-		loading_line = document.getElementById('loading-line');
-	};
+		window.onload = () => {
+			loading_line = document.getElementById('loading-line');
+		};
 
-	window.onscroll = (e) => {
-		let d_height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-		let percentage = (window.scrollY / d_height) * 100;
-		loading_line.style.width = percentage + '%';
-	};
-</script>
+		window.onscroll = (e) => {
+			let d_height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+			let percentage = (window.scrollY / d_height) * 100;
+			loading_line.style.width = percentage + '%';
+		};
+
+
+
+	</script>
 	{% block scripts %}
 
 	{% endblock scripts %}
