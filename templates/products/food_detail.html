@@ -267,50 +267,53 @@
 
 
 
+
 <!--================Featured Section Start =================-->
 <section class="section-margin mb-lg-0 mb-md-0"
-    style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
-    <div class="container">
-        <div class="section-intro">
-            <h4 class="intro-title">Featured Items</h4>
-            <h2>Fresh taste at great price</h2>
-        </div>
-
-        {% if featured_foods %}
-        <div class="owl-carousel owl-theme featured-carousel">
-            {% for item in featured_foods %}
-            <div class="col-lg-12 col-12 col-sm-12 col-md-12 p-0 main-item-card">
-                <a href="{% url 'products:food_detail' item.id %}">
-                    <div class="media align-items-center food-card p-3 w-100">
-                        <div class="media-body">
-                            <div class="row justify-content-center">
-                                <img class=""
-                                src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                alt="" style="height: 120px; max-width: 200px;">
-                            </div>
-                            <div class="d-flex justify-content-center mt-2">
-                                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
-                                </h4>
-                            </div>
-
-                            <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
-                            <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
-                                    style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
-                            </h3>
-                            <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20%
-                                Off</p>
-                            <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="lead">No food items found</p>
-        {% endif %}
+  style="background: url(/static/svg/6.svg) no-repeat; background-position: right;">
+  <div class="container">
+    <div class="section-intro">
+      <h4 class="intro-title">Featured Items</h4>
+      <h2>Fresh taste at great price</h2>
     </div>
+
+    {% if featured_foods %}
+    <div class="owl-carousel owl-theme featured-carousel">
+      {% for item in featured_foods %}
+      <div class="col-lg-12 col-12 col-sm-12 col-md-12 p-0 main-item-card">
+        
+          <div class="media align-items-center food-card p-3 w-100">
+            <div class="media-body">
+              <div class="row justify-content-center">
+                <a href="{% url 'products:food_detail' item.id %}">
+                <img class=""
+              src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
+              alt="" style="height: 120px; max-width: 200px;">
+              </a>
+              </div>
+              <div class="d-flex justify-content-center mt-2">
+                <a href="{% url 'products:food_detail' item.id %}">
+                <h4 style="color: var(--main); font-size: 14px;">{{ item.name }}
+                </h4>
+                </a>
+              </div>
+
+              <p style="font-size: 11px;  margin: 0 6px;">{{ item.restaurant.name }}</p>
+              <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
+                  style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
+              </h3>
+              <p class="lead" style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20% Off</p>
+              <div style="float: right; margin-top: -20px;  margin-right: 6px;">
+                {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead">No food items found</p>
+    {% endif %}
+  </div>
 </section>
 <!--================Featured Section End =================-->
 
