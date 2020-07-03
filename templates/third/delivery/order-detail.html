@@ -159,7 +159,9 @@
                                                 Number</strong></p>
                                     </th>
                                     <th>
-                                        <p class="lead"><a href="tel:{{ order.address.mobile_number }}">{{ order.address.mobile_number }}</a></p>
+                                        <p class="lead"><a
+                                                href="tel:{{ order.address.mobile_number }}">{{ order.address.mobile_number }}</a>
+                                        </p>
                                     </th>
                                 </tr>
                                 <tr>
@@ -168,7 +170,9 @@
                                                 Number</strong></p>
                                     </th>
                                     <th>
-                                        <p class="lead"><a href="tel:{{ order.address.alt_mobile }}">{{ order.address.alt_mobile }}</a></p>
+                                        <p class="lead"><a
+                                                href="tel:{{ order.address.alt_mobile }}">{{ order.address.alt_mobile }}</a>
+                                        </p>
                                     </th>
                                 </tr>
                             </tbody>
@@ -181,26 +185,35 @@
                         <table class="table">
                             <thead class="" style="background: var(--main)!important; color: #fff;">
                                 <tr>
-                                    <th scope="col" class="col-md-2" style="min-width: 120px!important;">Item Thumbnail
-                                    </th>
                                     <th scope="col" class="col-md-1">Quantity</th>
                                     <th scope="col" class="col-md-7" style="min-width: 450px!important;">Item Name</th>
                                     <th scope="col" class="col-md-2 col-sm-12">Price</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {% for item in order.cart.foods.all %}
                                 <tr>
-                                    <th scope="row"><img src="{% if item.foodimage_set.first.image %}{{ item.foodimage_set.first.image.url }}{% else %}https://images.pexels.com/photos/1095550/pexels-photo-1095550.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940{% endif %}"
-                                            alt="{{ item.name }}" width="90px"></th>
-                                    <th>1</th>
-                                    <td><a href="{% url 'products:food_detail' item.id %}">
-                                            <p class="lead"><strong>{{ item.name }}</strong></p>
+                                    <td>{{ item.quantity }}</td>
+
+                                    <td><a href="{% url 'products:food_detail' item.food.id %}">
+                                            <p class="lead"><strong>{{ item.food.name }}</strong></p>
                                         </a>
-                                        <small>{{ item.restaurant.name }}</small><br>
-                                        <a href="tel:{{ item.restaurant.mobile_number}}" class="btn btn-link">Call Restaurant</a>
+                                        <small>{{ item.food.restaurant.name }}</small><br>
+                                        <a href="tel:{{ item.food.restaurant.mobile_number}}" class="btn btn-link">Call
+                                            Restaurant</a>
                                     </td>
-                                    <td>Rs. {{ item.discount_price }}</td>
+                                    <td>{{ item.quantity }} x Rs. {{ item.food.discount_price }} = {{ item.cost }}</td>
+                                </tr>
+                                {% endfor %}
+                                {% for item in cart.groceries.all %}
+                                <tr>
+                                    <td><a href="{% url 'products:grocery_detail' item.grocery.id %}">
+                                            <p class="lead"><strong>{{ item.grocery.name }}</strong></p>
+                                        </a>
+                                    </td>
+                                    <td>{{ item.quantity }} x Rs. {{ item.grocery.discount_price }} = {{ item.cost }}
+                                    </td>
                                 </tr>
                                 {% endfor %}
                                 <tr>
