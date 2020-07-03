@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 from addresses.models import Address
 from cart.models import Cart, FoodEntry, GroceryEntry
@@ -48,7 +49,7 @@ def add_to_cart(request):
         else:
             cart_obj.groceries.add(grocery_obj)
             messages.success(request, '{} is successfully added to your cart.'.format(grocery_obj.grocery.name), extra_tags="info")
-    return redirect("cart:home")
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
 def remove_from_cart(request):

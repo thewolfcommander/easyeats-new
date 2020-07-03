@@ -227,12 +227,8 @@
                                         <h3 class="price-tag" style="font-size: 14px; margin: 0 6px;"><strike
                                                 style="font-size: 10px!important; color: orange; margin-right: 10px;">{{ item.gross_price }}</strike>{{ item.discount_price }}
                                         </h3>
-                                        <p class="lead"
-                                            style="color: orangered; font-size: 12px; float: left; margin: 0 6px;">20%
-                                            Off</p>
-                                        <div style="float: right; margin-top: -20px;  margin-right: 6px;">
-                                            {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}
-                                        </div>
+                                        <div style="float: left; margin-top: 7px;">
+                                          {% include 'products/snippets/add-to-cart.html' with food=item cart=cart %}</div>
                                     </div>
                                 </div>
                             </a>
