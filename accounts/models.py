@@ -14,7 +14,6 @@ class CustomUserManager(BaseUserManager):
     """
     def create_user(self, user_id, email, password=None, **extra_fields):
         user = self.model(user_id=user_id, email=email, *extra_fields)
-        user.set_password(password)
         user.save(using=self._db)
         Token.objects.create(user=user)
         return user
