@@ -18,6 +18,10 @@ urlpatterns = [
     path('products/', include('products.urls', namespace='products')),
     path('groceries/', include('grocery.urls', namespace='grocery')),
     path('third-party/', include('third.urls', namespace='third')),
+
+
+    # APIS
+    path('api/v1/accounts/', include('accounts.api.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

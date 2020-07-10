@@ -19,6 +19,7 @@ django-import-export==2.0.2
 django-slack==5.14.3
 django-storages==1.9.1
 django-widget-tweaks==1.4.5
+djangorestframework==3.11.0
 docutils==0.15.2
 et-xmlfile==1.0.1
 filelock==3.0.12

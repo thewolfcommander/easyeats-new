@@ -18,7 +18,7 @@ class SignUpForm(UserCreationForm):
 class UserDetailForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ( 'profile_photo', 'user_id', 'email', 'mobile_number', 'full_name', 'gender')
+        fields = ( 'user_id', 'email', 'mobile_number', 'full_name', 'gender')
 
     
 class VendorForm(forms.ModelForm):
