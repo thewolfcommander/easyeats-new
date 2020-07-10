@@ -38,6 +38,10 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def images(self):
+        return self.restaurantimage_set.all()
+
 
 class RestaurantImage(models.Model):
     """
@@ -122,6 +126,16 @@ class Food(models.Model):
     def get_absolute_url(self):
         return reverse("products:food_detail", kwargs={"id": self.id})
 
+    
+    @property
+    def images(self):
+        return self.foodimage_set.all()
+
+    
+    @property
+    def tags(self):
+        return self.foodtag_set.all()
+
 
 class FoodImage(models.Model):
     """
@@ -155,12 +169,7 @@ class Review(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, null=True)
     rating_1 = models.BooleanField(default=False)
-    rating_2 = models.BooleanField(default=False)
-    rating_3 = models.BooleanField(default=False)
-    rating_4 = models.BooleanField(default=False)
-    rating_5 = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -175,12 +184,7 @@ class RestaurantReview(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, null=True)
     rating_1 = models.BooleanField(default=False)
-    rating_2 = models.BooleanField(default=False)
-    rating_3 = models.BooleanField(default=False)
-    rating_4 = models.BooleanField(default=False)
-    rating_5 = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
