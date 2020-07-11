@@ -23,6 +23,7 @@ urlpatterns = [
     # APIS
     path('api/v1/accounts/', include('accounts.api.urls')),
     path('api/v1/addresses/', include('addresses.api.urls')),
+    path('api/v1/core/', include('core.api.urls')),
     path('api/v1/groceries/', include('grocery.api.urls')),
     path('api/v1/products/', include('products.api.urls')),
 ]
