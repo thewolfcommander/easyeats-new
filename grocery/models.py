@@ -19,6 +19,7 @@ class GroceryCategory(models.Model):
     def __str__(self):
         return '{} - {}'.format(str(self.id), self.name)
 
+
     
 class GrocerySubCategory(models.Model):
     """
@@ -78,6 +79,16 @@ class Grocery(models.Model):
     def __str__(self):
         return self.name
 
+    
+    @property
+    def images(self):
+        return self.groceryimage_set.all()
+
+
+    @property
+    def tags(self):
+        return self.grocerytag_set.all()
+
 
 class GroceryImage(models.Model):
     """
@@ -111,12 +122,7 @@ class GroceryReview(models.Model):
     grocery = models.ForeignKey(Grocery, on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, null=True)
     rating_1 = models.BooleanField(default=False)
-    rating_2 = models.BooleanField(default=False)
-    rating_3 = models.BooleanField(default=False)
-    rating_4 = models.BooleanField(default=False)
-    rating_5 = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

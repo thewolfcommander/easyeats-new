@@ -37,7 +37,7 @@ class CategoryListView(generics.ListAPIView):
     ]
 
 
-class CategoryListView(generics.RetrieveAPIView):
+class CategoryDetailView(generics.RetrieveAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     permission_classes = [permissions.AllowAny]
@@ -65,7 +65,7 @@ class FoodDetailView(generics.RetrieveAPIView):
 
 class FoodReviewListView(generics.ListAPIView):
     serializer_class = FoodReviewSerializer
-    queryset = FoodReview.objects.all()
+    queryset = Review.objects.all()
     permission_classes = [permissions.AllowAny]
     filterset_fields = [
         'food',
@@ -76,7 +76,7 @@ class FoodReviewListView(generics.ListAPIView):
 
 class FoodReviewCreateView(generics.CreateAPIView):
     serializer_class = FoodReviewSerializer
-    queryset = FoodReview.objects.all()
+    queryset = Review.objects.all()
     permission_classes = [permissions.IsAuthenticated]
 
 

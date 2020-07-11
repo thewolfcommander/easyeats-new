@@ -103,7 +103,7 @@ class FoodSerializer(serializers.ModelSerializer):
 
 class FoodReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FoodReview
+        model = Review
         fields = [
             'id',
             'food',
