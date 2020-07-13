@@ -66,16 +66,18 @@ class Cart(models.Model):
     Cart model for handling of carts
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    foods = models.ManyToManyField(FoodEntry)
+    foods = models.ManyToManyField(FoodEntry, blank=True)
     count = models.PositiveIntegerField(default=0)
-    groceries = models.ManyToManyField(GroceryEntry)
+    groceries = models.ManyToManyField(GroceryEntry, blank=True)
     sub_total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     shipping = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    discount = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     objects = CartManager()
+
 
 
 def pre_save_cart_reciever(sender, instance, action, *args, **kwargs):

@@ -5,10 +5,8 @@ from django.utils.text import Truncator
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.conf import settings
 
+from rest_framework.authtoken.models import Token
 
-
-
-UPLOAD_DIRECTORY_PROFILEPHOTO = 'images_profilephoto'
 
 class CustomUserManager(BaseUserManager):
     """
@@ -16,8 +14,8 @@ class CustomUserManager(BaseUserManager):
     """
     def create_user(self, user_id, email, password=None, **extra_fields):
         user = self.model(user_id=user_id, email=email, *extra_fields)
-        user.set_password(password)
         user.save(using=self._db)
+        Token.objects.create(user=user)
         return user
 
     def create_superuser(self, user_id, email, password, **extra_fields):
@@ -66,7 +64,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     gender = models.CharField(max_length=255, choices=GENDER, null=True, help_text="User's Gender")
     email = models.EmailField(max_length=255, null=True, default='', help_text="User's Email")
     mobile_number = models.CharField(max_length=10, null=True, help_text="User's Mobile number")
-    profile_photo = models.ImageField(max_length=255, blank=True, null=True, upload_to=UPLOAD_DIRECTORY_PROFILEPHOTO, help_text="User's Profile photo")
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     order_count = models.IntegerField(default=0)

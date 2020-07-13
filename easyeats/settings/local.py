@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'storages',
     'widget_tweaks',
     'import_export',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'django_filters',
 
     'accounts',
     'addresses',
@@ -218,3 +221,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '138990984092290'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'db608830340d9efc92f5c0d916829ea5'
+
+
+
+
+"""
+REST Framework Settings
+"""
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
