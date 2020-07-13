@@ -192,8 +192,8 @@ class CartCreateSerializer(serializers.ModelSerializer):
     
 class CartShowSerializer(serializers.ModelSerializer):
     user = UserShowSerializer(read_only=True)
-    foods = FoodEntrySerializer(many=True, read_only=True)
-    groceries = GroceryEntrySerializer(many=True, read_only=True)
+    foods = FoodEntryShowSerializer(many=True, read_only=True)
+    groceries = GroceryEntryShowSerializer(many=True, read_only=True)
     class Meta:
         model = Cart
         fields = [
