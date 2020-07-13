@@ -72,6 +72,7 @@ class Cart(models.Model):
     sub_total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     shipping = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    discount = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

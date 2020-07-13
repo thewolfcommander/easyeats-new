@@ -126,6 +126,7 @@ class CartCreateSerializer(serializers.ModelSerializer):
         sub_total = 0.00
         shipping = 25.00
         total = 0.00
+        discount = 0.00
         if user.order_count == 0:
             shipping = 0.00
         if foods is not None:
@@ -159,6 +160,7 @@ class CartCreateSerializer(serializers.ModelSerializer):
         sub_total = 0.00
         shipping = 25.00
         total = 0.00
+        discount = 0.00
         if user.order_count == 0:
             shipping = 0.00
         if foods is not None:
