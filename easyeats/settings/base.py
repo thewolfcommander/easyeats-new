@@ -231,4 +231,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    'DEFAULT_PAGINATION_CLASS': (
+        'easyeats.apps.products.pagination.CustomPageNumberPagination',
+        # 'easyeats.apps.products.api.pagination.CustomLimitOffsetPagination',
+        # 'rest_framework.pagination.PageNumberPagination',
+    ),
+    'PAGE_SIZE': 15,
 }

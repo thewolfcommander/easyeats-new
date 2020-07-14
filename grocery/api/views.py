@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 
 from .serializers import *
 from grocery.models import *
+from products.pagination import CustomPageNumberPagination
 
 
 
@@ -12,6 +13,7 @@ class GroceryCategoryListView(generics.ListAPIView):
     filterset_fields = [
         'active'
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class GroceryCategoryDetailView(generics.RetrieveAPIView):
@@ -29,6 +31,7 @@ class GrocerySubCategoryListView(generics.ListAPIView):
         'active',
         'category',
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class GrocerySubCategoryDetailView(generics.RetrieveAPIView):
@@ -48,6 +51,7 @@ class GroceryListView(generics.ListAPIView):
         'sub_category',
         'featured'
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 
@@ -67,6 +71,7 @@ class GroceryReviewListView(generics.ListAPIView):
         'rating',
         'user'
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class GroceryReviewCreateView(generics.CreateAPIView):

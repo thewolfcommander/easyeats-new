@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 
 from .serializers import *
 from products.models import *
+from products.pagination import CustomPageNumberPagination
 
 
 class RestaurantListView(generics.ListAPIView):
@@ -17,6 +18,7 @@ class RestaurantListView(generics.ListAPIView):
         'active',
         'vendor'
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class RestaurantDetailView(generics.RetrieveAPIView):
@@ -35,6 +37,7 @@ class CategoryListView(generics.ListAPIView):
         'active',
         'name',
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class CategoryDetailView(generics.RetrieveAPIView):
@@ -54,6 +57,7 @@ class FoodListView(generics.ListAPIView):
         'restaurant',
         'category',
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class FoodDetailView(generics.RetrieveAPIView):
@@ -72,6 +76,7 @@ class FoodReviewListView(generics.ListAPIView):
         'rating_1',
         'user',
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class FoodReviewCreateView(generics.CreateAPIView):
@@ -89,6 +94,7 @@ class RestaurantReviewListView(generics.ListAPIView):
         'rating_1',
         'user',
     ]
+    pagination_class = CustomPageNumberPagination
 
 
 class RestaurantReviewCreateView(generics.CreateAPIView):
